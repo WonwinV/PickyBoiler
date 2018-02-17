@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">PickyBoiler</string>
+    <string name="VegetarianCount">VegetarianCount</string>
+    <string name="AllergenCount">AllergenCount</string>
+    <string name="URL">URL</string>;
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_preferences_tabs">PreferencesTabs</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="edittext_hint"><font size="16">"       Add your favorite food"</font></string>
+    <string name="favoriteFood">favoriteFood</string>
+    <string name="AllergenEgg">Egg</string>
+    <string name="AllergenFish">Fish</string>
+    <string name="AllergenGluten">Gluten</string>
+    <string name="AllergenMilk">Milk</string>
+    <string name="AllergenNut">Nut</string>
+    <string name="AllergenPeanut">Peanut</string>
+    <string name="AllergenShellfish">Shellfish</string>
+    <string name="AllergenSoy">Soy</string>
+    <string name="AllergenWheat">Wheat</string>
+    <string name="isVeggie">isVeggie</string>
 </resources>
