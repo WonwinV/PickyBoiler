@@ -20,6 +20,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         android:background="@drawable/side_nav_bar"
+        android:paddingLeft="20dp"
         app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
         app:headerLayout="@layout/nav_header_sidebar"
