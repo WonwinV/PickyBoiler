@@ -9,9 +9,11 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/app_bar_sidebar"
+        layout="@layout/app_bar_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <include layout="@layout/content_food_preferences" />
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -19,11 +21,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:background="@drawable/side_nav_bar"
-        android:paddingLeft="20dp"
-        app:itemTextColor="@color/white"
-        app:itemIconTint="@color/white"
-        app:headerLayout="@layout/nav_header_sidebar"
-        app:menu="@menu/activity_sidebar_drawer" />
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

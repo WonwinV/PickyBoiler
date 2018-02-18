@@ -15,17 +15,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity
+public class OffCampusDining extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    DrawerLayout drawer;
-    Button sidebarbtn;
-    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_off_campus_dining);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
@@ -38,8 +34,8 @@ public class MainActivity extends AppCompatActivity
             }
         });*/
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        sidebarbtn = (Button) findViewById(R.id.sidebarbutton);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        Button sidebarbtn = (Button) findViewById(R.id.sidebarbutton);
         /*ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -52,7 +48,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -95,13 +91,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_oncampus) {
-            Intent navoncampus = new Intent(MainActivity.this, MainActivity.class);
+            Intent navoncampus = new Intent(OffCampusDining.this, MainActivity.class);
             startActivity(navoncampus);
         } else if (id == R.id.nav_offcampus) {
-            Intent navoffcampus = new Intent(MainActivity.this, OffCampusDining.class);
+            Intent navoffcampus = new Intent(OffCampusDining.this, OffCampusDining.class);
             startActivity(navoffcampus);
         } else if (id == R.id.nav_foodpref) {
-            Intent navfoodpref = new Intent(MainActivity.this, FoodPreferences.class);
+            Intent navfoodpref = new Intent(OffCampusDining.this, FoodPreferences.class);
             startActivity(navfoodpref);
         }
 

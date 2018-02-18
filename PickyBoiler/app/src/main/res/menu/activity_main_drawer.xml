@@ -3,17 +3,17 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_oncampus"
             android:icon="@drawable/oncampuslogo"
-            android:title="On-campus Dining" />
+            android:title="Import" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_offcampus"
             android:icon="@drawable/offcampuslogo"
-            android:title="Off-campus Dining" />
+            android:title="Gallery" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_foodpref"
             android:icon="@drawable/foodpreflogo"
-            android:title="Food Preferences" />
+            android:title="Slideshow" />
 
     </group>
 

@@ -1,5 +1,6 @@
 package pickyboiler.pickyboiler;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,31 +15,38 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
-public class Sidebar extends AppCompatActivity
+public class FoodPreferences extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sidebar);
+        setContentView(R.layout.activity_food_preferences);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        Button sidebtn = (Button) findViewById(R.id.sidebarbutton);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });*/
+
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        Button sidebarbtn = (Button) findViewById(R.id.sidebarbutton);
+        /*ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();*/
 
-        sidebtn.setOnClickListener(new View.OnClickListener() {
-
+        sidebarbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawer.openDrawer(GravityCompat.START);
             }
         });
-
-        //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        //        this, drawer, sidebtn, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        //drawer.setDrawerListener(toggle);
-        //toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -57,7 +65,7 @@ public class Sidebar extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.sidebar, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -69,9 +77,9 @@ public class Sidebar extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
+        if (id == R.id.action_settings) {
             return true;
-        }*/
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -82,12 +90,15 @@ public class Sidebar extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
+        if (id == R.id.nav_oncampus) {
+            Intent navoncampus = new Intent(FoodPreferences.this, MainActivity.class);
+            startActivity(navoncampus);
+        } else if (id == R.id.nav_offcampus) {
+            Intent navoffcampus = new Intent(FoodPreferences.this, OffCampusDining.class);
+            startActivity(navoffcampus);
+        } else if (id == R.id.nav_foodpref) {
+            Intent navfoodpref = new Intent(FoodPreferences.this, FoodPreferences.class);
+            startActivity(navfoodpref);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
