@@ -5,15 +5,15 @@
         <item
             android:id="@+id/nav_oncampus"
             android:icon="@drawable/oncampuslogo"
-            android:title="Import" />
+            android:title="On-Campus Dining" />
         <item
             android:id="@+id/nav_offcampus"
             android:icon="@drawable/offcampuslogo"
-            android:title="Gallery" />
+            android:title="Off-Campus Dining" />
         <item
             android:id="@+id/nav_foodpref"
             android:icon="@drawable/foodpreflogo"
-            android:title="Slideshow" />
+            android:title="Food Preferences" />
 
     </group>
 
