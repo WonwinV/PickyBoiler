@@ -1,9 +1,15 @@
 package pickyboiler.pickyboiler;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,13 +24,15 @@ import android.widget.Button;
 public class FoodPreferences extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private SectionsPageAdapter mSectionPageAdapter;
+    private CustomViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_preferences);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +58,30 @@ public class FoodPreferences extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //FOR TABS
+        mSectionPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
+
+        mViewPager = (CustomViewPager) findViewById(R.id.container);
+        mViewPager.setPagingEnabled(false);
+        //mViewPager.beginFakeDrag();
+        setupViewPager(mViewPager);
+
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+
+        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#FFB52B"));
+        tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
+        tabLayout.setTabTextColors(Color.parseColor("#727272"), Color.parseColor("#FFB52B"));
+    }
+
+    private void setupViewPager (ViewPager viewPager) {
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new AllergenTabFragment(), "Allergens");
+        adapter.addFragment(new FavTabFragment(), "Favorites");
+        adapter.addFragment(new DietTabFragment(), "Diets");
+        viewPager.setAdapter(adapter);
     }
 
     @Override

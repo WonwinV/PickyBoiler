@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="pickyboiler.pickyboiler.FoodPreferences"
-    tools:showIn="@layout/app_bar_main">
+    tools:context="pickyboiler.pickyboiler.FoodPreferences" >
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:id="@+id/prefhead"
         android:background="@drawable/prefheader"/>
 
     <ImageView
@@ -20,10 +21,35 @@
         android:background="@drawable/sidebarbutton"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="24dp"
         android:layout_marginStart="20dp"
         android:text=""
         android:textOff=""
         android:textOn="" />
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/prefhead"
+        app:elevation="0dp"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:tabTextAppearance="@style/CustomTabStyle" >
+        </android.support.design.widget.TabLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <pickyboiler.pickyboiler.CustomViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbar"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    />
 
 </RelativeLayout>
