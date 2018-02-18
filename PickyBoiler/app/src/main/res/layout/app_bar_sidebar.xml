@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context="pickyboiler.pickyboiler.Sidebar">
 
-
-
     <Button
         android:id="@+id/sidebarbutton"
         android:layout_width="18dp"

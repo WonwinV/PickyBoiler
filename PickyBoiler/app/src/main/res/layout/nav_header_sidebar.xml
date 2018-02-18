@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/side_nav_bar"
     android:gravity="top"
+    android:layout_marginTop="20dp"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Light">
 

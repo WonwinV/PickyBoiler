@@ -4,16 +4,16 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:icon="@drawable/oncampuslogo"
+            android:title="On-campus Dining" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:icon="@drawable/offcampuslogo"
+            android:title="Off-campus Dining" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:icon="@drawable/foodpreflogo"
+            android:title="Food Preferences" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
