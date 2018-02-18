@@ -22,7 +22,7 @@
             tools:ignore="HardcodedText" />
 
         <Button
-            android:id="@+id/prefbutton"
+            android:id="@+id/sidebarbutton"
             android:layout_width="18dp"
             android:layout_height="12dp"
             android:background="@drawable/sidebarbutton"
@@ -33,7 +33,7 @@
             android:text=""
             android:textOff=""
             android:textOn=""
-            android:onClick="goToPreferences"/> TODO: EDIT THIS
+            android:onClick="openSidebar"/>
 
     </RelativeLayout>
 
