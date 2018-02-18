@@ -18,4 +18,8 @@
     <string name="AllergenSoy">Soy</string>
     <string name="AllergenWheat">Wheat</string>
     <string name="isVeggie">isVeggie</string>
+    <string name="title_activity_sidebar">Sidebar</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
