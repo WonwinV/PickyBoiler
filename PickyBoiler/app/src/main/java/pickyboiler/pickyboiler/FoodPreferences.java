@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+
 public class FoodPreferences extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -44,6 +45,7 @@ public class FoodPreferences extends AppCompatActivity
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         Button sidebarbtn = (Button) findViewById(R.id.sidebarbutton);
+
         /*ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -64,7 +66,6 @@ public class FoodPreferences extends AppCompatActivity
 
         mViewPager = (CustomViewPager) findViewById(R.id.container);
         mViewPager.setPagingEnabled(false);
-        //mViewPager.beginFakeDrag();
         setupViewPager(mViewPager);
 
 
