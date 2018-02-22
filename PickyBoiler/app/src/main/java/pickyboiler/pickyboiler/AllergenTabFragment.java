@@ -1,19 +1,13 @@
 package pickyboiler.pickyboiler;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 
-
-import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ToggleButton;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -43,6 +37,7 @@ public class AllergenTabFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //need to implement allergen_tab_fragment xml
         View view = inflater.inflate(R.layout.allergen_tab_fragment,container,false);
 
         hashMap = new HashMap<>();
@@ -71,15 +66,15 @@ public class AllergenTabFragment extends Fragment {
         wheat.setOnClickListener(handleClick);
 
         //add all buttons to hashMap
-        map.put("Egg", egg);
-        map.put("Fish", fish);
-        map.put("Gluten", gluten);
-        map.put("Milk", milk);
-        map.put("Nut", nut);
-        map.put("Peanut", peanut);
-        map.put("Shellfish", shellfish);
-        map.put("Soy", soy);
-        map.put("Wheat", wheat);
+        hashMap.put("Egg", egg);
+        hashMap.put("Fish", fish);
+        hashMap.put("Gluten", gluten);
+        hashMap.put("Milk", milk);
+        hashMap.put("Nut", nut);
+        hashMap.put("Peanut", peanut);
+        hashMap.put("Shellfish", shellfish);
+        hashMap.put("Soy", soy);
+        hashMap.put("Wheat", wheat);
 
 
         return view;
