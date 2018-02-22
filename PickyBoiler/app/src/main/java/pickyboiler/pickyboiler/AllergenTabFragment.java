@@ -8,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ToggleButton;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import pickyboiler.pickyboiler.utilities.storage.SharedPreferencesManager;
 
 
 /**
@@ -95,8 +98,47 @@ public class AllergenTabFragment extends Fragment {
 
     @Override
     public void onResume() {
+
         super.onResume();
 
+        //create array list to store preferences selected by user
+        ArrayList<String> userSelected = SharedPreferencesManager.getAllAllergens();
+
+        //loop through array list
+        for (String x: userSelected) {
+
+            ToggleButton current = hashMap.get(x);
+            current.setChecked(true);
+
+            //if selected by user
+            if(current.equals(egg)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.egg));
+            }
+            else if(current.equals(fish)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.fish));
+            }
+            else if(current.equals(gluten)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.gluten));
+            }
+            else if(current.equals(milk)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.milk));
+            }
+            else if(current.equals(nut)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.nut));
+            }
+            else if(current.equals(peanut)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.peanut));
+            }
+            else if(current.equals(shellfish)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.shellfish));
+            }
+            else if(current.equals(soy)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.soy));
+            }
+            else if(current.equals(wheat)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.wheat));
+            }
+        }
     }
 
 }
