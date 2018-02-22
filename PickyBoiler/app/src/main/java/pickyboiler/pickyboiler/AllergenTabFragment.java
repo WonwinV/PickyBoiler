@@ -38,7 +38,7 @@ public class AllergenTabFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //need to implement allergen_tab_fragment xml
-        View view = inflater.inflate(R.layout.allergen_tab_fragment,container,false);
+       View view = inflater.inflate(R.layout.allergen_tab_fragment,container,false);
 
         hashMap = new HashMap<>();
 
