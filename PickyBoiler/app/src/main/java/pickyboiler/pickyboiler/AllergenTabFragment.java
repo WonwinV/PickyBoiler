@@ -47,7 +47,7 @@ public class AllergenTabFragment extends Fragment {
 
         hashMap = new HashMap<>();
 
-        //get ToggleButton through ID
+        //get ToggleButton through ID       name_btn
         egg = (ToggleButton) view.findViewById(R.id.egg_btn);
         fish = (ToggleButton) view.findViewById(R.id.fish_btn);
         gluten = (ToggleButton) view.findViewById(R.id.gluten_btn);
@@ -83,6 +83,24 @@ public class AllergenTabFragment extends Fragment {
 
 
         return view;
+
+    }
+
+    //add handleClick listener
+    private View.OnClickListener handleClick = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+
+
+        }
+
+    };
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
     }
 
