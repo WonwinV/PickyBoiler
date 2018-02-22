@@ -1,4 +1,4 @@
-package pickyboiler.pickyboiler.Utilities.Storage;
+package pickyboiler.pickyboiler.utilities.storage;
 
 import android.app.Application;
 import android.content.Context;
