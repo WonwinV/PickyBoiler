@@ -10,12 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ToggleButton;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-import android.widget.Toast;
 
 import pickyboiler.pickyboiler.utilities.storage.SharedPreferencesManager;
 

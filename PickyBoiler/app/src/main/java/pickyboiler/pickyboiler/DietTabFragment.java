@@ -29,11 +29,8 @@ public class DietTabFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        //TODO: create diet_tab_fragment
         View view = inflater.inflate(R.layout.allergen_tab_fragment,container,false);
 
-
-        //TODO: implement vegetarian_btn
         vegetarian = (ToggleButton) view.findViewById(R.id.vegetarian_btn);
         vegetarian.setOnClickListener(new View.OnClickListener() {
 
