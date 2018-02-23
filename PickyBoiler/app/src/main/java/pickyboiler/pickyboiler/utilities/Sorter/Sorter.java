@@ -1,4 +1,4 @@
-package pickyboiler.pickyboiler.utilities.Sorter;
+package pickyboiler.pickyboiler.Utilities.Sorter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import pickyboiler.pickyboiler.R;
-import pickyboiler.pickyboiler.utilities.storage.SharedPreferencesManager;
+import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 public class Sorter {
     private static ArrayList<String> allergenList;
