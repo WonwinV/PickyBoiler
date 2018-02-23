@@ -1,4 +1,4 @@
-package pickyboiler.pickyboiler.utilities.Sorter;
+package pickyboiler.pickyboiler.Utilities.Sorter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import pickyboiler.pickyboiler.R;
-import pickyboiler.pickyboiler.utilities.storage.SharedPreferencesManager;
+import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 public class Sorter {
     private static ArrayList<String> allergenList;
@@ -86,11 +86,7 @@ public class Sorter {
         return diningCourtWithScore;
     }
 
-<<<<<<< HEAD
     private static JSONObject computeScore(Context context, JSONObject diningCourt) {
-=======
-   private static JSONObject computeScore(Context context, JSONObject diningCourt) {
->>>>>>> ba29ef66df11d6bd549ff135d1520d5c1f77326b
         Integer score = 0;
         HashMap<String, Integer> favoriteCounts = new HashMap<>();
         JSONObject result = new JSONObject();
