@@ -36,6 +36,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
+
 /**
  * Created by Prin on 2/15/18.
  */
