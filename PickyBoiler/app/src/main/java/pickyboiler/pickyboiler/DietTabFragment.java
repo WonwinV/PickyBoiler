@@ -4,14 +4,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ToggleButton;
 
-import pickyboiler.pickyboiler.utilities.storage.SharedPreferencesManager;
+import pickyboiler.pickyboiler.utilities.storage.*;
+
 
 /**
  * Created by Prin on 2/15/18.
@@ -68,5 +67,15 @@ public class DietTabFragment extends Fragment {
         return view;
     }
 
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        if(SharedPreferencesManager.isVeggie()) {
+            getView().findViewById(R.id.vegetarian_btn).setBackgroundDrawable(getResources().getDrawable(R.drawable.vegetarian));
+        }
+
+    }
 
 }

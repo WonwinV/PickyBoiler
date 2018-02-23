@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 import android.widget.Toast;
 
-import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
+import pickyboiler.pickyboiler.utilities.storage.SharedPreferencesManager;
 
 
 /**
