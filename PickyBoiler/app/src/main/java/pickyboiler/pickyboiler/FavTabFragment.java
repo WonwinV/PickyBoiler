@@ -106,4 +106,48 @@ public class FavTabFragment extends Fragment {
 
 
         listView.setAdapter(adapter);
+      
+       SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity());
+                // set item background
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(255, 149, 128)));  //rgb(237,70,47)
+                // set item width
+                deleteItem.setWidth(250);
+                // set an icon
+                //deleteItem.setIcon(R.drawable.ic_action_discard);
+                // set text
+                deleteItem.setTitle("Delete");
+                deleteItem.setTitleColor(Color.WHITE);
+                deleteItem.setTitleSize(16);
+                // add to menu
+                menu.addMenuItem(deleteItem);
+            }
+        };
+
+        // set creator
+        mListView.setMenuCreator(creator);
+
+        mListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+
+                switch (index) {
+                    case 0:
+                        SharedPreferencesManager.removeFavoriteItem(favItemsList.get(position));
+                        favItemsList.remove(position);
+                        adapter.notifyDataSetChanged();
+                        SharedPreferencesManager.showToast("Item deleted.");
+                        break;
+                }
+                return true;
+            }
+        });
+
+        return view;
+    }
 }
