@@ -1,9 +1,15 @@
 package pickyboiler.pickyboiler;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,18 +20,97 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import pickyboiler.pickyboiler.Utilities.Adapters.DiningCourtAdapter;
+import pickyboiler.pickyboiler.Utilities.Network.DiningCourtParser;
+import pickyboiler.pickyboiler.Utilities.Network.JSONFetcher;
+import pickyboiler.pickyboiler.Utilities.Sorter.Sorter;
+
+import static pickyboiler.pickyboiler.R.id.swipelayout;
+import static pickyboiler.pickyboiler.R.id.mainlayout;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, JSONFetcher.AsyncResponse {
+
+    JSONArray allCurrentMealJSONArr = new JSONArray();
+    int completedAsyncTask;
+    boolean finishedAllAsync;
+    final int numberOfCourts = 5;
+    int counter = 0;
 
     DrawerLayout drawer;
     Button sidebarbtn;
     NavigationView navigationView;
 
+    SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Recycle View
         setContentView(R.layout.activity_main);
+        recycleDiningCourtsList = (RecyclerView) findViewById(R.id.rv_home_list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recycleDiningCourtsList.setLayoutManager(layoutManager);
+        diningAdapter = new DiningCourtAdapter();
+        recycleDiningCourtsList.setAdapter(diningAdapter);
+
+        //allCurrentMeal = new HashMap<>();
+        allCurrentMealJSONArr = new JSONArray();
+        completedAsyncTask = 0;
+        finishedAllAsync = false;
+        counter = 0;
+
+        Date cDate = new Date();
+        String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
+
+        //hard coded for now
+        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Ford/" + fDate);
+        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Earhart/" + fDate);
+        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Windsor/" + fDate);
+        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Hillenbrand/" + fDate);
+        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Wiley/" + fDate);
+
+        final JSONFetcher.AsyncResponse dd = this;
+
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(swipelayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                diningAdapter = new DiningCourtAdapter();
+                recycleDiningCourtsList.setAdapter(diningAdapter);
+
+                //allCurrentMeal = new HashMap<>();
+                allCurrentMealJSONArr = new JSONArray();
+                completedAsyncTask = 0;
+                finishedAllAsync = false;
+                counter = 0;
+
+                Date cDate = new Date();
+                String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
+
+                //hard coded for now
+                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Ford/" + fDate);
+                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Earhart/" + fDate);
+                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Windsor/" + fDate);
+                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Hillenbrand/" + fDate);
+                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Wiley/" + fDate);
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+        swipeRefreshLayout.setColorSchemeColors(Color.rgb(255, 158, 138), Color.rgb(254, 193, 136), Color.rgb(255, 233, 135));
+
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
@@ -55,6 +140,108 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+    @Override
+    public void processFinish(String output) {
+        if(output == null) {
+            Log.e("HomeActivity-fetched", "network error");
+            //TODO: handle network error here
+            if(++completedAsyncTask == numberOfCourts) {
+                finishedAllAsync = true;
+                //ArrayList<JSONObject> arr = Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr);
+                //Log.d("Sorting====", ">>" + arr.toString());
+                if(counter > 0)
+                    diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr), getApplicationContext());
+
+                if(counter == 0) {
+                    //no dining court open
+                    JSONObject ads = new JSONObject();
+                    try {
+                        ads.put("Location", "Local Restaurant ads here");
+                        ads.put("favoriteCounts", "contact developer for ads");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    ArrayList<JSONObject> adsArr = new ArrayList<>();
+                    adsArr.add(ads);
+                    diningAdapter.addData(adsArr, getApplicationContext());
+
+                    Drawable drawable;
+                    drawable = getDrawable(R.drawable.background_nointernet);
+                    RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
+                    mlayout.setBackground(drawable);
+                }
+            }
+            return;
+        }
+        JSONObject jsonobj = null;
+        try {
+            Log.d("~~~~~~", "finished fetching " + new JSONObject(output).getString("Location"));
+            //do operation on the fetched JSON
+            jsonobj = new JSONObject(output);
+            DiningCourtParser parser = new DiningCourtParser();
+            JSONObject parsed = parser.parseDiningCourtJSON(jsonobj);
+            JSONObject mealObj = parser.getCurrentMealJSON(parsed);
+            Log.d("===Parsed_" + jsonobj.getString("Location"), "processFinish: " + parsed.toString());
+            //Log.d("===ParsedLunch", ">" + parsed.getJSONObject("MealDetails").getJSONObject("Lunch").toString());
+            if (mealObj != null) {
+                counter++;
+                allCurrentMealJSONArr.put(mealObj);
+                //allCurrentMeal.put(jsonobj.getString("Location"), mealObj);
+                //Log.d("HomeActivity-parsed", "Serving @  " + jsonobj.getString("Location") + " : " + allCurrentMeal.get(jsonobj.getString("Location")).toString());
+                //Log.d("URLLLLLL", allCurrentMeal.get(jsonobj.getString("Location")).getString("URL"));
+            } else {
+                Log.d("HomeActivity-parsed", "Not serving @ " + jsonobj.getString("Location") + " : " + parser.findCurrentMeal(parsed));
+            }
+
+        } catch (JSONException e) {
+            //TODO: handle network error here. Incomplete request response.
+            Log.e("JSON fetch error", "parse JSON error: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            //crash and burn
+            Log.e("Crash!!! ", e.getMessage());
+            e.printStackTrace();
+        }
+
+        if(++completedAsyncTask == numberOfCourts) {
+
+            if(counter == 0) {
+                //no dining court open
+                Log.d("ADDDDSS", "processFinish: ");
+                JSONObject ads = new JSONObject();
+                try {
+                    ads.put("Location", "Local Restaurant Ads Here");
+                    ads.put("favoriteCounts", "Contact developers");
+                    ads.put("AllergenCount", new JSONObject().put("Contact developers", 0));
+                    ads.put("URL", "https://hungryboiler.com/");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                ArrayList<JSONObject> adsArr = new ArrayList<>();
+                adsArr.add(ads);
+                diningAdapter.addData(adsArr, getApplicationContext());
+
+                Drawable drawable;
+                drawable = getDrawable(R.drawable.background_closed);
+                RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
+                mlayout.setBackground(drawable);
+            }
+            if(counter > 0) {
+                Drawable drawable2 = getDrawable(R.drawable.background);
+                RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
+                mlayout.setBackground(drawable2);
+
+                //ArrayList<JSONObject> arr = Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr);
+                diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr), getApplicationContext());
+            }
+
+            finishedAllAsync = true;
+        }
+    }
+
+    private RecyclerView recycleDiningCourtsList;
+    private DiningCourtAdapter diningAdapter;
 
     @Override
     public void onBackPressed() {
@@ -108,5 +295,36 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        /*buttonpref = (Button) findViewById(R.id.prefbutton);
+        buttonpref.setPressed(false);
+        boolean pressed = buttonpref.isPressed();
+        if (!pressed) {
+            drawable = getDrawable(R.drawable.pref_btn);
+            buttonpref.setBackground(drawable);
+        }*/
+
+        diningAdapter = new DiningCourtAdapter();
+        recycleDiningCourtsList.setAdapter(diningAdapter);
+
+        //allCurrentMeal = new HashMap<>();
+        allCurrentMealJSONArr = new JSONArray();
+        completedAsyncTask = 0;
+        finishedAllAsync = false;
+        counter = 0;
+
+        Date cDate = new Date();
+        String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
+
+        //hard coded for now
+        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Ford/" + fDate);
+        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Earhart/" + fDate);
+        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Windsor/" + fDate);
+        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Hillenbrand/" + fDate);
+        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Wiley/" + fDate);
     }
 }
