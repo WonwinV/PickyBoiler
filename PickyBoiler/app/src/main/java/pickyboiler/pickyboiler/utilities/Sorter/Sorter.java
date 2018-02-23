@@ -1,7 +1,6 @@
 package pickyboiler.pickyboiler.Utilities.Sorter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -9,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -18,7 +16,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import pickyboiler.pickyboiler.R;
 import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
