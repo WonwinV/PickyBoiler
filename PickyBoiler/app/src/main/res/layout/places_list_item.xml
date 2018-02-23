@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:paddingTop="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="15dp"
+    android:background="@drawable/dining_btn">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:id="@+id/tv_place_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:textSize="22sp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Top 5 Favorite(s) : "
+            android:layout_below="@id/tv_place_name"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/tv_veggies_count"
+            android:layout_below="@id/tv_place_name"
+            android:layout_alignParentEnd="true"
+            android:gravity="left"
+            android:textSize="15sp"
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Allergen(s) : "
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_below="@id/tv_veggies_count" />
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textSize="15sp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/tv_veggies_count"
+            android:id="@+id/tv_allergens"/>
+
+    </RelativeLayout>
+
+</FrameLayout>
