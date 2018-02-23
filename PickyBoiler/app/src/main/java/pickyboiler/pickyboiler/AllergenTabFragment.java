@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-import pickyboiler.pickyboiler.utilities.storage.SharedPreferencesManager;
+import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 
 /**

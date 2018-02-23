@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ToggleButton;
 
-import pickyboiler.pickyboiler.utilities.storage.*;
+import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 
 /**
@@ -23,13 +23,11 @@ public class DietTabFragment extends Fragment {
 
     ToggleButton vegetarian;
 
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.allergen_tab_fragment,container,false);
+        View view = inflater.inflate(R.layout.diet_tab_fragment,container,false);
 
         vegetarian = (ToggleButton) view.findViewById(R.id.vegetarian_btn);
         vegetarian.setOnClickListener(new View.OnClickListener() {

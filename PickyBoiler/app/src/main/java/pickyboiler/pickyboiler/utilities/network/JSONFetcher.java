@@ -1,4 +1,4 @@
-package pickyboiler.pickyboiler.utilities.network;
+package pickyboiler.pickyboiler.Utilities.Network;
 import android.os.AsyncTask;
 import android.util.Log;
 
