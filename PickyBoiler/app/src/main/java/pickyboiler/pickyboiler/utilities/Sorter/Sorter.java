@@ -1,10 +1,91 @@
 package pickyboiler.pickyboiler.utilities.Sorter;
 
-/**
- * Created by HP on 2/22/2018.
- */
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import pickyboiler.pickyboiler.R;
+import pickyboiler.pickyboiler.utilities.storage.SharedPreferencesManager;
 
 public class Sorter {
+    private static ArrayList<String> allergenList;
+    private static ArrayList<String> favoriteList;
+    private static final int veggieMultiplier = 7;
+    private static final int favoriteMultiplier = 7;
+
+    public static ArrayList<JSONObject> sortDiningCourt(Context context, JSONArray allCurrentMeal) {
+        allergenList = new ArrayList<>();
+        allergenList = SharedPreferencesManager.getAllAllergens();
+        favoriteList = SharedPreferencesManager.getAllFavoriteItem();
+
+        ArrayList<JSONObject> diningCourtWithScore = new ArrayList<>();
+        try {
+            //compute ranking score
+            for (int i = 0; i < allCurrentMeal.length(); i++) {
+                JSONObject item = allCurrentMeal.getJSONObject(i);
+                JSONObject computed = computeScore(context, item);
+                item.put("computedRanking", computed.getString("computedRanking"));
+                String favCounts = "";
+                JSONArray list = computed.getJSONArray("favoriteCounts");
+                Log.d("SORTER", "sortDiningCourt: " + list.toString());
+                //Log.d("SORTER_SCORE", "sortDiningCourt: " + computed.getString("computedRanking"));
+                if(list != null && list.length() > 0) {
+                    for (int j = 0; j < list.length(); j++) {
+                        JSONObject entry = list.getJSONObject(j);
+                        Iterator<String> keys = entry.keys();
+                        String name = keys.next();
+                        //Log.d("FAVCOUNTS", "sortDiningCourt: " + name);
+                        if (name.trim().length() > 0) {
+                            favCounts += name + "(" + entry.getInt(name) + ")" + ", ";
+                        }
+                    }
+                    if (favCounts.length() > 2)
+                        favCounts = favCounts.substring(0, favCounts.length() - 2);
+                }
+                if(favCounts.length() > 0)
+                    item.put("favoriteCounts", favCounts);
+                else
+                    item.put("favoriteCounts", "No favorite menu found");
+                diningCourtWithScore.add(item);
+            }
+
+            //sort by ranking score
+            Collections.sort(diningCourtWithScore, new Comparator<JSONObject>() {
+                @Override
+                public int compare(JSONObject o1, JSONObject o2) {
+                    Integer a1 = 0, a2 = 0;
+                    try {
+                        a1 = o1.getInt("computedRanking");
+                        a2 = o2.getInt("computedRanking");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    return a2.compareTo(a1);
+                }
+            });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return diningCourtWithScore;
+    }
+
    private static JSONObject computeScore(Context context, JSONObject diningCourt) {
         Integer score = 0;
         HashMap<String, Integer> favoriteCounts = new HashMap<>();
