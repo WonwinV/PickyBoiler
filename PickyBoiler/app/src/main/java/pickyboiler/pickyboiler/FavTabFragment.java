@@ -38,6 +38,8 @@ import java.util.List;
 
 import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
+import static pickyboiler.pickyboiler.R.id.editText;
+
 /**
  * Created by Prin on 2/15/18.
  */
