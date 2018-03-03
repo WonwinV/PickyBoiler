@@ -83,33 +83,8 @@ public class MainActivity extends AppCompatActivity
 
         final JSONFetcher.AsyncResponse dd = this;
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(swipelayout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                diningAdapter = new DiningCourtAdapter();
-                recycleDiningCourtsList.setAdapter(diningAdapter);
-
-                //allCurrentMeal = new HashMap<>();
-                allCurrentMealJSONArr = new JSONArray();
-                completedAsyncTask = 0;
-                finishedAllAsync = false;
-                counter = 0;
-
-                Date cDate = new Date();
-                String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
-
-                //hard coded for now
-                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Ford/" + fDate);
-                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Earhart/" + fDate);
-                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Windsor/" + fDate);
-                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Hillenbrand/" + fDate);
-                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Wiley/" + fDate);
-
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
-        swipeRefreshLayout.setColorSchemeColors(Color.rgb(255, 158, 138), Color.rgb(254, 193, 136), Color.rgb(255, 233, 135));
+        //Need to implement a new refresh function here
+        //TODO: make sure onRefresh does not conflict with onCreate - siravit
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
