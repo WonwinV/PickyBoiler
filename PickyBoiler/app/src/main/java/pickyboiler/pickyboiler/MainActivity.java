@@ -34,6 +34,7 @@ import pickyboiler.pickyboiler.Utilities.Adapters.DiningCourtAdapter;
 import pickyboiler.pickyboiler.Utilities.Network.DiningCourtParser;
 import pickyboiler.pickyboiler.Utilities.Network.JSONFetcher;
 import pickyboiler.pickyboiler.Utilities.Sorter.Sorter;
+import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 import static pickyboiler.pickyboiler.R.id.swipelayout;
 import static pickyboiler.pickyboiler.R.id.mainlayout;
@@ -73,13 +74,79 @@ public class MainActivity extends AppCompatActivity
 
         Date cDate = new Date();
         String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
+        String checkCacheDate = new SimpleDateFormat("M/d/yyyy").format(cDate);
+
+        //check cache first
+        String[] diningCourtList = {"Ford", "Earhart", "Windsor", "Hillenbrand", "Wiley"};
+        boolean validCache = false;
+        DiningCourtParser parser = new DiningCourtParser();
+        try {
+            for (String diningCourtName : diningCourtList) {
+                JSONObject parsedCache = new JSONObject(SharedPreferencesManager.getValueFromKey(SharedPreferencesManager.getContext(), diningCourtName + "_cache"));
+                if (parsedCache.get("Date").equals(checkCacheDate)) {
+                    Log.d("^^^CACHE^^^", "validCache");
+                    validCache = true;
+                    JSONObject mealObj = parser.getCurrentMealJSON(parsedCache);
+                    Log.d("P==CACHE==Parsed_" + parsedCache.getString("Location"), "processFinish: " + parsedCache.toString());
+                    if (mealObj != null) {
+                        counter++;
+                        allCurrentMealJSONArr.put(mealObj);
+                    } else {
+                        Log.d("HomeActivity-parsed", "Not serving @ " + parsedCache.getString("Location") + " : " + parser.findCurrentMeal(parsedCache));
+                    }
+                }
+                else {
+                    Log.d("^^^CACHE^^^", "NOT validCache");
+                    break;
+                }
+            }
+
+            if(validCache) {
+                if (counter == 0) {
+                    //no dining court open
+                    Log.d("ADDDDSS", "processFinish: ");
+                    JSONObject ads = new JSONObject();
+                    try {
+                        ads.put("Location", "Local Restaurant Ads Here");
+                        ads.put("favoriteCounts", "Contact developers");
+                        ads.put("AllergenCount", new JSONObject().put("Contact developers", 0));
+                        ads.put("URL", "https://hungryboiler.com/");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    ArrayList<JSONObject> adsArr = new ArrayList<>();
+                    adsArr.add(ads);
+                    diningAdapter.addData(adsArr, getApplicationContext());
+
+                    Drawable drawable;
+                    drawable = getDrawable(R.drawable.background_closed);
+                    RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
+                    mlayout.setBackground(drawable);
+                }
+                if (counter > 0) {
+                    Drawable drawable2 = getDrawable(R.drawable.background);
+                    RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
+                    mlayout.setBackground(drawable2);
+                    Log.d("ADDDATA", "onRefresh: menu");
+                    diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr), getApplicationContext());
+                }
+            }
+        } catch (JSONException e) {
+            //invalid cache handler here
+        } catch (Exception e) {
+            //something happened boom boom
+            e.printStackTrace();
+        }
 
         //hard coded for now
-        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Ford/" + fDate);
-        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Earhart/" + fDate);
-        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Windsor/" + fDate);
-        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Hillenbrand/" + fDate);
-        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Wiley/" + fDate);
+        if(!validCache) {
+            Log.d("CALL TO FETCHHHHH", "fetch everythingggggggg");
+            new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Ford/" + fDate);
+            new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Earhart/" + fDate);
+            new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Windsor/" + fDate);
+            new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Hillenbrand/" + fDate);
+            new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Wiley/" + fDate);
+        }
 
         final JSONFetcher.AsyncResponse dd = this;
 
@@ -90,7 +157,6 @@ public class MainActivity extends AppCompatActivity
                 diningAdapter = new DiningCourtAdapter();
                 recycleDiningCourtsList.setAdapter(diningAdapter);
 
-                //allCurrentMeal = new HashMap<>();
                 allCurrentMealJSONArr = new JSONArray();
                 completedAsyncTask = 0;
                 finishedAllAsync = false;
@@ -98,13 +164,79 @@ public class MainActivity extends AppCompatActivity
 
                 Date cDate = new Date();
                 String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
+                String checkCacheDate = new SimpleDateFormat("M/d/yyyy").format(cDate);
+
+                //check cache first
+                String[] diningCourtList = {"Ford", "Earhart", "Windsor", "Hillenbrand", "Wiley"};
+                boolean validCache = false;
+                DiningCourtParser parser = new DiningCourtParser();
+                try {
+                    for (String diningCourtName : diningCourtList) {
+                        JSONObject parsedCache = new JSONObject(SharedPreferencesManager.getValueFromKey(SharedPreferencesManager.getContext(), diningCourtName + "_cache"));
+                        if (parsedCache.get("Date").equals(checkCacheDate)) {
+                            Log.d("^^^CACHE^^^", "validCache");
+                            validCache = true;
+                            JSONObject mealObj = parser.getCurrentMealJSON(parsedCache);
+                            Log.d("P==CACHE==Parsed_" + parsedCache.getString("Location"), "processFinish: " + parsedCache.toString());
+                            if (mealObj != null) {
+                                counter++;
+                                allCurrentMealJSONArr.put(mealObj);
+                            } else {
+                                Log.d("HomeActivity-parsed", "Not serving @ " + parsedCache.getString("Location") + " : " + parser.findCurrentMeal(parsedCache));
+                            }
+                        }
+                        else {
+                            Log.d("^^^CACHE^^^", "NOT validCache");
+                            break;
+                        }
+                    }
+
+                    if(validCache) {
+                        if (counter == 0) {
+                            //no dining court open
+                            Log.d("ADDDDSS", "processFinish: ");
+                            JSONObject ads = new JSONObject();
+                            try {
+                                ads.put("Location", "Local Restaurant Ads Here");
+                                ads.put("favoriteCounts", "Contact developers");
+                                ads.put("AllergenCount", new JSONObject().put("Contact developers", 0));
+                                ads.put("URL", "https://hungryboiler.com/");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            ArrayList<JSONObject> adsArr = new ArrayList<>();
+                            adsArr.add(ads);
+                            diningAdapter.addData(adsArr, getApplicationContext());
+
+                            Drawable drawable;
+                            drawable = getDrawable(R.drawable.background_closed);
+                            RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
+                            mlayout.setBackground(drawable);
+                        }
+                        if (counter > 0) {
+                            Drawable drawable2 = getDrawable(R.drawable.background);
+                            RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
+                            mlayout.setBackground(drawable2);
+                            Log.d("ADDDATA", "onRefresh: menu");
+                            diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr), getApplicationContext());
+                        }
+                    }
+                } catch (JSONException e) {
+                    //invalid cache handler here
+                } catch (Exception e) {
+                    //something happened boom boom
+                    e.printStackTrace();
+                }
 
                 //hard coded for now
-                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Ford/" + fDate);
-                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Earhart/" + fDate);
-                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Windsor/" + fDate);
-                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Hillenbrand/" + fDate);
-                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Wiley/" + fDate);
+                if(!validCache) {
+                    Log.d("CALL TO FETCHHHHH", "fetch everythingggggggg");
+                    new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Ford/" + fDate);
+                    new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Earhart/" + fDate);
+                    new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Windsor/" + fDate);
+                    new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Hillenbrand/" + fDate);
+                    new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Wiley/" + fDate);
+                }
 
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -145,7 +277,7 @@ public class MainActivity extends AppCompatActivity
     public void processFinish(String output) {
         if(output == null) {
             Log.e("HomeActivity-fetched", "network error");
-            //TODO: handle network error here
+            //handle network error here
             if(++completedAsyncTask == numberOfCourts) {
                 finishedAllAsync = true;
                 //ArrayList<JSONObject> arr = Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr);
@@ -181,8 +313,12 @@ public class MainActivity extends AppCompatActivity
             jsonobj = new JSONObject(output);
             DiningCourtParser parser = new DiningCourtParser();
             JSONObject parsed = parser.parseDiningCourtJSON(jsonobj);
+            //cached parsed data
+            SharedPreferencesManager.putStringSharedPreferences(parsed.getString("Location")+"_cache", parsed.toString());
+            Log.d("^^^CACHE^^^", "cached to>>>"+parsed.getString("Location")+"_cache"+" : "+SharedPreferencesManager.getValueFromKey(getApplicationContext(), parsed.getString("Location")+"_cache"));
+
             JSONObject mealObj = parser.getCurrentMealJSON(parsed);
-            Log.d("===Parsed_" + jsonobj.getString("Location"), "processFinish: " + parsed.toString());
+            Log.d("===Parsed_" + parsed.getString("Location"), "processFinish: " + parsed.toString());
             //Log.d("===ParsedLunch", ">" + parsed.getJSONObject("MealDetails").getJSONObject("Lunch").toString());
             if (mealObj != null) {
                 counter++;
@@ -319,12 +455,78 @@ public class MainActivity extends AppCompatActivity
 
         Date cDate = new Date();
         String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
+        String checkCacheDate = new SimpleDateFormat("M/d/yyyy").format(cDate);
+
+        //check cache first
+        String[] diningCourtList = {"Ford", "Earhart", "Windsor", "Hillenbrand", "Wiley"};
+        boolean validCache = false;
+        DiningCourtParser parser = new DiningCourtParser();
+        try {
+            for (String diningCourtName : diningCourtList) {
+                JSONObject parsedCache = new JSONObject(SharedPreferencesManager.getValueFromKey(getApplicationContext(), diningCourtName + "_cache"));
+                if (parsedCache.get("Date").equals(checkCacheDate)) {
+                    Log.d("^^^CACHE^^^", "validCache");
+                    validCache = true;
+                    JSONObject mealObj = parser.getCurrentMealJSON(parsedCache);
+                    Log.d("resumePCACHE==Parsed_" + parsedCache.getString("Location"), parsedCache.toString());
+                    if (mealObj != null) {
+                        counter++;
+                        allCurrentMealJSONArr.put(mealObj);
+                    } else {
+                        Log.d("HomeActivity-parsed", "Not serving @ " + parsedCache.getString("Location") + " : " + parser.findCurrentMeal(parsedCache));
+                    }
+                }
+                else {
+                    Log.d("^^^CACHE^^^", "NOT validCache,"+parsedCache.get("Date")+" vs "+checkCacheDate);
+                    break;
+                }
+            }
+
+            if(validCache) {
+                if (counter == 0) {
+                    //no dining court open
+                    Log.d("ADDDDSS", "processFinish: ");
+                    JSONObject ads = new JSONObject();
+                    try {
+                        ads.put("Location", "Local Restaurant Ads Here");
+                        ads.put("favoriteCounts", "Contact developers");
+                        ads.put("AllergenCount", new JSONObject().put("Contact developers", 0));
+                        ads.put("URL", "https://hungryboiler.com/");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    ArrayList<JSONObject> adsArr = new ArrayList<>();
+                    adsArr.add(ads);
+                    Log.d("ADDDATA", "onResume: ads");
+                    diningAdapter.addData(adsArr, getApplicationContext());
+
+                    Drawable drawable;
+                    drawable = getDrawable(R.drawable.background_closed);
+                    RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
+                    mlayout.setBackground(drawable);
+                }
+                if (counter > 0) {
+                    Drawable drawable2 = getDrawable(R.drawable.background);
+                    RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
+                    mlayout.setBackground(drawable2);
+                    Log.d("ADDDATA", "onResume: menu");
+                    diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr), getApplicationContext());
+                }
+            }
+        } catch (JSONException e) {
+            //invalid cache handler here
+        } catch (Exception e) {
+            //something happened boom boom
+            e.printStackTrace();
+        }
 
         //hard coded for now
-        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Ford/" + fDate);
-        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Earhart/" + fDate);
-        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Windsor/" + fDate);
-        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Hillenbrand/" + fDate);
-        new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Wiley/" + fDate);
+        if(!validCache) {
+            new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Ford/" + fDate);
+            new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Earhart/" + fDate);
+            new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Windsor/" + fDate);
+            new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Hillenbrand/" + fDate);
+            new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Wiley/" + fDate);
+        }
     }
 }
