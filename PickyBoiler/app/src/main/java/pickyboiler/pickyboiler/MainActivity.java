@@ -243,6 +243,8 @@ public class MainActivity extends AppCompatActivity
         });
         swipeRefreshLayout.setColorSchemeColors(Color.rgb(255, 158, 138), Color.rgb(254, 193, 136), Color.rgb(255, 233, 135));
 
+        //Need to implement a new refresh function here
+
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
