@@ -29,6 +29,10 @@
             android:name=".FoodPreferences"
             android:label="@string/title_activity_food_preferences"
             android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".MenuDisplayPage"
+            android:label="MenuDisplayPage"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -33,6 +33,8 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
     private String[] listAllergens;// = {"GG", "RIP", "F", "DEATH", "Shrimp"};
     private String[] urlList;// = {"http://www.google.com", "http://www.youtube.com", "http://www.apple.com", "http://www.slickdeals.com", "http://www.purdue.com"};
 
+    private Context mainContext;
+
 //    public void addData(HashMap<String, JSONObject> dataSet, Context context) {
 //        String[] keys = dataSet.keySet().toArray(new String[dataSet.size()]);
 //        diningCourtNames = new String[dataSet.size()];
@@ -68,6 +70,9 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
         numsVeggies = new String[allCurrentMeal.size()];
         listAllergens = new String[allCurrentMeal.size()];
         urlList = new String[allCurrentMeal.size()];
+
+        mainContext = context;
+
         try {
             for (int i = 0; i < allCurrentMeal.size(); i++) {
                 diningCourtNames[i] = allCurrentMeal.get(i).getString("Location");
@@ -105,7 +110,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
     public InfoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.places_list_item, parent, false);
-        return new InfoViewHolder(view);
+        return new InfoViewHolder(view,mainContext);
     }
     @Override
     public void onBindViewHolder(InfoViewHolder holder, int position) {
@@ -126,8 +131,11 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
         TextView allergenListText;
         TextView countVeggiesText;
 
-        public InfoViewHolder(View itemView) {
+        Context context;
+
+        public InfoViewHolder(View itemView, Context context) {
             super(itemView);
+            this.context = context;
             diningCourtNameText = (TextView) itemView.findViewById(R.id.tv_place_name);
             allergenListText = (TextView) itemView.findViewById(R.id.tv_allergens);
             countVeggiesText = (TextView) itemView.findViewById(R.id.tv_veggies_count);
@@ -136,14 +144,16 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(v.getContext(), "Redirecting to " + urlList[getAdapterPosition()], Toast.LENGTH_SHORT).show();
+            //Toast.makeText(v.getContext(), "Redirecting to " + urlList[getAdapterPosition()], Toast.LENGTH_SHORT).show();
 //            String url = urlList[getAdapterPosition()];
 //            Intent i = new Intent(Intent.ACTION_VIEW);
 //            i.setData(Uri.parse(url));
 //            startActivity(v.getContext(), i, null);
 
-            //Intent menuPage = new Intent(this,MenuDisplayPage.class);
-            //startActivity(menuPage);
+            Intent menuPage = new Intent(context,MenuDisplayPage.class);
+            context.startActivity(menuPage);
+
+
 
         }
     }
