@@ -165,10 +165,11 @@ public class MainActivity extends AppCompatActivity
 
                 Date cDate = new Date();
                 String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
-                
+
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+        swipeRefreshLayout.setColorSchemeColors(Color.rgb(255, 158, 138), Color.rgb(254, 193, 136), Color.rgb(255, 233, 135));
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
