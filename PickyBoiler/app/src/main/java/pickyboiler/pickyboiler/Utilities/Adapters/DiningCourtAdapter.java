@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import pickyboiler.pickyboiler.MenuDisplayPage;
 import pickyboiler.pickyboiler.R;
 import pickyboiler.pickyboiler.MainActivity;
 import pickyboiler.pickyboiler.Utilities.Storage.ApplicationController;
@@ -136,10 +137,14 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
         @Override
         public void onClick(View v) {
             Toast.makeText(v.getContext(), "Redirecting to " + urlList[getAdapterPosition()], Toast.LENGTH_SHORT).show();
-            String url = urlList[getAdapterPosition()];
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(url));
-            startActivity(v.getContext(), i, null);
+//            String url = urlList[getAdapterPosition()];
+//            Intent i = new Intent(Intent.ACTION_VIEW);
+//            i.setData(Uri.parse(url));
+//            startActivity(v.getContext(), i, null);
+
+            //Intent menuPage = new Intent(this,MenuDisplayPage.class);
+            //startActivity(menuPage);
+
         }
     }
 }
