@@ -166,6 +166,12 @@ public class MainActivity extends AppCompatActivity
                 Date cDate = new Date();
                 String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
 
+                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Ford/" + fDate);
+                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Earhart/" + fDate);
+                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Windsor/" + fDate);
+                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Hillenbrand/" + fDate);
+                new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Wiley/" + fDate);
+
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
