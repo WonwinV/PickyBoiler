@@ -150,7 +150,25 @@ public class MainActivity extends AppCompatActivity
 
         final JSONFetcher.AsyncResponse dd = this;
 
-        //Need to implement a new refresh function here
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(swipelayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                diningAdapter = new DiningCourtAdapter();
+                recycleDiningCourtsList.setAdapter(diningAdapter);
+
+                //allCurrentMeal = new HashMap<>();
+                allCurrentMealJSONArr = new JSONArray();
+                completedAsyncTask = 0;
+                finishedAllAsync = false;
+                counter = 0;
+
+                Date cDate = new Date();
+                String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
+                
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
