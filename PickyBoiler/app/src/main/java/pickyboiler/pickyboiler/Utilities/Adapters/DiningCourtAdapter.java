@@ -127,6 +127,8 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
         }
     }
     public class InfoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public final static String sendDiningCourt = "SEND_DINING_COURT_NAME";
+
         TextView diningCourtNameText;
         TextView allergenListText;
         TextView countVeggiesText;
@@ -144,13 +146,12 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
 
         @Override
         public void onClick(View v) {
-            //Toast.makeText(v.getContext(), "Redirecting to " + urlList[getAdapterPosition()], Toast.LENGTH_SHORT).show();
-//            String url = urlList[getAdapterPosition()];
-//            Intent i = new Intent(Intent.ACTION_VIEW);
-//            i.setData(Uri.parse(url));
-//            startActivity(v.getContext(), i, null);
+            //get the current dining court
+            String diningCourt = diningCourtNames[getAdapterPosition()];
 
             Intent menuPage = new Intent(context,MenuDisplayPage.class);
+            menuPage.putExtra(sendDiningCourt,diningCourt);
+
             context.startActivity(menuPage);
 
 
