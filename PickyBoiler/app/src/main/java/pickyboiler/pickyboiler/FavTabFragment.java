@@ -25,6 +25,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AutoCompleteTextView;
+import android.widget.ArrayAdapter;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -52,6 +54,8 @@ public class FavTabFragment extends Fragment {
     ArrayList<String> favItemsList;
     ListView listView;
     ArrayAdapter adapter;
+    ArrayAdapter<String> ada;
+    String[] favorites = {"Apple", "Broccoli", "Chicken", "Cheese", "Cake", "Dates", "Egg", "Fruit Salad"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,6 +77,12 @@ public class FavTabFragment extends Fragment {
         Log.d("favlist_fofygg", forbg);
 
         adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,favItemsList);
+      
+        //Create instance to check autofill
+        ada = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_item, favorites);
+        AutoCompleteTextView actv = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView);
+        actv.setThreshold(1); //will start working from first character
+        actv.setAdapter(ada);
 
         view.findViewById(R.id.addfood_btn).setOnClickListener(new View.OnClickListener() {
             @Override
