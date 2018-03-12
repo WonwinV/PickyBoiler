@@ -18,6 +18,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
 
 import pickyboiler.pickyboiler.MenuDisplayPage;
@@ -32,6 +33,9 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
     private String[] numsVeggies;// = {"3", "2", "3", "2", "100"};
     private String[] listAllergens;// = {"GG", "RIP", "F", "DEATH", "Shrimp"};
     private String[] urlList;// = {"http://www.google.com", "http://www.youtube.com", "http://www.apple.com", "http://www.slickdeals.com", "http://www.purdue.com"};
+
+
+    private ArrayList<JSONObject> diningCourtMenus;
 
     private Context mainContext;
 
@@ -71,10 +75,14 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
         listAllergens = new String[allCurrentMeal.size()];
         urlList = new String[allCurrentMeal.size()];
 
+        diningCourtMenus = allCurrentMeal;
+
         mainContext = context;
 
         try {
             for (int i = 0; i < allCurrentMeal.size(); i++) {
+
+
                 diningCourtNames[i] = allCurrentMeal.get(i).getString("Location");
                 //Log.d("DUPLICAEBUGGGGGG", "addData: " + diningCourtNames[i]);
                 //TODO: change back to numVeggies after debugging
@@ -128,6 +136,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
     }
     public class InfoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public final static String sendDiningCourt = "SEND_DINING_COURT_NAME";
+        public final static String sendMenuItems = "SEND_MENU_ITEMS";
 
         TextView diningCourtNameText;
         TextView allergenListText;
@@ -147,10 +156,34 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
         @Override
         public void onClick(View v) {
             //get the current dining court
+
             String diningCourt = diningCourtNames[getAdapterPosition()];
+
+
+            Iterator<String> menuIterator = null;
+            ArrayList<String> menuItem = new ArrayList<>();
+            try {
+                for (int i = 0; i < diningCourtMenus.size(); i++) {
+                    String tempCourt = diningCourtMenus.get(i).getString("Location");
+                    if (tempCourt == diningCourt){
+                        menuIterator = diningCourtMenus.get(i).getJSONObject("AllMeal").keys();
+                    }
+                }
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            if (menuIterator != null){
+                while (menuIterator.hasNext()){
+                    menuItem.add(menuIterator.next());
+                }
+            }else{
+                menuItem.add("NO DINING COURT SELECTED");
+            }
 
             Intent menuPage = new Intent(context,MenuDisplayPage.class);
             menuPage.putExtra(sendDiningCourt,diningCourt);
+            menuPage.putExtra(sendMenuItems,menuItem);
 
             context.startActivity(menuPage);
 

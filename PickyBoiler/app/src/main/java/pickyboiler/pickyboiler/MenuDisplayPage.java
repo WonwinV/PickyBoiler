@@ -7,7 +7,11 @@ import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import pickyboiler.pickyboiler.Utilities.Adapters.DiningCourtAdapter;
 
@@ -18,16 +22,20 @@ import pickyboiler.pickyboiler.Utilities.Adapters.DiningCourtAdapter;
 public class MenuDisplayPage extends AppCompatActivity {
 
     public String diningCourtName;
+    public ArrayList<String> menuItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+
         Intent intent = getIntent();
         diningCourtName = intent.getStringExtra(DiningCourtAdapter.InfoViewHolder.sendDiningCourt);
+        menuItems = intent.getStringArrayListExtra(DiningCourtAdapter.InfoViewHolder.sendMenuItems);
 
         ImageView menuIMG = (ImageView) findViewById(R.id.menuimg);
+        TextView menuText = (TextView) findViewById(R.id.MenuText);
 
         int menuID = R.drawable.default_menu_logo;
         switch (diningCourtName){
@@ -48,6 +56,13 @@ public class MenuDisplayPage extends AppCompatActivity {
                 break;
         }
         menuIMG.setImageDrawable(getResources().getDrawable(menuID));
+
+        String menuFinal = "";
+        for (int i = 0; i < menuItems.size(); i++){
+            menuFinal += menuItems.get(i) + "\n";
+        }
+
+        menuText.setText(menuFinal);
 
 
     }

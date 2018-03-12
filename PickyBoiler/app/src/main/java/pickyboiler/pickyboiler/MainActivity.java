@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity
                             }
                             ArrayList<JSONObject> adsArr = new ArrayList<>();
                             adsArr.add(ads);
-                            diningAdapter.addData(adsArr, getApplicationContext());
+                            diningAdapter.addData(adsArr,getApplicationContext());
 
                             Drawable drawable;
                             drawable = getDrawable(R.drawable.background_closed);
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity
                             RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
                             mlayout.setBackground(drawable2);
                             Log.d("ADDDATA", "onRefresh: menu");
-                            diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr), getApplicationContext());
+                            diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr),getApplicationContext());
                         }
                     }
                 } catch (JSONException e) {
@@ -369,7 +369,7 @@ public class MainActivity extends AppCompatActivity
                 mlayout.setBackground(drawable2);
 
                 //ArrayList<JSONObject> arr = Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr);
-                diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr), getApplicationContext());
+                diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr),getApplicationContext());
             }
 
             finishedAllAsync = true;
@@ -498,7 +498,7 @@ public class MainActivity extends AppCompatActivity
                     ArrayList<JSONObject> adsArr = new ArrayList<>();
                     adsArr.add(ads);
                     Log.d("ADDDATA", "onResume: ads");
-                    diningAdapter.addData(adsArr, getApplicationContext());
+                    diningAdapter.addData(adsArr,getApplicationContext());
 
                     Drawable drawable;
                     drawable = getDrawable(R.drawable.background_closed);
@@ -510,7 +510,7 @@ public class MainActivity extends AppCompatActivity
                     RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
                     mlayout.setBackground(drawable2);
                     Log.d("ADDDATA", "onResume: menu");
-                    diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr), getApplicationContext());
+                    diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr),getApplicationContext());
                 }
             }
         } catch (JSONException e) {
