@@ -96,7 +96,7 @@ public class Sorter {
             Iterator<String> keys = diningCourt.getJSONObject("AllMeal").keys();
             while (keys.hasNext()) {
                 String menuName = keys.next();
-                JSONArray itemAllergen = diningCourt.getJSONObject("AllMeal").getJSONArray(menuName);
+                JSONArray itemAllergen = diningCourt.getJSONObject("AllMeal").getJSONObject(menuName).getJSONArray("allergens");
                 boolean safeForVegetarian = false;
                 boolean allergicTo = false;
                 boolean isFavorite = false;

@@ -1,11 +1,18 @@
 package pickyboiler.pickyboiler.Utilities.Network;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -143,7 +150,10 @@ public class DiningCourtParser {
                             }
 
                             //list of all menu items, each item with name and allergens list
-                            allMenu.put(allItems.getJSONObject(k).getString("Name"), menuAllergens);
+                            JSONObject detail = new JSONObject();
+                            detail.put("ID", allItems.getJSONObject(k).getString("ID"));
+                            detail.put("allergens", menuAllergens);
+                            allMenu.put(allItems.getJSONObject(k).getString("Name"), detail);
                             //Log.d("....menuAllergen", ">" + allItems.getJSONObject(k).getString("Name") + " : " + menuAllergens.toString());
                         }
                     }
@@ -238,5 +248,14 @@ public class DiningCourtParser {
             return false;
         }
         return false;
+    }
+
+    public void getNutritionValues(String ID) {
+        final String request = "https://api.hfs.purdue.edu/menus/v2/items/" + ID;
+        try {
+            // do stuff
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
