@@ -71,7 +71,12 @@ public class DiningCourtParser {
      *                 Breakfast : {
      *                     Status : Open
      *                     AllMeal : {
-     *                         Steak,
+     *                         Steak : {
+     *                            ID : 2333....
+     *                            allergens : [
+     *                               pork, ...
+     *                            ]
+     *                         },
      *                         ...
      *                     }
      *                     VegetarianCount : 3,
