@@ -27,6 +27,7 @@
         android:layout_alignStart="@+id/menuimg"
         android:layout_below="@+id/menuimg"
         android:layout_marginTop="13dp"
+        android:width="365dp"
         android:lineSpacingExtra="0sp"
         android:lineSpacingMultiplier="1.3"
         android:maxLines="50"
