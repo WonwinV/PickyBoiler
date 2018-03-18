@@ -37,6 +37,7 @@ public class MenuDisplayPage extends AppCompatActivity {
         ImageView menuIMG = (ImageView) findViewById(R.id.menuimg);
         TextView menuText = (TextView) findViewById(R.id.MenuText);
 
+
         int menuID = R.drawable.default_menu_logo;
         switch (diningCourtName){
             case "Wiley":
@@ -55,7 +56,9 @@ public class MenuDisplayPage extends AppCompatActivity {
                 menuID = R.drawable.windsor_menu_logo;
                 break;
         }
+
         menuIMG.setImageDrawable(getResources().getDrawable(menuID));
+
 
         String menuFinal = "";
         for (int i = 0; i < menuItems.size(); i++){
