@@ -114,13 +114,13 @@ public class DietTabFragment extends Fragment {
                 case R.id.vegan_btn:
                     if (pressed) {
                         text = "Added vegan to diets.";
-                        drawable = getResources().getDrawable(R.drawable.fish);
+                        drawable = getResources().getDrawable(R.drawable.vegan);
                         view.setBackgroundDrawable(drawable);
                         //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenFish), "true");
                     }
                     else {
                         text = "Removed vegan from diets.";
-                        drawable = getResources().getDrawable(R.drawable.fish_bw);
+                        drawable = getResources().getDrawable(R.drawable.vegan_bw);
                         view.setBackgroundDrawable(drawable);
                         //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenFish), "false");
                     }
@@ -143,100 +143,69 @@ public class DietTabFragment extends Fragment {
                     break;
 
 
-                case R.id.milk_btn:
+                case R.id.nobeef_btn:
                     if (pressed) {
-                        text = "Added milk to allergens.";
-                        drawable = getResources().getDrawable(R.drawable.milk);
+                        text = "Added no beef to diets.";
+                        drawable = getResources().getDrawable(R.drawable.nobeef);
                         view.setBackgroundDrawable(drawable);
-                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenMilk), "true");
+                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenMilk), "true");
                     }
                     else {
-                        text = "Removed milk from allergens.";
-                        drawable = getResources().getDrawable(R.drawable.milk_bw);
-                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenMilk), "false");
+                        text = "Removed no beef from diets.";
+                        drawable = getResources().getDrawable(R.drawable.nobeef_bw);
+                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenMilk), "false");
                         view.setBackgroundDrawable(drawable);
                     }
                     break;
 
 
-                case R.id.nut_btn:
+                case R.id.lowsodium_btn:
                     if (pressed) {
-                        text = "Added nut to allergens.";
-                        drawable = getResources().getDrawable(R.drawable.nut);
+                        text = "Added low sodium to diets.";
+                        drawable = getResources().getDrawable(R.drawable.lowsodium);
                         view.setBackgroundDrawable(drawable);
-                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenNut), "true");
+                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenNut), "true");
                     }
                     else {
-                        text = "Removed nut from allergens.";
-                        drawable = getResources().getDrawable(R.drawable.nut_bw);
+                        text = "Removed low sodium from diets.";
+                        drawable = getResources().getDrawable(R.drawable.lowsodium_bw);
                         view.setBackgroundDrawable(drawable);
-                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenNut), "false");
+                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenNut), "false");
                     }
                     break;
 
 
-                case R.id.peanut_btn:
+                case R.id.lowsugar_btn:
                     if (pressed) {
-                        text = "Added peanut to allergens.";
-                        drawable = getResources().getDrawable(R.drawable.peanut);
+                        text = "Added low sugar to diets.";
+                        drawable = getResources().getDrawable(R.drawable.lowsugar);
                         view.setBackgroundDrawable(drawable);
-                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenPeanut), "true");
+                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenPeanut), "true");
                     }
                     else {
-                        text = "Removed peanut from allergens.";
-                        drawable = getResources().getDrawable(R.drawable.peanut_bw);
+                        text = "Removed low sugar from diets.";
+                        drawable = getResources().getDrawable(R.drawable.lowsugar_bw);
                         view.setBackgroundDrawable(drawable);
-                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenPeanut), "false");
+                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenPeanut), "false");
                     }
                     break;
 
 
-                case R.id.shellfish_btn:
+                case R.id.lowcalories_btn:
                     if (pressed) {
-                        text = "Added shellfish to allergens.";
-                        drawable = getResources().getDrawable(R.drawable.shellfish);
+                        text = "Added low calories to diets.";
+                        drawable = getResources().getDrawable(R.drawable.lowcalories);
                         view.setBackgroundDrawable(drawable);
-                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenShellfish), "true");
+                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenShellfish), "true");
                     }
                     else {
-                        text = "Removed shellfish from allergens.";
-                        drawable = getResources().getDrawable(R.drawable.shellfish_bw);
+                        text = "Removed low calories from diets.";
+                        drawable = getResources().getDrawable(R.drawable.lowcalories_bw);
                         view.setBackgroundDrawable(drawable);
-                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenShellfish), "false");
+                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenShellfish), "false");
                     }
                     break;
 
-
-                case R.id.soy_btn:
-                    if (pressed) {
-                        text = "Added soy to allergens.";
-                        drawable = getResources().getDrawable(R.drawable.soy);
-                        view.setBackgroundDrawable(drawable);
-                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenSoy), "true");
-                    }
-                    else {
-                        text = "Removed soy from allergens.";
-                        drawable = getResources().getDrawable(R.drawable.soy_bw);
-                        view.setBackgroundDrawable(drawable);
-                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenSoy), "false");
-                    }
-                    break;
-
-
-                case R.id.wheat_btn:
-                    if (pressed) {
-                        text = "Added wheat to allergens.";
-                        drawable = getResources().getDrawable(R.drawable.wheat);
-                        view.setBackgroundDrawable(drawable);
-                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenWheat), "true");
-                    }
-                    else {
-                        text = "Removed wheat from allergens.";
-                        drawable = getResources().getDrawable(R.drawable.wheat_bw);
-                        view.setBackgroundDrawable(drawable);
-                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenWheat), "false");
-                    }
-                    break;
             }
 
             SharedPreferencesManager.showToast((String) text);
