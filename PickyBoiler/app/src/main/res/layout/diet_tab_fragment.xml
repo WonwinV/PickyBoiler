@@ -3,16 +3,106 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ToggleButton
-        android:layout_marginTop="20dp"
-        android:id="@+id/vegetarian_btn"
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/vegetarian_bw"
-        android:textOn=""
-        android:textOff=""
-        android:text=""
-        android:layout_marginStart="20dp"
-        android:onClick="onAllergenBtnClicked"/>
+        android:columnCount="3"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_centerHorizontal="true">
+
+        <ToggleButton
+            android:id="@+id/vegetarian_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/vegetarian_bw"
+            android:textOn=""
+            android:textOff=""
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:onClick="onAllergenBtnClicked"
+            />
+
+        <ToggleButton
+            android:id="@+id/vegan_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/vegan_bw"
+            android:textOn=""
+            android:textOff=""
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <ToggleButton
+            android:id="@+id/nopork_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/nopork_bw"
+            android:textOn=""
+            android:textOff=""
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginBottom="10dp"
+            />
+
+        <ToggleButton
+            android:id="@+id/nobeef_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/nobeef_bw"
+            android:textOn=""
+            android:textOff=""
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <ToggleButton
+            android:id="@+id/lowsodium_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/lowsodium_bw"
+            android:textOn=""
+            android:textOff=""
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <ToggleButton
+            android:id="@+id/lowsugar_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/lowsugar_bw"
+            android:textOn=""
+            android:textOff=""
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginBottom="10dp"
+            />
+
+        <ToggleButton
+            android:id="@+id/lowcalories_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/lowcalories_bw"
+            android:textOn=""
+            android:textOff=""
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            />
+
+    </GridLayout>
 
 </RelativeLayout>
