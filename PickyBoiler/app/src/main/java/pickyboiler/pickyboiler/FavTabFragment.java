@@ -40,7 +40,7 @@ import java.util.List;
 
 import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
-import static pickyboiler.pickyboiler.R.id.editText;
+import static pickyboiler.pickyboiler.R.id.autoCompleteTextView;
 
 /**
  * Created by Prin on 2/15/18.
@@ -55,7 +55,7 @@ public class FavTabFragment extends Fragment {
     ListView listView;
     ArrayAdapter adapter;
     ArrayAdapter<String> ada;
-    String[] favorites = {"Apple", "Broccoli", "Chicken", "Cheese", "Cake", "Dates", "Egg", "Fruit Salad"};
+    String[] favorites = {"Apple", "Broccoli", "Chicken", "Cheese", "Cake", "Egg", "Fruit Salad"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,11 +75,10 @@ public class FavTabFragment extends Fragment {
         }
         Log.d("header_fofygg", "TEST 5");
         Log.d("favlist_fofygg", forbg);
-
         adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,favItemsList);
-      
+
         //Create instance to check autofill
-        ada = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_item, favorites);
+        ada = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, favorites);
         AutoCompleteTextView actv = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView);
         actv.setThreshold(1); //will start working from first character
         actv.setAdapter(ada);
@@ -87,7 +86,9 @@ public class FavTabFragment extends Fragment {
         view.findViewById(R.id.addfood_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String favItems = ((EditText) view.findViewById(editText)).getText().toString();
+
+                String favItems = ((AutoCompleteTextView) view.findViewById(autoCompleteTextView)).getText().toString();
+                //System.out.println(favItems);
                 if (favItems.trim().length() <= 0) {
                     //Toast.makeText(getActivity(), "Input should not be empty.", Toast.LENGTH_SHORT).show();
                     SharedPreferencesManager.showToast("Input should not be empty.");
@@ -104,7 +105,7 @@ public class FavTabFragment extends Fragment {
 
                 /*SharedPref*/
                 SharedPreferencesManager.addFavoriteItem(getActivity().getApplicationContext(), favItems.trim());
-                Log.d("what_added_fofygg", "||"+favItems.trim());
+                Log.d("what_added_fofygg", "||"+ favItems.trim());
                 Log.d("testSharedPref_fofygg", ">>>" + SharedPreferencesManager.getValueFromKey(getActivity().getApplicationContext(), getResources().getString(R.string.favoriteFood)));
 
                 favItemsList.add(favItems.trim());
@@ -114,7 +115,7 @@ public class FavTabFragment extends Fragment {
                 //ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,favItemsList);
                 listView.setAdapter(adapter);
 
-                ((EditText) view.findViewById(editText)).setText("");
+                ((AutoCompleteTextView) view.findViewById(autoCompleteTextView)).setText("");
             }
         });
 
