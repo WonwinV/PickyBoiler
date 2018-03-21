@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ToggleButton;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 
@@ -20,6 +23,8 @@ import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 public class DietTabFragment extends Fragment {
 
     private static final String TAG = "DietTabFragment";
+
+    private static HashMap<String, ToggleButton> hashMap;
 
     ToggleButton vegetarian;
     ToggleButton vegan;
@@ -34,6 +39,8 @@ public class DietTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.diet_tab_fragment,container,false);
+
+        hashMap = new HashMap<>();
 
         vegetarian = (ToggleButton) view.findViewById(R.id.vegetarian_btn);
         vegan = (ToggleButton) view.findViewById(R.id.vegan_btn);
@@ -51,7 +58,15 @@ public class DietTabFragment extends Fragment {
         lowsugar.setOnClickListener(handleDietClick);
         lowcalories.setOnClickListener(handleDietClick);
 
-        vegetarian.setOnClickListener(new View.OnClickListener() {
+        hashMap.put("isVeggie", vegetarian);
+        hashMap.put("isVegan", vegan);
+        hashMap.put("noPork", nopork);
+        hashMap.put("noBeef", nobeef);
+        hashMap.put("lowSodium", lowsodium);
+        hashMap.put("lowSugar", lowsugar);
+        hashMap.put("lowCalories", lowcalories);
+
+        /*vegetarian.setOnClickListener(new View.OnClickListener() {
 
                                           @Override
                                           public void onClick(View v) {
@@ -78,7 +93,7 @@ public class DietTabFragment extends Fragment {
 
         if(SharedPreferencesManager.isVeggie()) {
             view.findViewById(R.id.vegetarian_btn).setBackgroundDrawable(getResources().getDrawable(R.drawable.vegetarian));
-        }
+        }*/
 
         return view;
     }
@@ -100,13 +115,15 @@ public class DietTabFragment extends Fragment {
                         text = "Added vegetarian to diets.";
                         drawable = getResources().getDrawable(R.drawable.vegetarian);
                         view.setBackgroundDrawable(drawable);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenEgg), "true");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.isVeggie), "true");
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.isVeggie), true).apply();
                     }
                     else {
                         text = "Removed vegetarian from diets.";
                         drawable = getResources().getDrawable(R.drawable.vegetarian_bw);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenEgg), "false");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.isVeggie), "false");
                         view.setBackgroundDrawable(drawable);
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.isVeggie), false).apply();
                     }
                     break;
 
@@ -116,13 +133,15 @@ public class DietTabFragment extends Fragment {
                         text = "Added vegan to diets.";
                         drawable = getResources().getDrawable(R.drawable.vegan);
                         view.setBackgroundDrawable(drawable);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenFish), "true");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.isVegan), "true");
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.isVegan), true).apply();
                     }
                     else {
                         text = "Removed vegan from diets.";
                         drawable = getResources().getDrawable(R.drawable.vegan_bw);
                         view.setBackgroundDrawable(drawable);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenFish), "false");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.isVegan), "false");
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.isVegan), false).apply();
                     }
                     break;
 
@@ -132,13 +151,15 @@ public class DietTabFragment extends Fragment {
                         text = "Added no pork to diets.";
                         drawable = getResources().getDrawable(R.drawable.nopork);
                         view.setBackgroundDrawable(drawable);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenGluten), "true");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.noPork), "true");
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.noPork), true).apply();
                     }
                     else {
                         text = "Removed no pork from diets.";
                         drawable = getResources().getDrawable(R.drawable.nopork_bw);
                         view.setBackgroundDrawable(drawable);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenGluten), "false");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.noPork), "false");
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.noPork), false).apply();
                     }
                     break;
 
@@ -148,13 +169,15 @@ public class DietTabFragment extends Fragment {
                         text = "Added no beef to diets.";
                         drawable = getResources().getDrawable(R.drawable.nobeef);
                         view.setBackgroundDrawable(drawable);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenMilk), "true");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.noBeef), "true");
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.noBeef), true).apply();
                     }
                     else {
                         text = "Removed no beef from diets.";
                         drawable = getResources().getDrawable(R.drawable.nobeef_bw);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenMilk), "false");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.noBeef), "false");
                         view.setBackgroundDrawable(drawable);
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.noBeef), false).apply();
                     }
                     break;
 
@@ -164,13 +187,15 @@ public class DietTabFragment extends Fragment {
                         text = "Added low sodium to diets.";
                         drawable = getResources().getDrawable(R.drawable.lowsodium);
                         view.setBackgroundDrawable(drawable);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenNut), "true");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.lowSodium), "true");
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.lowSodium), true).apply();
                     }
                     else {
                         text = "Removed low sodium from diets.";
                         drawable = getResources().getDrawable(R.drawable.lowsodium_bw);
                         view.setBackgroundDrawable(drawable);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenNut), "false");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.lowSodium), "false");
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.lowSodium), false).apply();
                     }
                     break;
 
@@ -180,13 +205,15 @@ public class DietTabFragment extends Fragment {
                         text = "Added low sugar to diets.";
                         drawable = getResources().getDrawable(R.drawable.lowsugar);
                         view.setBackgroundDrawable(drawable);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenPeanut), "true");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.lowSugar), "true");
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.lowSugar), true).apply();
                     }
                     else {
                         text = "Removed low sugar from diets.";
                         drawable = getResources().getDrawable(R.drawable.lowsugar_bw);
                         view.setBackgroundDrawable(drawable);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenPeanut), "false");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.lowSugar), "false");
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.lowSugar), false).apply();
                     }
                     break;
 
@@ -196,16 +223,17 @@ public class DietTabFragment extends Fragment {
                         text = "Added low calories to diets.";
                         drawable = getResources().getDrawable(R.drawable.lowcalories);
                         view.setBackgroundDrawable(drawable);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenShellfish), "true");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.lowCalories), "true");
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.lowCalories), true).apply();
                     }
                     else {
                         text = "Removed low calories from diets.";
                         drawable = getResources().getDrawable(R.drawable.lowcalories_bw);
                         view.setBackgroundDrawable(drawable);
-                        //SharedPreferencesManager.putStringSharedPreferences(getString(R.string.AllergenShellfish), "false");
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.lowCalories), "false");
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.lowCalories), false).apply();
                     }
                     break;
-
             }
 
             SharedPreferencesManager.showToast((String) text);
@@ -217,12 +245,46 @@ public class DietTabFragment extends Fragment {
 
     @Override
     public void onResume(){
-        super.onResume();
+        /*super.onResume();
 
         if(SharedPreferencesManager.isVeggie()) {
             getView().findViewById(R.id.vegetarian_btn).setBackgroundDrawable(getResources().getDrawable(R.drawable.vegetarian));
+        }*/
+
+        super.onResume();
+/*
+        //create array list to store preferences selected by user
+        ArrayList<String> userSelected = SharedPreferencesManager.getAllDiets();
+
+        //loop through array list
+        for (String x: userSelected) {
+
+            ToggleButton current = hashMap.get(x);
+            current.setChecked(true);
+
+            //if selected by user
+            if(current.equals(vegetarian)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.vegetarian));
+            }
+            else if(current.equals(vegan)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.vegan));
+            }
+            else if(current.equals(nopork)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.nopork));
+            }
+            else if(current.equals(nobeef)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.nobeef));
+            }
+            else if(current.equals(lowsodium)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.lowsodium));
+            }
+            else if(current.equals(lowsugar)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.lowsugar));
+            }
+            else if(current.equals(lowcalories)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.lowcalories));
+            }
         }
-
+*/
     }
-
 }

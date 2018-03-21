@@ -18,6 +18,13 @@
     <string name="AllergenSoy">Soy</string>
     <string name="AllergenWheat">Wheat</string>
     <string name="isVeggie">isVeggie</string>
+    <string name="isVegan">isVegan</string>
+    <string name="noPork">noPork</string>
+    <string name="noBeef">noBeef</string>
+    <string name="lowSodium">lowSodium</string>
+    <string name="lowSugar">lowSugar</string>
+    <string name="lowCalories">lowCalories</string>
+
     <string name="title_activity_sidebar">Sidebar</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

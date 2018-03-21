@@ -49,6 +49,7 @@ public class SharedPreferencesManager extends Application{
     public static Context getContext() {
         return context;
     }
+
     public static void putStringSharedPreferences(String key, String value) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value).apply();
@@ -130,5 +131,20 @@ public class SharedPreferencesManager extends Application{
         }
 
         return allergensList;
+    }
+
+    public static ArrayList<String> getAllDiets() {
+        String[] dietsKey = {context.getResources().getString(R.string.isVeggie), context.getResources().getString(R.string.isVegan), context.getResources().getString(R.string.noPork)
+                , context.getResources().getString(R.string.noBeef), context.getResources().getString(R.string.lowSodium), context.getResources().getString(R.string.lowSugar)
+                , context.getResources().getString(R.string.lowCalories)};
+
+        ArrayList<String> dietsList = new ArrayList<>();
+        for (String dietKey : dietsKey) {
+            if(getValueFromKey(context, dietKey) != null && getValueFromKey(context, dietKey).equals("true")) {
+                dietsList.add(dietKey);
+            }
+        }
+
+        return dietsList;
     }
 }
