@@ -252,7 +252,7 @@ public class DietTabFragment extends Fragment {
         }*/
 
         super.onResume();
-/*
+
         //create array list to store preferences selected by user
         ArrayList<String> userSelected = SharedPreferencesManager.getAllDiets();
 
@@ -285,6 +285,6 @@ public class DietTabFragment extends Fragment {
                 current.setBackgroundDrawable(getResources().getDrawable(R.drawable.lowcalories));
             }
         }
-*/
+
     }
 }
