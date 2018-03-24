@@ -135,6 +135,7 @@ public class MainActivity extends AppCompatActivity
             //invalid cache handler here
         } catch (Exception e) {
             //something happened boom boom
+            System.out.println("onCreate crashes");
             e.printStackTrace();
         }
 

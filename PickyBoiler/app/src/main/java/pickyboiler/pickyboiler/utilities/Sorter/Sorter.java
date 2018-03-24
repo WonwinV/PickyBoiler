@@ -83,14 +83,22 @@ public class Sorter {
         return diningCourtWithScore;
     }
 
-    private static JSONObject computeScore(Context context, JSONObject diningCourt) {
+    public static JSONObject computeScore(Context context, JSONObject diningCourt) {
+        if(favoriteList == null) {
+            favoriteList = new ArrayList<>();
+        } if(allergenList == null) {
+            allergenList = new ArrayList<>();
+        } if(diningCourt == null)
+            return new JSONObject();
+
+
         Integer score = 0;
         HashMap<String, Integer> favoriteCounts = new HashMap<>();
         JSONObject result = new JSONObject();
         try {
             //check if veggie
             if(SharedPreferencesManager.isVeggie()) {
-                score += diningCourt.getInt(context.getResources().getString(R.string.VegetarianCount)) * veggieMultiplier;
+                score += diningCourt.getInt("VegetarianCount") * veggieMultiplier;
             }
             //check for favorites
             Iterator<String> keys = diningCourt.getJSONObject("AllMeal").keys();
