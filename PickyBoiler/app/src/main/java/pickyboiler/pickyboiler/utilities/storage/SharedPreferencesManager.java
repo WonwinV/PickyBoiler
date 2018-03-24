@@ -115,7 +115,7 @@ public class SharedPreferencesManager extends Application{
         return new ArrayList<String>(Arrays.asList(favorite.trim().split(",")));
     }
     public static boolean isVeggie() {
-        return sharedPreferences.getBoolean(context.getResources().getString(R.string.isVeggie), false);
+        return Boolean.parseBoolean(SharedPreferencesManager.getValueFromKey("isVeggie"));
     }
 
     public static ArrayList<String> getAllAllergens() {
