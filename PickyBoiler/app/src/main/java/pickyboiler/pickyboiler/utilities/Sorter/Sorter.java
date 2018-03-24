@@ -23,8 +23,8 @@ import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 public class Sorter {
     private static ArrayList<String> allergenList;
     private static ArrayList<String> favoriteList;
-    private static final int veggieMultiplier = 7;
-    private static final int favoriteMultiplier = 7;
+    private static final int veggieMultiplier = 15;
+    private static final int favoriteMultiplier = 15;
 
     public static ArrayList<JSONObject> sortDiningCourt(Context context, JSONArray allCurrentMeal) {
         allergenList = new ArrayList<>();
