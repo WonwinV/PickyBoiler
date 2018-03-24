@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity
         DiningCourtParser parser = new DiningCourtParser();
         try {
             for (String diningCourtName : diningCourtList) {
-                JSONObject parsedCache = new JSONObject(SharedPreferencesManager.getValueFromKey(SharedPreferencesManager.getContext(), diningCourtName + "_cache"));
+                JSONObject parsedCache = new JSONObject(SharedPreferencesManager.getValueFromKey(diningCourtName + "_cache"));
                 if (parsedCache.get("Date").equals(checkCacheDate)) {
                     Log.d("^^^CACHE^^^", "validCache");
                     validCache = true;
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity
                 DiningCourtParser parser = new DiningCourtParser();
                 try {
                     for (String diningCourtName : diningCourtList) {
-                        JSONObject parsedCache = new JSONObject(SharedPreferencesManager.getValueFromKey(SharedPreferencesManager.getContext(), diningCourtName + "_cache"));
+                        JSONObject parsedCache = new JSONObject(SharedPreferencesManager.getValueFromKey(diningCourtName + "_cache"));
                         if (parsedCache.get("Date").equals(checkCacheDate)) {
                             Log.d("^^^CACHE^^^", "validCache");
                             validCache = true;
@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity
             JSONObject parsed = parser.parseDiningCourtJSON(jsonobj);
             //cached parsed data
             SharedPreferencesManager.putStringSharedPreferences(parsed.getString("Location")+"_cache", parsed.toString());
-            Log.d("^^^CACHE^^^", "cached to>>>"+parsed.getString("Location")+"_cache"+" : "+SharedPreferencesManager.getValueFromKey(getApplicationContext(), parsed.getString("Location")+"_cache"));
+            Log.d("^^^CACHE^^^", "cached to>>>"+parsed.getString("Location")+"_cache"+" : "+SharedPreferencesManager.getValueFromKey(parsed.getString("Location")+"_cache"));
 
             JSONObject mealObj = parser.getCurrentMealJSON(parsed);
             Log.d("===Parsed_" + parsed.getString("Location"), "processFinish: " + parsed.toString());
@@ -463,7 +463,7 @@ public class MainActivity extends AppCompatActivity
         DiningCourtParser parser = new DiningCourtParser();
         try {
             for (String diningCourtName : diningCourtList) {
-                JSONObject parsedCache = new JSONObject(SharedPreferencesManager.getValueFromKey(getApplicationContext(), diningCourtName + "_cache"));
+                JSONObject parsedCache = new JSONObject(SharedPreferencesManager.getValueFromKey(diningCourtName + "_cache"));
                 if (parsedCache.get("Date").equals(checkCacheDate)) {
                     Log.d("^^^CACHE^^^", "validCache");
                     validCache = true;

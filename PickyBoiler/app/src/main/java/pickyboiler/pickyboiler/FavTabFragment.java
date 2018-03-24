@@ -106,7 +106,7 @@ public class FavTabFragment extends Fragment {
                 /*SharedPref*/
                 SharedPreferencesManager.addFavoriteItem(getActivity().getApplicationContext(), favItems.trim());
                 Log.d("what_added_fofygg", "||"+ favItems.trim());
-                Log.d("testSharedPref_fofygg", ">>>" + SharedPreferencesManager.getValueFromKey(getActivity().getApplicationContext(), getResources().getString(R.string.favoriteFood)));
+                Log.d("testSharedPref_fofygg", ">>>" + SharedPreferencesManager.getValueFromKey(getResources().getString(R.string.favoriteFood)));
 
                 favItemsList.add(favItems.trim());
                 SharedPreferencesManager.showToast("Item added.");
