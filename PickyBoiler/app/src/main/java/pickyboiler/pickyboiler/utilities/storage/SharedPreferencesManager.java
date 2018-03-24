@@ -55,7 +55,7 @@ public class SharedPreferencesManager extends Application{
         editor.putString(key, value).apply();
     }
 
-    public static String getValueFromKey(Context context, String key) {
+    public static String getValueFromKey(String key) {
         return sharedPreferences.getString(key, null);
     }
 
@@ -125,7 +125,7 @@ public class SharedPreferencesManager extends Application{
 
         ArrayList<String> allergensList = new ArrayList<>();
         for (String allergenKey : allergensKey) {
-            if(getValueFromKey(context, allergenKey) != null && getValueFromKey(context, allergenKey).equals("true")) {
+            if(getValueFromKey(allergenKey) != null && getValueFromKey(allergenKey).equals("true")) {
                 allergensList.add(allergenKey);
             }
         }
@@ -140,7 +140,7 @@ public class SharedPreferencesManager extends Application{
 
         ArrayList<String> dietsList = new ArrayList<>();
         for (String dietKey : dietsKey) {
-            if(getValueFromKey(context, dietKey) != null && getValueFromKey(context, dietKey).equals("true")) {
+            if(getValueFromKey(dietKey) != null && getValueFromKey(dietKey).equals("true")) {
                 dietsList.add(dietKey);
             }
         }
