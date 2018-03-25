@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -37,6 +38,7 @@ public class MenuDisplayPage extends AppCompatActivity {
         ImageView menuIMG = (ImageView) findViewById(R.id.menuimg);
         TextView menuText = (TextView) findViewById(R.id.MenuText);
 
+        menuText.setMovementMethod(new ScrollingMovementMethod());
 
         int menuID = R.drawable.default_menu_logo;
         switch (diningCourtName){
