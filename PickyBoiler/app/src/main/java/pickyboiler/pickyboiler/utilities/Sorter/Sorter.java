@@ -115,7 +115,7 @@ public class Sorter {
                 if(!menuName.toLowerCase().contains("pork"))
                     isNoPork = true;
                 boolean isNoBeef = false;
-                if(!menuName.toLowerCase().contains("beef"))
+                if(!menuName.toLowerCase().contains("beef") && !menuName.toLowerCase().contains("steak"))
                     isNoBeef = true;
 
                 //do not check favorite if allergic
@@ -150,7 +150,7 @@ public class Sorter {
                         if (!favoriteCounts.containsKey(favoriteList.get(j))) {
                             favoriteCounts.put(favoriteList.get(j), 1);
                         } else {
-                            favoriteCounts.put(favoriteList.get(j), favoriteCounts.get(favoriteList.get(j)) + 1);
+                            favoriteCounts.put(favoriteList.get(j), favoriteCounts.get(favoriteList.get(j))+1);
                         }
                         score += favoriteMultiplier;
                         isFavorite = true;
@@ -191,6 +191,7 @@ public class Sorter {
             result.put("computedRanking", score);
             result.put("favoriteCounts", sortedFav);
         } catch (JSONException e) {
+            Log.d("CRASH", "crash at computeScore: ");
             e.printStackTrace();
         }
 
