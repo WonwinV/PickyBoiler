@@ -38,6 +38,7 @@ public class NotificationUtils {
         nb.setStyle(s);
 
 
+
         Intent resultIntent = new Intent(context, MainActivity.class);
         TaskStackBuilder TSB = TaskStackBuilder.create(context);
         TSB.addParentStack(MainActivity.class);
@@ -51,6 +52,7 @@ public class NotificationUtils {
 
         nb.setContentIntent(resultPendingIntent);
         nb.setAutoCancel(true);
+
 
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 

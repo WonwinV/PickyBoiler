@@ -285,12 +285,6 @@ public class MainActivity extends AppCompatActivity
 
         Calendar calendar = Calendar.getInstance();
 
-
-
-        //calendar.set(Calendar.MONTH, 8);
-        //calendar.set(Calendar.YEAR, 2016);
-        //calendar.set(Calendar.DAY_OF_MONTH, 18);
-
         calendar.set(Calendar.HOUR_OF_DAY, 11);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
