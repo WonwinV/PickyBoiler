@@ -33,6 +33,7 @@
             android:name=".MenuDisplayPage"
             android:label="MenuDisplayPage"
             android:theme="@style/AppTheme"></activity>
+        <receiver android:name=".Utilities.Notifications.NotificationReceiver"/>
     </application>
 
 </manifest>

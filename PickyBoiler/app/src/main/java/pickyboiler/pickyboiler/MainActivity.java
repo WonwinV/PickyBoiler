@@ -1,5 +1,7 @@
 package pickyboiler.pickyboiler;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -28,11 +30,13 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import pickyboiler.pickyboiler.Utilities.Adapters.DiningCourtAdapter;
 import pickyboiler.pickyboiler.Utilities.Network.DiningCourtParser;
 import pickyboiler.pickyboiler.Utilities.Network.JSONFetcher;
+import pickyboiler.pickyboiler.Utilities.Notifications.NotificationReceiver;
 import pickyboiler.pickyboiler.Utilities.Sorter.Sorter;
 import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
@@ -53,6 +57,9 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
 
     SwipeRefreshLayout swipeRefreshLayout;
+
+    PendingIntent pIntent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -272,6 +279,31 @@ public class MainActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        //Notifications
+
+        Calendar calendar = Calendar.getInstance();
+
+
+
+        //calendar.set(Calendar.MONTH, 8);
+        //calendar.set(Calendar.YEAR, 2016);
+        //calendar.set(Calendar.DAY_OF_MONTH, 18);
+
+        calendar.set(Calendar.HOUR_OF_DAY, 11);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.AM_PM,Calendar.AM);
+
+        Intent myIntent = new Intent(MainActivity.this, NotificationReceiver.class);
+        pIntent = PendingIntent.getBroadcast(MainActivity.this, 0, myIntent,0);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pIntent);
+
+
+
     }
 
     @Override
