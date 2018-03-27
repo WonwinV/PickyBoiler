@@ -1,38 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:id="@+id/popup"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@drawable/popup_bg"
+    android:orientation="vertical"
+    >
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add to favorites?"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:text="Options"
+        android:textColor="#FFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#FFF"
         android:text="Add this item to favorites?" />
 
     <Button
         android:id="@+id/lbutton"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="left"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="left|center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Yes" />
 
     <Button
         android:id="@+id/rbutton"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="right"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="right|center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Close" />
+        android:text="No" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
+
+
