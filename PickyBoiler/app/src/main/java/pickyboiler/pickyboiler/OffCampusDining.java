@@ -48,12 +48,15 @@ public class OffCampusDining extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();*/
 
+
         sidebarbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawer.openDrawer(GravityCompat.START);
             }
         });
+
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
