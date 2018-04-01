@@ -12,5 +12,19 @@ import android.view.ViewGroup;
  */
 
 public class RestaurantMapFragment extends Fragment {
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.map_tab_fragment,container,false);
 
+
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+    }
 }
