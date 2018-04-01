@@ -4,15 +4,26 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.baoyz.swipemenulistview.SwipeMenuListView;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
+
+import static pickyboiler.pickyboiler.R.id.autoCompleteDietTextView;
+import static pickyboiler.pickyboiler.R.id.autoCompleteTextView;
 
 
 /**
@@ -26,6 +37,14 @@ public class DietTabFragment extends Fragment {
 
     private static HashMap<String, ToggleButton> hashMap;
 
+    public static Toast toastShow;
+    private SwipeMenuListView mListView;
+    ArrayList<String> dietItemsList;
+    ListView listView;
+    ArrayAdapter adapter;
+    ArrayAdapter<String> ada;
+    String[] diets = {"Pork"};
+
     ToggleButton vegetarian;
     ToggleButton vegan;
     ToggleButton nopork;
@@ -38,7 +57,42 @@ public class DietTabFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.diet_tab_fragment,container,false);
+        final View view = inflater.inflate(R.layout.diet_tab_fragment,container,false);
+        mListView = (SwipeMenuListView) view.findViewById(R.id.diet_lv);
+        listView = (ListView) view.findViewById(R.id.diet_lv);
+
+        dietItemsList = SharedPreferencesManager.getPrefFavListtFofy();
+        String dietabc = "";
+        for (String x:
+                dietItemsList) {
+            dietabc += x + ",";
+        }
+        adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,dietItemsList);
+        ada = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, diets);
+        AutoCompleteTextView actv = (AutoCompleteTextView) view.findViewById(autoCompleteDietTextView);
+        actv.setThreshold(1);
+        actv.setAdapter(ada);
+
+        view.findViewById(R.id.adddiet_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String dietItems = ((AutoCompleteTextView) view.findViewById(autoCompleteDietTextView)).getText().toString();
+
+                //TODO: Check input conditions and sort list alphabetically
+
+                //SharedPreferences
+                SharedPreferencesManager.addFavoriteItem(getActivity().getApplicationContext(), dietItems.trim());
+
+                dietItemsList.add(dietItems.trim());
+                SharedPreferencesManager.showToast("Item added.");
+                listView.setAdapter(adapter);
+
+                ((AutoCompleteTextView) view.findViewById(autoCompleteDietTextView)).setText("");
+            }
+        });
+
+        listView.setAdapter(adapter);
 
         hashMap = new HashMap<>();
 
@@ -58,13 +112,13 @@ public class DietTabFragment extends Fragment {
         lowsugar.setOnClickListener(handleDietClick);
         lowcalories.setOnClickListener(handleDietClick);*/
 
-        hashMap.put("isVeggie", vegetarian);
+        /*hashMap.put("isVeggie", vegetarian);
         hashMap.put("isVegan", vegan);
         hashMap.put("noPork", nopork);
         hashMap.put("noBeef", nobeef);
         hashMap.put("lowSodium", lowsodium);
         hashMap.put("lowSugar", lowsugar);
-        hashMap.put("lowCalories", lowcalories);
+        hashMap.put("lowCalories", lowcalories);*/
 
         /*vegetarian.setOnClickListener(new View.OnClickListener() {
 
