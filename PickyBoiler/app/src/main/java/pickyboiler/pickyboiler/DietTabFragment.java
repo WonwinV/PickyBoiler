@@ -42,7 +42,7 @@ public class DietTabFragment extends Fragment {
 
         hashMap = new HashMap<>();
 
-        vegetarian = (ToggleButton) view.findViewById(R.id.vegetarian_btn);
+        /*vegetarian = (ToggleButton) view.findViewById(R.id.vegetarian_btn);
         vegan = (ToggleButton) view.findViewById(R.id.vegan_btn);
         nopork = (ToggleButton) view.findViewById(R.id.nopork_btn);
         nobeef = (ToggleButton) view.findViewById(R.id.nobeef_btn);
@@ -56,7 +56,7 @@ public class DietTabFragment extends Fragment {
         nobeef.setOnClickListener(handleDietClick);
         lowsodium.setOnClickListener(handleDietClick);
         lowsugar.setOnClickListener(handleDietClick);
-        lowcalories.setOnClickListener(handleDietClick);
+        lowcalories.setOnClickListener(handleDietClick);*/
 
         hashMap.put("isVeggie", vegetarian);
         hashMap.put("isVegan", vegan);
@@ -98,7 +98,7 @@ public class DietTabFragment extends Fragment {
         return view;
     }
 
-    private View.OnClickListener handleDietClick = new View.OnClickListener() {
+    /*private View.OnClickListener handleDietClick = new View.OnClickListener() {
 
         @Override
         public void onClick(View view) {
@@ -240,7 +240,7 @@ public class DietTabFragment extends Fragment {
 
         }
 
-    };
+    };*/
 
 
     @Override
@@ -257,7 +257,7 @@ public class DietTabFragment extends Fragment {
         ArrayList<String> userSelected = SharedPreferencesManager.getAllDiets();
 
         //loop through array list
-        for (String x: userSelected) {
+        /*for (String x: userSelected) {
 
             ToggleButton current = hashMap.get(x);
             current.setChecked(true);
@@ -284,7 +284,7 @@ public class DietTabFragment extends Fragment {
             else if(current.equals(lowcalories)) {
                 current.setBackgroundDrawable(getResources().getDrawable(R.drawable.lowcalories));
             }
-        }
+        }*/
 
     }
 }

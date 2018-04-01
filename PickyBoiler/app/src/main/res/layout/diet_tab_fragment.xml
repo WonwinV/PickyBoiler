@@ -1,108 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <GridLayout
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteDietTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="8dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/textbox"
+        android:inputType="text|textPersonName"
+        android:layout_toStartOf="@+id/adddiet_btn"
+        tools:ignore="HardcodedText,LabelFor,RtlHardcoded"
+        android:hint="@string/editdiet_hint"/>
+
+    <Button
+        android:id="@+id/adddiet_btn"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_alignBottom="@+id/autoCompleteDietTextView"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/add_btn"
+        android:text="" />
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:paddingTop="6dp"
+        android:id="@+id/diet_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:columnCount="3"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_centerHorizontal="true">
+        android:layout_below="@id/autoCompleteDietTextView" />
 
-        <ToggleButton
-            android:id="@+id/vegetarian_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/vegetarian_bw"
-            android:textOn=""
-            android:textOff=""
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill_horizontal"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:onClick="onAllergenBtnClicked"
-            />
-
-        <ToggleButton
-            android:id="@+id/vegan_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/vegan_bw"
-            android:textOn=""
-            android:textOff=""
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill_horizontal"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            />
-
-        <ToggleButton
-            android:id="@+id/nopork_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/nopork_bw"
-            android:textOn=""
-            android:textOff=""
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill_horizontal"
-            android:layout_marginBottom="10dp"
-            />
-
-        <ToggleButton
-            android:id="@+id/nobeef_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/nobeef_bw"
-            android:textOn=""
-            android:textOff=""
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill_horizontal"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            />
-
-        <ToggleButton
-            android:id="@+id/lowsodium_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/lowsodium_bw"
-            android:textOn=""
-            android:textOff=""
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill_horizontal"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            />
-
-        <ToggleButton
-            android:id="@+id/lowsugar_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/lowsugar_bw"
-            android:textOn=""
-            android:textOff=""
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill_horizontal"
-            android:layout_marginBottom="10dp"
-            />
-
-        <ToggleButton
-            android:id="@+id/lowcalories_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/lowcalories_bw"
-            android:textOn=""
-            android:textOff=""
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill_horizontal"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            />
-
-    </GridLayout>
 
 </RelativeLayout>
