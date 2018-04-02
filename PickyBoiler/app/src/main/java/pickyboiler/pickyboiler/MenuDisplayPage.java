@@ -21,7 +21,6 @@ import android.text.method.LinkMovementMethod;
 import android.support.v4.app.Fragment;
 import android.text.TextPaint;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -151,13 +150,22 @@ public class MenuDisplayPage extends AppCompatActivity {
         //clear default background
         popup.setBackgroundDrawable(new BitmapDrawable());
 
-
         //popup appears at center screen
         popup.showAtLocation(layout, Gravity.CENTER, 0,0);
 
+        //Get a reference to close button, and close the popup when clicked
+        Button close = (Button) layout.findViewById(R.id.cbutton);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup.dismiss();
+            }
+        });
+
+
         // Getting a reference to left button, and close the popup when clicked.
-        Button right = (Button) layout.findViewById(R.id.lbutton);
-        right.setOnClickListener(new View.OnClickListener() {
+        Button left = (Button) layout.findViewById(R.id.lbutton);
+        left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String favItem = menuFinal.substring(fir,las+1);
@@ -175,11 +183,12 @@ public class MenuDisplayPage extends AppCompatActivity {
         });
 
         // Getting a reference to right button, and close the popup when clicked.
-        Button close = (Button) layout.findViewById(R.id.rbutton);
-        close.setOnClickListener(new View.OnClickListener() {
+        Button right = (Button) layout.findViewById(R.id.rbutton);
+        right.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                //Waiting till tomorrow to actually add, to be sure no remaining bugs
                 popup.dismiss();
             }
         });
