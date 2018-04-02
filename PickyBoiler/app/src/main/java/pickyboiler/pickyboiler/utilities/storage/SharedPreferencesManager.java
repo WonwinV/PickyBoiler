@@ -147,4 +147,48 @@ public class SharedPreferencesManager extends Application{
 
         return dietsList;
     }
+
+    public static ArrayList<String> getAllDislikeItem() {
+        String dislike = sharedPreferences.getString(context.getResources().getString(R.string.dislikeFood), null);
+        if(dislike == null) {
+            return new ArrayList<String>();
+        }
+        dislike = dislike.trim();
+
+
+        return new ArrayList<String>(Arrays.asList(dislike.trim().split(",")));
+    }
+    public static ArrayList<String> getPrefDislikeList() {
+        String dislike = sharedPreferences.getString(context.getResources().getString(R.string.dislikeFood), null);
+        if(dislike == null || dislike.trim().equals("")) {
+            return new ArrayList<String>();
+        }
+        dislike = dislike.trim();
+        if(dislike.length() >= 2) {
+            // favorite = favorite.substring(1);
+        }
+        Log.d("fromHIGH_fofygg", dislike);
+        return new ArrayList<String>(Arrays.asList(dislike.trim().split(",")));
+    }
+
+    public static void addDislikeItem(Context context, String item) {
+        addOrAppendStringToSharedPreferences(context, context.getResources().getString(R.string.dislikeFood), item);
+    }
+    public static void removeDislikeItem(String itemToRemoved) {
+        ArrayList<String> dislikeList = getAllDislikeItem();
+        if(dislikeList.size() == 0) {
+            return;
+        }
+        String newList = "";
+        for (String iterator: dislikeList) {
+            //Log.d("ITERAATORRRR", ">>" + iterator);
+            if(!iterator.equals(itemToRemoved))
+                newList += iterator + ',';
+        }
+        if(newList.length() > 0)
+            newList = newList.substring(0, newList.length()-1);
+
+        Log.d("REMOVEFAV_fofygg", "old: " + sharedPreferences.getString(context.getResources().getString(R.string.dislikeFood), null) + " new: " + newList);
+        putStringSharedPreferences(context.getResources().getString(R.string.dislikeFood), newList);
+    }
 }

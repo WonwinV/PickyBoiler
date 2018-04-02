@@ -108,15 +108,15 @@ public class Sorter {
                 boolean safeForVegetarian = false;
                 boolean allergicTo = false;
                 boolean isFavorite = false;
-                boolean userNoPork = Boolean.parseBoolean(SharedPreferencesManager.getValueFromKey("noPork"));
-                boolean userNoBeef = Boolean.parseBoolean(SharedPreferencesManager.getValueFromKey("noBeef"));
+//                boolean userNoPork = Boolean.parseBoolean(SharedPreferencesManager.getValueFromKey("noPork"));
+//                boolean userNoBeef = Boolean.parseBoolean(SharedPreferencesManager.getValueFromKey("noBeef"));
 
-                boolean isNoPork = false;
-                if(!menuName.toLowerCase().contains("pork"))
-                    isNoPork = true;
-                boolean isNoBeef = false;
-                if(!menuName.toLowerCase().contains("beef") && !menuName.toLowerCase().contains("steak"))
-                    isNoBeef = true;
+//                boolean isNoPork = false;
+//                if(!menuName.toLowerCase().contains("pork"))
+//                    isNoPork = true;
+//                boolean isNoBeef = false;
+//                if(!menuName.toLowerCase().contains("beef") && !menuName.toLowerCase().contains("steak"))
+//                    isNoBeef = true;
 
                 //do not check favorite if allergic
                 for (int i = 0; i < itemAllergen.length(); i++) {
@@ -127,7 +127,7 @@ public class Sorter {
                     if (itemAllergen.getString(i).equals("Vegetarian"))
                         safeForVegetarian = true;
                 }
-                if (allergicTo || (SharedPreferencesManager.isVeggie() && !safeForVegetarian) || (userNoPork && !isNoPork) || (userNoBeef && !isNoBeef))
+                if (allergicTo || (SharedPreferencesManager.isVeggie() && !safeForVegetarian)) // || (userNoPork && !isNoPork) || (userNoBeef && !isNoBeef))
                     continue;
 
                 //check if favorite

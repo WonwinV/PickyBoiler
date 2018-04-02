@@ -9,6 +9,7 @@
     <string name="edittext_hint"><font size="16">"       Add your favorite food"</font></string>
     <string name="editdiet_hint"><font size="16">"       Add food you want to exclude"</font></string>
     <string name="favoriteFood">favoriteFood</string>
+    <string name="dislikeFood">dislikeFood</string>
     <string name="AllergenEgg">Egg</string>
     <string name="AllergenFish">Fish</string>
     <string name="AllergenGluten">Gluten</string>
