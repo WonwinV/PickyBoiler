@@ -1,5 +1,7 @@
 package pickyboiler.pickyboiler;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +16,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.util.ArrayList;
@@ -79,13 +84,26 @@ public class DietTabFragment extends Fragment {
 
                 String dietItems = ((AutoCompleteTextView) view.findViewById(autoCompleteDietTextView)).getText().toString();
 
-                //TODO: Check input conditions and sort list alphabetically
+                if (dietItems.trim().length() <= 0) {
+                    //Toast.makeText(getActivity(), "Input should not be empty.", Toast.LENGTH_SHORT).show();
+                    SharedPreferencesManager.showToast("Input should not be empty.");
+                    return;
+                }
+                if (!dietItems.matches("[a-zA-Z ]+")) {
+                    SharedPreferencesManager.showToast("Input should not contain invalid character.");
+                    return;
+                }
+                if (dietItemsList.contains(dietItems.trim())) {
+                    SharedPreferencesManager.showToast("Item already added.");
+                    return;
+                }
 
                 //SharedPreferences
                 SharedPreferencesManager.addFavoriteItem(getActivity().getApplicationContext(), dietItems.trim());
 
                 dietItemsList.add(dietItems.trim());
                 SharedPreferencesManager.showToast("Item added.");
+                Collections.sort(dietItemsList);
                 listView.setAdapter(adapter);
 
                 ((AutoCompleteTextView) view.findViewById(autoCompleteDietTextView)).setText("");
@@ -93,6 +111,45 @@ public class DietTabFragment extends Fragment {
         });
 
         listView.setAdapter(adapter);
+
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity());
+                // set item background
+                deleteItem.setBackground(new ColorDrawable(Color.rgb(255, 149, 128)));  //rgb(237,70,47)
+                // set item width
+                deleteItem.setWidth(250);
+                // set an icon
+                //deleteItem.setIcon(R.drawable.ic_action_discard);
+                // set text
+                deleteItem.setTitle("Delete");
+                deleteItem.setTitleColor(Color.WHITE);
+                deleteItem.setTitleSize(16);
+                // add to menu
+                menu.addMenuItem(deleteItem);
+            }
+        };
+
+        mListView.setMenuCreator(creator);
+        mListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+
+                switch (index) {
+                    case 0:
+                        SharedPreferencesManager.removeFavoriteItem(dietItemsList.get(position));
+                        dietItemsList.remove(position);
+                        adapter.notifyDataSetChanged();
+                        SharedPreferencesManager.showToast("Item deleted.");
+                        break;
+                }
+                return true;
+            }
+        });
 
         hashMap = new HashMap<>();
 
