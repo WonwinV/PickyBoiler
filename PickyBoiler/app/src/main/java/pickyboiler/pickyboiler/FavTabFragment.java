@@ -41,6 +41,7 @@ import java.util.List;
 import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 import static pickyboiler.pickyboiler.R.id.autoCompleteTextView;
+import static pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager.getAllDislikeItem;
 
 /**
  * Created by Prin on 2/15/18.
@@ -98,7 +99,7 @@ public class FavTabFragment extends Fragment {
                     SharedPreferencesManager.showToast("Input should not contain invalid character.");
                     return;
                 }
-                if (favItemsList.contains(favItems.trim())) {
+                if (favItemsList.contains(favItems.trim().toLowerCase())) {
                     SharedPreferencesManager.showToast("Item already added.");
                     return;
                 }

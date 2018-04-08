@@ -66,7 +66,7 @@ public class DietTabFragment extends Fragment {
         mListView = (SwipeMenuListView) view.findViewById(R.id.diet_lv);
         listView = (ListView) view.findViewById(R.id.diet_lv);
 
-        dietItemsList = SharedPreferencesManager.getPrefFavListtFofy();
+        dietItemsList = SharedPreferencesManager.getAllDislikeItem();
         String dietabc = "";
         for (String x:
                 dietItemsList) {
@@ -93,7 +93,7 @@ public class DietTabFragment extends Fragment {
                     SharedPreferencesManager.showToast("Input should not contain invalid character.");
                     return;
                 }
-                if (dietItemsList.contains(dietItems.trim())) {
+                if (dietItemsList.contains(dietItems.trim().toLowerCase())) {
                     SharedPreferencesManager.showToast("Item already added.");
                     return;
                 }

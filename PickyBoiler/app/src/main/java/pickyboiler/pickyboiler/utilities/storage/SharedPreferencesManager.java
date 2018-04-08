@@ -72,7 +72,13 @@ public class SharedPreferencesManager extends Application{
     }
 
     public static void addFavoriteItem(Context context, String item) {
-        item = item.toLowerCase();
+        item = item.toLowerCase().trim();
+        //check if already existed
+        ArrayList<String> fav = getAllFavoriteItem();
+        if(fav.contains(item)) {
+            return;
+        }
+
         //check if conflict with dislike
         ArrayList<String> dislike = getAllDislikeItem();
         if(dislike.contains(item.trim())) {
@@ -93,7 +99,7 @@ public class SharedPreferencesManager extends Application{
     }
 
     public static void removeFavoriteItem(String itemToRemoved) {
-        itemToRemoved = itemToRemoved.toLowerCase();
+        itemToRemoved = itemToRemoved.toLowerCase().trim();
         ArrayList<String> favoriteList = getAllFavoriteItem();
         if(favoriteList.size() == 0) {
             return;
@@ -195,7 +201,13 @@ public class SharedPreferencesManager extends Application{
     }
 
     public static void addDislikeItem(String item) {
-        item = item.toLowerCase();
+        item = item.toLowerCase().trim();
+        //check if already existed
+        ArrayList<String> dis = getAllDislikeItem();
+        if(dis.contains(item)) {
+            return;
+        }
+
         ArrayList<String> favList = getPrefFavListtFofy();
         if(favList.contains(item.trim())) {
             //remove from fav list then add
@@ -209,7 +221,7 @@ public class SharedPreferencesManager extends Application{
     }
 
     public static void removeDislikeItem(String itemToRemoved) {
-        itemToRemoved = itemToRemoved.toLowerCase();
+        itemToRemoved = itemToRemoved.toLowerCase().trim();
         ArrayList<String> dislikeList = getAllDislikeItem();
         if(dislikeList.size() == 0) {
             return;
