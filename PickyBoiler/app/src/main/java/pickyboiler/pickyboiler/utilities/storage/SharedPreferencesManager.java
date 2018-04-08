@@ -72,9 +72,28 @@ public class SharedPreferencesManager extends Application{
     }
 
     public static void addFavoriteItem(Context context, String item) {
-        addOrAppendStringToSharedPreferences(context, context.getResources().getString(R.string.favoriteFood), item);
+        item = item.toLowerCase();
+        //check if conflict with dislike
+        ArrayList<String> dislike = getAllDislikeItem();
+        if(dislike.contains(item.trim())) {
+            //removed first then add
+            removeDislikeItem(item.trim());
+            addOrAppendStringToSharedPreferences(context, context.getResources().getString(R.string.favoriteFood), item);
+        }
+        else {
+            //add normally
+            addOrAppendStringToSharedPreferences(context, context.getResources().getString(R.string.favoriteFood), item);
+        }
     }
+
+    public static void forceAddFavoriteItem(Context context, String item) {
+        item = item.toLowerCase();
+        // add without checking. Only use in special cases
+        addOrAppendStringToSharedPreferences(context, context.getResources().getString(R.string.favoriteFood),item);
+    }
+
     public static void removeFavoriteItem(String itemToRemoved) {
+        itemToRemoved = itemToRemoved.toLowerCase();
         ArrayList<String> favoriteList = getAllFavoriteItem();
         if(favoriteList.size() == 0) {
             return;
@@ -155,7 +174,6 @@ public class SharedPreferencesManager extends Application{
         }
         dislike = dislike.trim();
 
-
         return new ArrayList<String>(Arrays.asList(dislike.trim().split(",")));
     }
     public static ArrayList<String> getPrefDislikeList() {
@@ -167,14 +185,31 @@ public class SharedPreferencesManager extends Application{
         if(dislike.length() >= 2) {
             // favorite = favorite.substring(1);
         }
-        Log.d("fromHIGH_fofygg", dislike);
+        Log.d("getPrefDislikeList", dislike);
         return new ArrayList<String>(Arrays.asList(dislike.trim().split(",")));
     }
 
-    public static void addDislikeItem(Context context, String item) {
-        addOrAppendStringToSharedPreferences(context, context.getResources().getString(R.string.dislikeFood), item);
+    public static void forceAddDislikeItem(Context context, String item) {
+        item = item.toLowerCase();
+        addOrAppendStringToSharedPreferences(context, context.getResources().getString(R.string.dislikeFood),item);
     }
+
+    public static void addDislikeItem(String item) {
+        item = item.toLowerCase();
+        ArrayList<String> favList = getPrefFavListtFofy();
+        if(favList.contains(item.trim())) {
+            //remove from fav list then add
+            removeFavoriteItem(item.trim());
+            addOrAppendStringToSharedPreferences(context, context.getResources().getString(R.string.dislikeFood), item.trim());
+        }
+        else {
+            //add normally
+            addOrAppendStringToSharedPreferences(context, context.getResources().getString(R.string.dislikeFood), item.trim());
+        }
+    }
+
     public static void removeDislikeItem(String itemToRemoved) {
+        itemToRemoved = itemToRemoved.toLowerCase();
         ArrayList<String> dislikeList = getAllDislikeItem();
         if(dislikeList.size() == 0) {
             return;
