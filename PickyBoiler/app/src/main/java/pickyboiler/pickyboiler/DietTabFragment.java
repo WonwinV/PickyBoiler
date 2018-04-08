@@ -99,7 +99,7 @@ public class DietTabFragment extends Fragment {
                 }
 
                 //SharedPreferences
-                SharedPreferencesManager.addFavoriteItem(getActivity().getApplicationContext(), dietItems.trim());
+                SharedPreferencesManager.addDislikeItem(dietItems.trim());
 
                 dietItemsList.add(dietItems.trim());
                 SharedPreferencesManager.showToast("Item added.");
@@ -141,7 +141,8 @@ public class DietTabFragment extends Fragment {
 
                 switch (index) {
                     case 0:
-                        SharedPreferencesManager.removeFavoriteItem(dietItemsList.get(position));
+                        //SharedPreferencesManager.removeFavoriteItem(dietItemsList.get(position));
+                        SharedPreferencesManager.removeDislikeItem(dietItemsList.get(position));
                         dietItemsList.remove(position);
                         adapter.notifyDataSetChanged();
                         SharedPreferencesManager.showToast("Item deleted.");
