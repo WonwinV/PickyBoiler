@@ -56,7 +56,7 @@ public class SharedPreferencesManager extends Application{
     }
 
     public static String getValueFromKey(String key) {
-        return sharedPreferences.getString(key, null);
+        return sharedPreferences.getString(key,null);
     }
 
     public static void addOrAppendStringToSharedPreferences(Context context, String key, String value) {
