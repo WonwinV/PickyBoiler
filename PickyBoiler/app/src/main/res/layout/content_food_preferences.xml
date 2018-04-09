@@ -10,7 +10,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="68dp"
         android:id="@+id/prefhead"
         android:background="@drawable/prefheader"/>
 
@@ -21,7 +21,7 @@
         android:background="@drawable/sidebarbutton"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:layout_marginStart="20dp"
         android:text=""
         android:textOff=""
