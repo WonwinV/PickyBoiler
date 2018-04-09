@@ -142,5 +142,7 @@ public class OffCampusDining extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+        
+        /*Fixing bugs arising from merging work - CC*/
     }
 }
