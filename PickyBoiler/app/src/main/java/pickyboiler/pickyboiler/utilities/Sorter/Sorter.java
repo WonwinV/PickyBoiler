@@ -17,7 +17,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import pickyboiler.pickyboiler.R;
 import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 public class Sorter {
@@ -79,7 +78,7 @@ public class Sorter {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        Log.d("ALLCURRENTMENU", "XXXX" + SharedPreferencesManager.getValueFromKey("allDiningMenu"));
         return diningCourtWithScore;
     }
 
@@ -90,7 +89,6 @@ public class Sorter {
             allergenList = new ArrayList<>();
         } if(diningCourt == null)
             return new JSONObject();
-
 
         Integer score = 0;
         HashMap<String, Integer> favoriteCounts = new HashMap<>();
@@ -104,6 +102,7 @@ public class Sorter {
             Iterator<String> keys = diningCourt.getJSONObject("AllMeal").keys();
             while (keys.hasNext()) {
                 String menuName = keys.next();
+                SharedPreferencesManager.addDiningCourtMenu(null, menuName);
                 JSONArray itemAllergen = diningCourt.getJSONObject("AllMeal").getJSONObject(menuName).getJSONArray("allergens");
                 boolean safeForVegetarian = false;
                 boolean allergicTo = false;

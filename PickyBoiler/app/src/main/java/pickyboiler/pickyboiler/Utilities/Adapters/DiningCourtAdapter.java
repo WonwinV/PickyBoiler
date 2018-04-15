@@ -33,7 +33,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
     private String[] numsVeggies;// = {"3", "2", "3", "2", "100"};
     private String[] listAllergens;// = {"GG", "RIP", "F", "DEATH", "Shrimp"};
     private String[] urlList;// = {"http://www.google.com", "http://www.youtube.com", "http://www.apple.com", "http://www.slickdeals.com", "http://www.purdue.com"};
-
+    private String[] dislikeList;
 
     private ArrayList<JSONObject> diningCourtMenus;
 
@@ -74,6 +74,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
         numsVeggies = new String[allCurrentMeal.size()];
         listAllergens = new String[allCurrentMeal.size()];
         urlList = new String[allCurrentMeal.size()];
+        dislikeList = new String[allCurrentMeal.size()];
 
         diningCourtMenus = allCurrentMeal;
 
@@ -89,6 +90,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
                 //numsVeggies[i] = allCurrentMeal.get(i).getString("computedRanking");
                 numsVeggies[i] = allCurrentMeal.get(i).getString("favoriteCounts");
                 //numsVeggies[i] = allCurrentMeal.get(i).getString(context.getString(R.string.VegetarianCount));
+
 
                 StringBuilder listAllergen = new StringBuilder();
                 JSONArray arr = allCurrentMeal.get(i).getJSONObject(context.getString(R.string.AllergenCount)).names();
@@ -106,6 +108,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
                 }
                 listAllergens[i] = listAllergen.toString();
                 urlList[i] = allCurrentMeal.get(i).getString(context.getString(R.string.URL));
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -125,6 +128,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
         holder.diningCourtNameText.setText(holder.diningCourtNameText.getText().toString()+diningCourtNames[position]);
         holder.allergenListText.setText(holder.allergenListText.getText().toString()+listAllergens[position]);
         holder.countVeggiesText.setText(holder.countVeggiesText.getText().toString()+numsVeggies[position]);
+        holder.dislikeText.setText(holder.dislikeText.getText().toString()+dislikeList[position]);
     }
 
     @Override
@@ -141,6 +145,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
         TextView diningCourtNameText;
         TextView allergenListText;
         TextView countVeggiesText;
+        TextView dislikeText;
 
         Context context;
 
@@ -150,6 +155,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
             diningCourtNameText = (TextView) itemView.findViewById(R.id.tv_place_name);
             allergenListText = (TextView) itemView.findViewById(R.id.tv_allergens);
             countVeggiesText = (TextView) itemView.findViewById(R.id.tv_veggies_count);
+            dislikeText = (TextView) itemView.findViewById(R.id.tv_dislike);
             itemView.setOnClickListener(this);
         }
 
