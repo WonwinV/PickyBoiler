@@ -7,7 +7,7 @@
     <string name="title_activity_preferences_tabs">PreferencesTabs</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="edittext_hint"><font size="16">"       Add your favorite food"</font></string>
-    <string name="editdiet_hint"><font size="16">"       Add food you want to exclude"</font></string>
+    <string name="editdiet_hint"><font size="16">"       Add food you dislike"</font></string>
     <string name="favoriteFood">favoriteFood</string>
     <string name="dislikeFood">dislikeFood</string>
     <string name="AllergenEgg">Egg</string>
