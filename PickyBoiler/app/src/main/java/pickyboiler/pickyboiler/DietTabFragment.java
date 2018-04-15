@@ -48,7 +48,7 @@ public class DietTabFragment extends Fragment {
     ListView listView;
     ArrayAdapter adapter;
     ArrayAdapter<String> ada;
-    String[] diets = {"Pork"};
+    String[] diets = SharedPreferencesManager.getArrayOfDiningCourtMenu();
 
     ToggleButton vegetarian;
     ToggleButton vegan;
@@ -154,6 +154,10 @@ public class DietTabFragment extends Fragment {
 
         hashMap = new HashMap<>();
 
+        vegetarian = (ToggleButton) view.findViewById(R.id.vegetarian_btn);
+        vegetarian.setOnClickListener(handleDietClick);
+        hashMap.put("isVeggie", vegetarian);
+
         /*vegetarian = (ToggleButton) view.findViewById(R.id.vegetarian_btn);
         vegan = (ToggleButton) view.findViewById(R.id.vegan_btn);
         nopork = (ToggleButton) view.findViewById(R.id.nopork_btn);
@@ -209,6 +213,40 @@ public class DietTabFragment extends Fragment {
 
         return view;
     }
+
+    private View.OnClickListener handleDietClick = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+            boolean pressed = ((ToggleButton) view).isChecked();
+            CharSequence text = "";
+            Drawable drawable;
+
+            switch (view.getId()) {
+
+                //PLEASE DO NOT REMOVE MY COMMENTS -Prin
+
+                case R.id.vegetarian_btn:
+                    if (pressed) {
+                        text = "Added vegetarian to diets.";
+                        drawable = getResources().getDrawable(R.drawable.vegetarian);
+                        view.setBackgroundDrawable(drawable);
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.isVeggie), "true");
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.isVeggie), true).apply();
+                    } else {
+                        text = "Removed vegetarian from diets.";
+                        drawable = getResources().getDrawable(R.drawable.vegetarian_bw);
+                        SharedPreferencesManager.putStringSharedPreferences(getString(R.string.isVeggie), "false");
+                        view.setBackgroundDrawable(drawable);
+                        //SharedPreferencesManager.getPrefs().edit().putBoolean(getString(R.string.isVeggie), false).apply();
+                    }
+                    break;
+            }
+
+            SharedPreferencesManager.showToast((String) text);
+
+        }
+    };
 
     /*private View.OnClickListener handleDietClick = new View.OnClickListener() {
 
@@ -367,6 +405,16 @@ public class DietTabFragment extends Fragment {
 
         //create array list to store preferences selected by user
         ArrayList<String> userSelected = SharedPreferencesManager.getAllDiets();
+
+        for (String x: userSelected) {
+
+            ToggleButton current = hashMap.get(x);
+            current.setChecked(true);
+
+            if (current.equals(vegetarian)) {
+                current.setBackgroundDrawable(getResources().getDrawable(R.drawable.vegetarian));
+            }
+        }
 
         //loop through array list
         /*for (String x: userSelected) {

@@ -74,7 +74,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
         numsVeggies = new String[allCurrentMeal.size()];
         listAllergens = new String[allCurrentMeal.size()];
         urlList = new String[allCurrentMeal.size()];
-        dislikeList = new String[allCurrentMeal.size()];
+        //dislikeList = new String[allCurrentMeal.size()];
 
         diningCourtMenus = allCurrentMeal;
 
@@ -107,6 +107,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
                     }
                 }
                 listAllergens[i] = listAllergen.toString();
+
                 urlList[i] = allCurrentMeal.get(i).getString(context.getString(R.string.URL));
 
             }
@@ -128,7 +129,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
         holder.diningCourtNameText.setText(holder.diningCourtNameText.getText().toString()+diningCourtNames[position]);
         holder.allergenListText.setText(holder.allergenListText.getText().toString()+listAllergens[position]);
         holder.countVeggiesText.setText(holder.countVeggiesText.getText().toString()+numsVeggies[position]);
-        holder.dislikeText.setText(holder.dislikeText.getText().toString()+dislikeList[position]);
+        //holder.dislikeText.setText(holder.dislikeText.getText().toString()+dislikeList[position]);
     }
 
     @Override
@@ -155,7 +156,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
             diningCourtNameText = (TextView) itemView.findViewById(R.id.tv_place_name);
             allergenListText = (TextView) itemView.findViewById(R.id.tv_allergens);
             countVeggiesText = (TextView) itemView.findViewById(R.id.tv_veggies_count);
-            dislikeText = (TextView) itemView.findViewById(R.id.tv_dislike);
+            //dislikeText = (TextView) itemView.findViewById(R.id.tv_dislike);
             itemView.setOnClickListener(this);
         }
 

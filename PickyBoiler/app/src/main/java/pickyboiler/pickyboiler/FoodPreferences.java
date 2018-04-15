@@ -86,7 +86,7 @@ public class FoodPreferences extends AppCompatActivity
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new AllergenTabFragment(), "Allergens");
         adapter.addFragment(new FavTabFragment(), "Favorites");
-        adapter.addFragment(new DietTabFragment(), "Diets");
+        adapter.addFragment(new DietTabFragment(), "Diets / Dislikes");
         viewPager.setAdapter(adapter);
     }
 
