@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 /**
  * Created by Jackson
@@ -17,7 +18,7 @@ import android.widget.Button;
 public class RestaurantMapFragment extends Fragment {
 
 
-    Button viewMapButton;
+    ImageButton viewMapButton;
 
     private Context mapPageContext;
 
@@ -28,7 +29,7 @@ public class RestaurantMapFragment extends Fragment {
 
         mapPageContext = getContext();
 
-        viewMapButton = (Button)view.findViewById(R.id.viewMap);
+        viewMapButton = (ImageButton)view.findViewById(R.id.viewMap);
         viewMapButton.setOnClickListener(handleClick);
 
         return view;
