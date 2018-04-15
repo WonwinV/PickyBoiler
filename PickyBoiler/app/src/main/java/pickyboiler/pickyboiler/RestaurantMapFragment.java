@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import  pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 /**
  * Created by Jackson
  */
@@ -40,6 +41,7 @@ public class RestaurantMapFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
+            SharedPreferencesManager.showToast((String) "Opening Map...");
             Intent mapIntent = new Intent(mapPageContext,MapsActivity.class);
             mapPageContext.startActivity(mapIntent);
         }
