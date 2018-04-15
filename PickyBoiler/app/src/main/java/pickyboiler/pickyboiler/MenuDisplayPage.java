@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.text.method.LinkMovementMethod;
 import android.support.v4.app.Fragment;
 import android.text.TextPaint;
+import android.net.Uri;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -163,7 +164,7 @@ public class MenuDisplayPage extends AppCompatActivity {
         });
 
 
-        // Getting a reference to left button, and close the popup when clicked.
+        // Getting a reference to left button, and add item when clicked.
         Button left = (Button) layout.findViewById(R.id.lbutton);
         left.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,8 +189,8 @@ public class MenuDisplayPage extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                //Waiting till tomorrow to actually add, to be sure no remaining bugs
-                popup.dismiss();
+                Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse("http://net.housing.purdue.edu/NetNutrition/1"));
+                startActivity(viewIntent);
             }
         });
 
