@@ -27,6 +27,8 @@
     <string name="lowSugar">lowSugar</string>
     <string name="lowCalories">lowCalories</string>
 
+    <string name="allDiningMenu"></string>
+
     <string name="title_activity_sidebar">Sidebar</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

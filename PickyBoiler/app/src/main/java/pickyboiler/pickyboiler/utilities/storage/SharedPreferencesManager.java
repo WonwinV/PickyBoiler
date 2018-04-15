@@ -10,7 +10,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
 import pickyboiler.pickyboiler.R;
 
 public class SharedPreferencesManager extends Application{
@@ -71,6 +70,48 @@ public class SharedPreferencesManager extends Application{
         }
     }
 
+    public static void addDiningCourtMenu(Context context, String value) {
+        //keep track of all available dining court item
+        value = value.trim();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String oldValue = sharedPreferences.getString("allDiningMenu", null);
+        //Log.d("OLDVALUE", ">>" + oldValue);
+
+        if(oldValue == null || oldValue.trim().length() == 0) {
+            editor.putString("allDiningMenu", value).apply();
+            //Log.d("FIRSTIN", value);
+        }
+        else {
+            //will change to hashmap if time allows, or if too slow
+            ArrayList<String> items = new ArrayList<>(Arrays.asList(oldValue.split(", ")));
+            if(!items.contains(value)) {
+                items.add(value);
+                //Log.d("BEFORECUR", value + ">>" + items.size() + "?????");
+                //for min API = 26: String.join(",", items)
+                String stringItems = items.toString();
+                editor.putString("allDiningMenu", stringItems.substring(1, stringItems.length()-1)).apply();
+                //Log.d("ACUTALARR", stringItems.substring(1, stringItems.length()-1));
+            }
+            //Log.d("ACUTALARR", "ALREADY EXISTED");
+        }
+    }
+
+    public static String[] getArrayOfDiningCourtMenu() {
+        //Log.d("SPLITSIZE", "GOT INNNN");
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String oldValue = sharedPreferences.getString("allDiningMenu", null);
+
+        if(oldValue == null || oldValue.trim().length() == 0) {
+            //Log.d("SPLITSIZE", "!!! 0 !!!!");
+            return new String[0];
+        }
+        else {
+            //String[] d = oldValue.split("\\\\s*,\\\\s*");
+            //Log.d("SPLITSIZE", d.length + "<<");
+            return oldValue.split(", ");
+        }
+    }
+
     public static void addFavoriteItem(Context context, String item) {
         item = item.toLowerCase().trim();
         //check if already existed
@@ -123,7 +164,6 @@ public class SharedPreferencesManager extends Application{
             return new ArrayList<String>();
         }
         favorite = favorite.trim();
-
 
         return new ArrayList<String>(Arrays.asList(favorite.trim().split(",")));
     }

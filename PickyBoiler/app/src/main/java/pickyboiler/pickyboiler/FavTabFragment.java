@@ -1,47 +1,30 @@
 package pickyboiler.pickyboiler;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnKeyListener;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AutoCompleteTextView;
-import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 import static pickyboiler.pickyboiler.R.id.autoCompleteTextView;
-import static pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager.getAllDislikeItem;
 
 /**
  * Created by Prin on 2/15/18.
@@ -56,7 +39,7 @@ public class FavTabFragment extends Fragment {
     ListView listView;
     ArrayAdapter adapter;
     ArrayAdapter<String> ada;
-    String[] favorites = {"Apple", "Broccoli", "Chicken", "Cheese", "Cake", "Egg", "Fruit Salad"};
+    String[] favorites = SharedPreferencesManager.getArrayOfDiningCourtMenu();
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
