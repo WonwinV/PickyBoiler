@@ -195,4 +195,6 @@ public class MenuDisplayPage extends AppCompatActivity {
         });
 
     }
+    
+    //Database communication to be added once debugging finished
 }
