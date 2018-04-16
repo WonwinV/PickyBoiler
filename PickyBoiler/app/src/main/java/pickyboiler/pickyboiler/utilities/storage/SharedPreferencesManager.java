@@ -1,7 +1,9 @@
 package pickyboiler.pickyboiler.Utilities.Storage;
 
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import pickyboiler.pickyboiler.DietTabFragment;
 import pickyboiler.pickyboiler.R;
 
 public class SharedPreferencesManager extends Application{
