@@ -28,4 +28,11 @@ public class NearbyRestaurantsFragment extends Fragment {
         super.onResume();
     }
 
+
+    public void rankRestaurants(){
+
+
+    }	
+
+
 }
