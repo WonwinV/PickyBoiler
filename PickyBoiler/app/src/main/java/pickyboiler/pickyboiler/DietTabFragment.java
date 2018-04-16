@@ -1,5 +1,7 @@
 package pickyboiler.pickyboiler;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -29,6 +31,9 @@ import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 import static pickyboiler.pickyboiler.R.id.autoCompleteDietTextView;
 import static pickyboiler.pickyboiler.R.id.autoCompleteTextView;
+import static pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager.addOrAppendStringToSharedPreferences;
+import static pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager.getPrefFavListtFofy;
+import static pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager.removeFavoriteItem;
 
 
 /**
@@ -99,7 +104,25 @@ public class DietTabFragment extends Fragment {
                 }
 
                 //SharedPreferences
+                ArrayList<String> favList = getPrefFavListtFofy();
+                if(favList.contains(dietItems.trim())) {
+                    //remove from fav list then add
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());       // not sure about the correct context
+                    builder.setCancelable(false);
+                    builder.setTitle("Food Preference Conflict");
+                    builder.setMessage("The item that is being added will be added to Diets page but will be removed from Favorites page as the item already exists in the Favorites page.");
+
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    builder.show();
+                }
                 SharedPreferencesManager.addDislikeItem(dietItems.trim());
+
 
                 dietItemsList.add(dietItems.trim());
                 SharedPreferencesManager.showToast("Item added.");

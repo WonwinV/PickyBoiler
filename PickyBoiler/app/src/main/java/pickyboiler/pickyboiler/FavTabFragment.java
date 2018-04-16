@@ -1,5 +1,7 @@
 package pickyboiler.pickyboiler;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import java.util.Collections;
 import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 import static pickyboiler.pickyboiler.R.id.autoCompleteTextView;
+import static pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager.getAllDislikeItem;
 
 /**
  * Created by Prin on 2/15/18.
@@ -88,6 +91,21 @@ public class FavTabFragment extends Fragment {
                 }
 
                 /*SharedPref*/
+                ArrayList<String> dislike = getAllDislikeItem();
+                if(dislike.contains(favItems.trim())) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setCancelable(false);
+                    builder.setTitle("Food Preference Conflict");
+                    builder.setMessage("The item that is being added will be added to Favorites page but will be removed from Diets page as the item already exists in the Diets page.");
+
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    builder.show();
+                }
                 SharedPreferencesManager.addFavoriteItem(getActivity().getApplicationContext(), favItems.trim());
                 Log.d("what_added_fofygg", "||"+ favItems.trim());
                 Log.d("testSharedPref_fofygg", ">>>" + SharedPreferencesManager.getValueFromKey(getResources().getString(R.string.favoriteFood)));
