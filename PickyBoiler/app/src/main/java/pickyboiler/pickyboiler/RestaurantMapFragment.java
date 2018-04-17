@@ -41,7 +41,8 @@ public class RestaurantMapFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            SharedPreferencesManager.showToast((String) "Opening Map...");
+            CharSequence text = "Opening Map...";
+            SharedPreferencesManager.showToast((String) text);
             Intent mapIntent = new Intent(mapPageContext,MapsActivity.class);
             mapPageContext.startActivity(mapIntent);
         }
