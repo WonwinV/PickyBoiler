@@ -217,13 +217,15 @@ public class FavTabFragment extends Fragment {
             //dtf.onResume();
 
             //favItemsList.clear();
-            favItemsList = getAllFavoriteItem();
-            for (int i = 0; i < favItemsList.size(); i++) {
-                if(favItemsList.get(i).trim().length() == 0)
-                    favItemsList.remove(i);
+            if (favItemsList != null) {
+                favItemsList = getAllFavoriteItem();
+                for (int i = 0; i < favItemsList.size(); i++) {
+                    if(favItemsList.get(i).trim().length() == 0)
+                        favItemsList.remove(i);
+                }
+                adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,favItemsList);
+                listView.setAdapter(adapter);
             }
-            adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,favItemsList);
-            listView.setAdapter(adapter);
 
             //FOR DIETS
             dislike = getAllDislikeItem();
