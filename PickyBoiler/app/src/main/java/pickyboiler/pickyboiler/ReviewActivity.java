@@ -344,7 +344,7 @@ public class ReviewActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
-/*
+
     private void displayPopup(final Activity context) {
 
         //inflate popup_layout
@@ -412,6 +412,4 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
       }
-
-*/
 }
