@@ -30,6 +30,7 @@ import java.util.HashMap;
 import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 import static pickyboiler.pickyboiler.R.id.autoCompleteDietTextView;
+import static pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager.getAllDislikeItem;
 import static pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager.getPrefFavListtFofy;
 
 
@@ -47,8 +48,10 @@ public class DietTabFragment extends Fragment {
     public static Toast toastShow;
     private SwipeMenuListView mListView;
     ArrayList<String> dietItemsList;
+    ArrayList<String> favList;
     ListView listView;
     ArrayAdapter adapter;
+    ArrayAdapter adapterFav;
     ArrayAdapter<String> ada;
     String[] diets = SharedPreferencesManager.getArrayOfDiningCourtMenu();
 
@@ -106,7 +109,7 @@ public class DietTabFragment extends Fragment {
                 }
 
                 //SharedPreferences
-                ArrayList<String> favList = getPrefFavListtFofy();
+                favList = getPrefFavListtFofy();
                 if(favList.contains(dietItems.toLowerCase().trim())) {
                     //remove from fav list then add
                     Log.d("CONFLICT", "onClick: found conflict");
@@ -132,12 +135,14 @@ public class DietTabFragment extends Fragment {
                 SharedPreferencesManager.showToast("Item added.");
                 Collections.sort(dietItemsList);
                 listView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
 
                 ((AutoCompleteTextView) view.findViewById(autoCompleteDietTextView)).setText("");
             }
         });
 
         listView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
@@ -430,6 +435,16 @@ public class DietTabFragment extends Fragment {
 
         super.onResume();
 
+        //dietItemsList.clear();
+        dietItemsList = getAllDislikeItem();
+        for (int i = 0; i < dietItemsList.size(); i++) {
+            if(dietItemsList.get(i).trim().length() == 0)
+                dietItemsList.remove(i);
+        }
+        adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,dietItemsList);
+        listView.setAdapter(adapter);
+        //adapter.notifyDataSetChanged();
+
         //create array list to store preferences selected by user
         ArrayList<String> userSelected = SharedPreferencesManager.getAllDiets();
 
@@ -473,5 +488,33 @@ public class DietTabFragment extends Fragment {
             }
         }*/
 
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser) {
+            //SharedPreferencesManager.showToast("DIET VISIBLE");
+
+            //adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,dietItemsList);
+            //listView.setAdapter(adapter);
+            //FavTabFragment ftf = new FavTabFragment();
+            //adapterFav = new ArrayAdapter(ftf.getActivity(), android.R.layout.simple_list_item_1,favList);
+            //ftf.onResume();
+
+            //dietItemsList.clear();
+            if (dietItemsList != null) {
+                dietItemsList = getAllDislikeItem();
+                for (int i = 0; i < dietItemsList.size(); i++) {
+                    if(dietItemsList.get(i).trim().length() == 0)
+                        dietItemsList.remove(i);
+                }
+                adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,dietItemsList);
+                listView.setAdapter(adapter);
+                //adapter.notifyDataSetChanged();
+            }
+
+        }
     }
 }
