@@ -84,9 +84,9 @@ public class Sorter {
 
     public static JSONObject computeScore(Context context, JSONObject diningCourt) {
         if(favoriteList == null) {
-            favoriteList = new ArrayList<>();
+            favoriteList = SharedPreferencesManager.getAllFavoriteItem();
         } if(allergenList == null) {
-            allergenList = new ArrayList<>();
+            allergenList = SharedPreferencesManager.getAllAllergens();
         } if(diningCourt == null)
             return new JSONObject();
 
@@ -131,6 +131,10 @@ public class Sorter {
 
                 //check if favorite
                 for (int j = 0; j < favoriteList.size(); j++) {
+                    Log.d("FAVSIZE", "favsize: "+favoriteList.size());
+                    if(favoriteList.get(j).trim().length() == 0)
+                        continue;
+
                     String[] keywords = favoriteList.get(j).split(" ");
                     String regex = "";
                     if (keywords.length > 0) {

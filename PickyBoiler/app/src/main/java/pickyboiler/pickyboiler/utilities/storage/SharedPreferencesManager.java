@@ -132,6 +132,7 @@ public class SharedPreferencesManager extends Application{
             //add normally
             addOrAppendStringToSharedPreferences(context, context.getResources().getString(R.string.favoriteFood), item);
         }
+        Log.d("ADDFAV", "new:>>"+sharedPreferences.getString(context.getResources().getString(R.string.favoriteFood), null) + "<<");
     }
 
     public static void forceAddFavoriteItem(Context context, String item) {
@@ -155,7 +156,7 @@ public class SharedPreferencesManager extends Application{
         if(newList.length() > 0)
             newList = newList.substring(0, newList.length()-1);
 
-        Log.d("REMOVEFAV_fofygg", "old: " + sharedPreferences.getString(context.getResources().getString(R.string.favoriteFood), null) + " new: " + newList);
+        Log.d("REMOVEFAV_fofygg", "old: " + sharedPreferences.getString(context.getResources().getString(R.string.favoriteFood), null) + " new:>>" + newList + "<<");
         putStringSharedPreferences(context.getResources().getString(R.string.favoriteFood), newList);
     }
 
