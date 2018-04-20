@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,10 +29,7 @@ import java.util.HashMap;
 import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 import static pickyboiler.pickyboiler.R.id.autoCompleteDietTextView;
-import static pickyboiler.pickyboiler.R.id.autoCompleteTextView;
-import static pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager.addOrAppendStringToSharedPreferences;
 import static pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager.getPrefFavListtFofy;
-import static pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager.removeFavoriteItem;
 
 
 /**
@@ -72,6 +68,11 @@ public class DietTabFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.diet_lv);
 
         dietItemsList = SharedPreferencesManager.getAllDislikeItem();
+        for (int i = 0; i < dietItemsList.size(); i++) {
+            if(dietItemsList.get(i).trim().length() == 0)
+                dietItemsList.remove(i);
+        }
+
         String dietabc = "";
         for (String x:
                 dietItemsList) {
