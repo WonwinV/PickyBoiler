@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,8 +107,9 @@ public class DietTabFragment extends Fragment {
 
                 //SharedPreferences
                 ArrayList<String> favList = getPrefFavListtFofy();
-                if(favList.contains(dietItems.trim())) {
+                if(favList.contains(dietItems.toLowerCase().trim())) {
                     //remove from fav list then add
+                    Log.d("CONFLICT", "onClick: found conflict");
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());       // not sure about the correct context
                     builder.setCancelable(false);
@@ -122,6 +124,7 @@ public class DietTabFragment extends Fragment {
                     });
                     builder.show();
                 }
+                Log.d("CONFLICT", "onClick: no conflict");
                 SharedPreferencesManager.addDislikeItem(dietItems.trim());
 
 

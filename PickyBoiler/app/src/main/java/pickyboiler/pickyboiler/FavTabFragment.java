@@ -97,7 +97,10 @@ public class FavTabFragment extends Fragment {
 
                 /*SharedPref*/
                 ArrayList<String> dislike = getAllDislikeItem();
-                if(dislike.contains(favItems.trim())) {
+                if(dislike.contains(favItems.toLowerCase().trim())) {
+                    //remove from fav list then add
+                    Log.d("CONFLICT", "onClick: found conflict");
+
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setCancelable(false);
                     builder.setTitle("Food Preference Conflict");
@@ -111,6 +114,7 @@ public class FavTabFragment extends Fragment {
                     });
                     builder.show();
                 }
+                Log.d("CONFLICT", "onClick: no conflict");
                 SharedPreferencesManager.addFavoriteItem(getActivity().getApplicationContext(), favItems.trim());
                 Log.d("what_added_fofygg", "||"+ favItems.trim());
                 Log.d("testSharedPref_fofygg", ">>>" + SharedPreferencesManager.getValueFromKey(getResources().getString(R.string.favoriteFood)));
