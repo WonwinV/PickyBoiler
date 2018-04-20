@@ -22,13 +22,16 @@ import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 public class Sorter {
     private static ArrayList<String> allergenList;
     private static ArrayList<String> favoriteList;
+    private static ArrayList<String> dislikeList;
     private static final int veggieMultiplier = 15;
     private static final int favoriteMultiplier = 15;
+    private static final int dislikeMultiplier = -2;
 
     public static ArrayList<JSONObject> sortDiningCourt(Context context, JSONArray allCurrentMeal) {
         allergenList = new ArrayList<>();
         allergenList = SharedPreferencesManager.getAllAllergens();
-        favoriteList = SharedPreferencesManager.getAllFavoriteItem();
+        favoriteList = SharedPreferencesManager.getPrefFavListtFofy();
+        dislikeList = SharedPreferencesManager.getPrefDislikeList();
 
         ArrayList<JSONObject> diningCourtWithScore = new ArrayList<>();
         try {
@@ -107,6 +110,7 @@ public class Sorter {
                 boolean safeForVegetarian = false;
                 boolean allergicTo = false;
                 boolean isFavorite = false;
+                boolean isDislike = false;
 //                boolean userNoPork = Boolean.parseBoolean(SharedPreferencesManager.getValueFromKey("noPork"));
 //                boolean userNoBeef = Boolean.parseBoolean(SharedPreferencesManager.getValueFromKey("noBeef"));
 
@@ -129,13 +133,13 @@ public class Sorter {
                 if (allergicTo || (SharedPreferencesManager.isVeggie() && !safeForVegetarian)) // || (userNoPork && !isNoPork) || (userNoBeef && !isNoBeef))
                     continue;
 
-                //check if favorite
-                for (int j = 0; j < favoriteList.size(); j++) {
-                    Log.d("FAVSIZE", "favsize: "+favoriteList.size());
-                    if(favoriteList.get(j).trim().length() == 0)
+                //check if dislike
+                for (int j = 0; j < dislikeList.size(); j++) {
+                    //Log.d("DISSIZE", "dissize: "+dislikeList.size());
+                    if(dislikeList.get(j).trim().length() == 0)
                         continue;
 
-                    String[] keywords = favoriteList.get(j).split(" ");
+                    String[] keywords = dislikeList.get(j).split(" ");
                     String regex = "";
                     if (keywords.length > 0) {
                         for (String word : keywords) {
@@ -149,19 +153,50 @@ public class Sorter {
                     boolean matchAllKeyword = menuName.toLowerCase().matches(regex);
                     if (matchAllKeyword) {
                         //counts favorite
-                        Log.d("computeSorter", "found fav!: " + favoriteList.get(j));
-                        if (!favoriteCounts.containsKey(favoriteList.get(j))) {
-                            favoriteCounts.put(favoriteList.get(j), 1);
-                        } else {
-                            favoriteCounts.put(favoriteList.get(j), favoriteCounts.get(favoriteList.get(j))+1);
-                        }
-                        score += favoriteMultiplier;
-                        isFavorite = true;
+                        Log.d("computeSorter", "found dislike!: " + dislikeList.get(j));
+                        isDislike = true;
+                        score -= dislikeMultiplier;
                         break;
                     }
                 }
-                //not favorite
-                if (!isFavorite)
+
+
+                //check if favorite
+                if(!isDislike) {
+                    for (int j = 0; j < favoriteList.size(); j++) {
+                        Log.d("FAVSIZE", "favsize: "+favoriteList.size());
+                        if(favoriteList.get(j).trim().length() == 0)
+                            continue;
+
+                        String[] keywords = favoriteList.get(j).split(" ");
+                        String regex = "";
+                        if (keywords.length > 0) {
+                            for (String word : keywords) {
+                                word = word.toLowerCase();
+                                if (word.trim().length() > 0)
+                                    regex += ".*" + word;
+                            }
+                            regex += ".*";
+                        }
+                        //Log.d("computeSorter", "regex: >>" + regex + "<<" + "word: >>" + favoriteList.get(j));
+                        boolean matchAllKeyword = menuName.toLowerCase().matches(regex);
+                        if (matchAllKeyword) {
+                            //counts favorite
+                            Log.d("computeSorter", "found fav!: " + favoriteList.get(j));
+                            if (!favoriteCounts.containsKey(favoriteList.get(j))) {
+                                favoriteCounts.put(favoriteList.get(j), 1);
+                            } else {
+                                favoriteCounts.put(favoriteList.get(j), favoriteCounts.get(favoriteList.get(j))+1);
+                            }
+                            score += favoriteMultiplier;
+                            isFavorite = true;
+                            break;
+                        }
+                    }
+                }
+
+                //not favorite but not dislike either
+                if (!isFavorite && !isDislike)
                     score++;
             }
 
