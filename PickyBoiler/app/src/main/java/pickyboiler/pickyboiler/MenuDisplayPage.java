@@ -18,7 +18,6 @@ import android.content.Context;
 import android.widget.PopupWindow;
 import android.widget.Button;
 import android.text.method.LinkMovementMethod;
-import android.support.v4.app.Fragment;
 import android.text.TextPaint;
 import android.net.Uri;
 
@@ -35,7 +34,7 @@ import pickyboiler.pickyboiler.Utilities.Storage.SharedPreferencesManager;
 
 public class MenuDisplayPage extends AppCompatActivity {
 
-    public String diningCourtName;
+    public static String diningCourtName;
     public ArrayList<String> menuItems;
     String menuFinal;
     int ini;
@@ -124,10 +123,21 @@ public class MenuDisplayPage extends AppCompatActivity {
             //to newline; increment puts us on new line past the newline char
             currPos++;
         }
+        Button reviewButton = findViewById(R.id.reviewButton);
+        reviewButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showReview(MenuDisplayPage.this);
+            }
+        });
         menuText.setText(ss);
     }
 
+    //method to display review interface
+    private void showReview(final Activity context) {
+        Intent intent = new Intent(this, ReviewActivity.class);
+        startActivity(intent);
 
+    }
     //method to display popup
     private void showPopup(final Activity context, int first, int last) {
         int width = 1000;
@@ -155,7 +165,7 @@ public class MenuDisplayPage extends AppCompatActivity {
         popup.showAtLocation(layout, Gravity.CENTER, 0,0);
 
         //Get a reference to close button, and close the popup when clicked
-        Button close = (Button) layout.findViewById(R.id.cbutton);
+        Button close = layout.findViewById(R.id.cbutton);
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -195,6 +205,3 @@ public class MenuDisplayPage extends AppCompatActivity {
         });
 
     }
-    
-    //Database communication to be added once debugging finished
-}
