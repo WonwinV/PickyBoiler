@@ -54,7 +54,6 @@ public class FavTabFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.favfood_lv);
 
         favItemsList = SharedPreferencesManager.getPrefFavListtFofy();
-        favItemsList = SharedPreferencesManager.getAllDislikeItem();
         for (int i = 0; i < favItemsList.size(); i++) {
             if(favItemsList.get(i).trim().length() == 0)
                 favItemsList.remove(i);
