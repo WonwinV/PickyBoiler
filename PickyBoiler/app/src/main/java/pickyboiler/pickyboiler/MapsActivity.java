@@ -45,6 +45,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng maruSushi = new LatLng(40.424270,-86.906759);
         LatLng madMushroom = new LatLng(40.424098,-86.908994);
         LatLng pandaExpress = new LatLng(40.424694,-86.907793);
+        LatLng _308OnState = new LatLng(40.424090, -86.908508);
+        LatLng riceCafe = new LatLng(40.423170, -86.908867);
+        LatLng BrotherBG = new LatLng(40.424076, -86.908359);
+        LatLng JJ   = new LatLng(40.423806, -86.908437);
 
         mMap.addMarker(new MarkerOptions().position(tripleX).title("Triple X"));
         mMap.addMarker(new MarkerOptions().position(puccinis).title("Puccini's"));
@@ -52,8 +56,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(maruSushi).title("Maru Sushi"));
         mMap.addMarker(new MarkerOptions().position(madMushroom).title("Mad Mushroom Pizza"));
         mMap.addMarker(new MarkerOptions().position(pandaExpress).title("Panda Express"));
+        mMap.addMarker(new MarkerOptions().position(_308OnState).title("308 On State"));
+        mMap.addMarker(new MarkerOptions().position(riceCafe).title("Rice Cafe"));
+        mMap.addMarker(new MarkerOptions().position(BrotherBG).title("Brother's Bar & Grill"));
+        mMap.addMarker(new MarkerOptions().position(JJ).title("Jimmy John's"));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tripleX));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(tripleX, 15.0f));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(tripleX, 14.0f));
     }
 }
