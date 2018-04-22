@@ -54,5 +54,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(pandaExpress).title("Panda Express"));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tripleX));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(tripleX, 15.0f));
     }
 }
