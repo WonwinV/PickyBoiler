@@ -91,19 +91,19 @@ public class MainActivity extends AppCompatActivity
             for (String diningCourtName : diningCourtList) {
                 JSONObject parsedCache = new JSONObject(SharedPreferencesManager.getValueFromKey(diningCourtName + "_cache"));
                 if (parsedCache.get("Date").equals(checkCacheDate)) {
-                    Log.d("^^^CACHE^^^", "validCache");
+                    //log.d("^^^CACHE^^^", "validCache");
                     validCache = true;
                     JSONObject mealObj = parser.getCurrentMealJSON(parsedCache);
-                    Log.d("P==CACHE==Parsed_" + parsedCache.getString("Location"), "processFinish: " + parsedCache.toString());
+                    //log.d("P==CACHE==Parsed_" + parsedCache.getString("Location"), "processFinish: " + parsedCache.toString());
                     if (mealObj != null) {
                         counter++;
                         allCurrentMealJSONArr.put(mealObj);
                     } else {
-                        Log.d("HomeActivity-parsed", "Not serving @ " + parsedCache.getString("Location") + " : " + parser.findCurrentMeal(parsedCache));
+                        //log.d("HomeActivity-parsed", "Not serving @ " + parsedCache.getString("Location") + " : " + parser.findCurrentMeal(parsedCache));
                     }
                 }
                 else {
-                    Log.d("^^^CACHE^^^", "NOT validCache");
+                    //log.d("^^^CACHE^^^", "NOT validCache");
                     break;
                 }
             }
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity
             if(validCache) {
                 if (counter == 0) {
                     //no dining court open
-                    Log.d("ADDDDSS", "processFinish: ");
+                    //log.d("ADDDDSS", "processFinish: ");
                     JSONObject ads = new JSONObject();
                     try {
                         ads.put("Location", "Local Restaurant Ads Here");
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity
                     Drawable drawable2 = getDrawable(R.drawable.background);
                     RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
                     mlayout.setBackground(drawable2);
-                    Log.d("ADDDATA", "onRefresh: menu");
+                    //log.d("ADDDATA", "onRefresh: menu");
                     diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr), getApplicationContext());
                 }
             }
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity
 
         //hard coded for now
         if(!validCache) {
-            Log.d("CALL TO FETCHHHHH", "fetch everythingggggggg");
+            //log.d("CALL TO FETCHHHHH", "fetch everythingggggggg");
             new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Ford/" + fDate);
             new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Earhart/" + fDate);
             new JSONFetcher(this).execute("https://api.hfs.purdue.edu/menus/v2/locations/Windsor/" + fDate);
@@ -182,19 +182,19 @@ public class MainActivity extends AppCompatActivity
                     for (String diningCourtName : diningCourtList) {
                         JSONObject parsedCache = new JSONObject(SharedPreferencesManager.getValueFromKey(diningCourtName + "_cache"));
                         if (parsedCache.get("Date").equals(checkCacheDate)) {
-                            Log.d("^^^CACHE^^^", "validCache");
+                            //log.d("^^^CACHE^^^", "validCache");
                             validCache = true;
                             JSONObject mealObj = parser.getCurrentMealJSON(parsedCache);
-                            Log.d("P==CACHE==Parsed_" + parsedCache.getString("Location"), "processFinish: " + parsedCache.toString());
+                            //log.d("P==CACHE==Parsed_" + parsedCache.getString("Location"), "processFinish: " + parsedCache.toString());
                             if (mealObj != null) {
                                 counter++;
                                 allCurrentMealJSONArr.put(mealObj);
                             } else {
-                                Log.d("HomeActivity-parsed", "Not serving @ " + parsedCache.getString("Location") + " : " + parser.findCurrentMeal(parsedCache));
+                                //log.d("HomeActivity-parsed", "Not serving @ " + parsedCache.getString("Location") + " : " + parser.findCurrentMeal(parsedCache));
                             }
                         }
                         else {
-                            Log.d("^^^CACHE^^^", "NOT validCache");
+                            //log.d("^^^CACHE^^^", "NOT validCache");
                             break;
                         }
                     }
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity
                     if(validCache) {
                         if (counter == 0) {
                             //no dining court open
-                            Log.d("ADDDDSS", "processFinish: ");
+                            //log.d("ADDDDSS", "processFinish: ");
                             JSONObject ads = new JSONObject();
                             try {
                                 ads.put("Location", "Local Restaurant Ads Here");
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity
                             Drawable drawable2 = getDrawable(R.drawable.background);
                             RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
                             mlayout.setBackground(drawable2);
-                            Log.d("ADDDATA", "onRefresh: menu");
+                            //log.d("ADDDATA", "onRefresh: menu");
                             diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr),getApplicationContext());
                         }
                     }
@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity
 
                 //hard coded for now
                 if(!validCache) {
-                    Log.d("CALL TO FETCHHHHH", "fetch everythingggggggg");
+                    //log.d("CALL TO FETCHHHHH", "fetch everythingggggggg");
                     new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Ford/" + fDate);
                     new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Earhart/" + fDate);
                     new JSONFetcher(dd).execute("https://api.hfs.purdue.edu/menus/v2/locations/Windsor/" + fDate);
@@ -308,7 +308,7 @@ public class MainActivity extends AppCompatActivity
             if(++completedAsyncTask == numberOfCourts) {
                 finishedAllAsync = true;
                 //ArrayList<JSONObject> arr = Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr);
-                //Log.d("Sorting====", ">>" + arr.toString());
+                ////log.d("Sorting====", ">>" + arr.toString());
                 if(counter > 0)
                     diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr), getApplicationContext());
 
@@ -335,26 +335,26 @@ public class MainActivity extends AppCompatActivity
         }
         JSONObject jsonobj = null;
         try {
-            Log.d("~~~~~~", "finished fetching " + new JSONObject(output).getString("Location"));
+            //log.d("~~~~~~", "finished fetching " + new JSONObject(output).getString("Location"));
             //do operation on the fetched JSON
             jsonobj = new JSONObject(output);
             DiningCourtParser parser = new DiningCourtParser();
             JSONObject parsed = parser.parseDiningCourtJSON(jsonobj);
             //cached parsed data
             SharedPreferencesManager.putStringSharedPreferences(parsed.getString("Location")+"_cache", parsed.toString());
-            Log.d("^^^CACHE^^^", "cached to>>>"+parsed.getString("Location")+"_cache"+" : "+SharedPreferencesManager.getValueFromKey(parsed.getString("Location")+"_cache"));
+            //log.d("^^^CACHE^^^", "cached to>>>"+parsed.getString("Location")+"_cache"+" : "+SharedPreferencesManager.getValueFromKey(parsed.getString("Location")+"_cache"));
 
             JSONObject mealObj = parser.getCurrentMealJSON(parsed);
-            Log.d("===Parsed_" + parsed.getString("Location"), "processFinish: " + parsed.toString());
-            //Log.d("===ParsedLunch", ">" + parsed.getJSONObject("MealDetails").getJSONObject("Lunch").toString());
+            //log.d("===Parsed_" + parsed.getString("Location"), "processFinish: " + parsed.toString());
+            ////log.d("===ParsedLunch", ">" + parsed.getJSONObject("MealDetails").getJSONObject("Lunch").toString());
             if (mealObj != null) {
                 counter++;
                 allCurrentMealJSONArr.put(mealObj);
                 //allCurrentMeal.put(jsonobj.getString("Location"), mealObj);
-                //Log.d("HomeActivity-parsed", "Serving @  " + jsonobj.getString("Location") + " : " + allCurrentMeal.get(jsonobj.getString("Location")).toString());
-                //Log.d("URLLLLLL", allCurrentMeal.get(jsonobj.getString("Location")).getString("URL"));
+                ////log.d("HomeActivity-parsed", "Serving @  " + jsonobj.getString("Location") + " : " + allCurrentMeal.get(jsonobj.getString("Location")).toString());
+                ////log.d("URLLLLLL", allCurrentMeal.get(jsonobj.getString("Location")).getString("URL"));
             } else {
-                Log.d("HomeActivity-parsed", "Not serving @ " + jsonobj.getString("Location") + " : " + parser.findCurrentMeal(parsed));
+                //log.d("HomeActivity-parsed", "Not serving @ " + jsonobj.getString("Location") + " : " + parser.findCurrentMeal(parsed));
             }
 
         } catch (JSONException e) {
@@ -371,7 +371,7 @@ public class MainActivity extends AppCompatActivity
 
             if(counter == 0) {
                 //no dining court open
-                Log.d("ADDDDSS", "processFinish: ");
+                //log.d("ADDDDSS", "processFinish: ");
                 JSONObject ads = new JSONObject();
                 try {
                     ads.put("Location", "Local Restaurant Ads Here");
@@ -492,19 +492,19 @@ public class MainActivity extends AppCompatActivity
             for (String diningCourtName : diningCourtList) {
                 JSONObject parsedCache = new JSONObject(SharedPreferencesManager.getValueFromKey(diningCourtName + "_cache"));
                 if (parsedCache.get("Date").equals(checkCacheDate)) {
-                    Log.d("^^^CACHE^^^", "validCache");
+                    //log.d("^^^CACHE^^^", "validCache");
                     validCache = true;
                     JSONObject mealObj = parser.getCurrentMealJSON(parsedCache);
-                    Log.d("resumePCACHE==Parsed_" + parsedCache.getString("Location"), parsedCache.toString());
+                    //log.d("resumePCACHE==Parsed_" + parsedCache.getString("Location"), parsedCache.toString());
                     if (mealObj != null) {
                         counter++;
                         allCurrentMealJSONArr.put(mealObj);
                     } else {
-                        Log.d("HomeActivity-parsed", "Not serving @ " + parsedCache.getString("Location") + " : " + parser.findCurrentMeal(parsedCache));
+                        //log.d("HomeActivity-parsed", "Not serving @ " + parsedCache.getString("Location") + " : " + parser.findCurrentMeal(parsedCache));
                     }
                 }
                 else {
-                    Log.d("^^^CACHE^^^", "NOT validCache,"+parsedCache.get("Date")+" vs "+checkCacheDate);
+                    //log.d("^^^CACHE^^^", "NOT validCache,"+parsedCache.get("Date")+" vs "+checkCacheDate);
                     break;
                 }
             }
@@ -512,7 +512,7 @@ public class MainActivity extends AppCompatActivity
             if(validCache) {
                 if (counter == 0) {
                     //no dining court open
-                    Log.d("ADDDDSS", "processFinish: ");
+                    //log.d("ADDDDSS", "processFinish: ");
                     JSONObject ads = new JSONObject();
                     try {
                         ads.put("Location", "Local Restaurant Ads Here");
@@ -524,7 +524,7 @@ public class MainActivity extends AppCompatActivity
                     }
                     ArrayList<JSONObject> adsArr = new ArrayList<>();
                     adsArr.add(ads);
-                    Log.d("ADDDATA", "onResume: ads");
+                    //log.d("ADDDATA", "onResume: ads");
                     diningAdapter.addData(adsArr,getApplicationContext());
 
                     Drawable drawable;
@@ -536,7 +536,7 @@ public class MainActivity extends AppCompatActivity
                     Drawable drawable2 = getDrawable(R.drawable.background);
                     RelativeLayout mlayout = (RelativeLayout) findViewById(mainlayout);
                     mlayout.setBackground(drawable2);
-                    Log.d("ADDDATA", "onResume: menu");
+                    //log.d("ADDDATA", "onResume: menu");
                     diningAdapter.addData(Sorter.sortDiningCourt(getApplicationContext(), allCurrentMealJSONArr),getApplicationContext());
                 }
             }

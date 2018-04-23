@@ -23,7 +23,7 @@ public class JSONFetcher extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
         delegate.processFinish(result);
-        Log.d(TAG, "onPostExecute: " + result);
+        //log.d(TAG, "onPostExecute: " + result);
     }
 
     protected void onPreExecute() {
@@ -77,7 +77,7 @@ public class JSONFetcher extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        Log.d(TAG, "onPostExecute: " + result);
+        //log.d(TAG, "onPostExecute: " + result);
     }*/
 }
 

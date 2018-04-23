@@ -31,7 +31,7 @@ public class DiningCourtParser {
     public HashMap<String, Integer> countVegetarianMenu(JSONObject diningCourtJSON) {
         HashMap<String, Integer> counts = new HashMap<>();
         try {
-            Log.d("--------", "counting for " + diningCourtJSON.getString("Location"));
+            //log.d("--------", "counting for " + diningCourtJSON.getString("Location"));
             for (int i = 0; i < diningCourtJSON.getJSONArray("Meals").length(); i++) {
                 int counter = 0;
                 JSONObject meal = diningCourtJSON.getJSONArray("Meals").getJSONObject(i);
@@ -103,7 +103,7 @@ public class DiningCourtParser {
     public JSONObject parseDiningCourtJSON(JSONObject diningCourtJSON) {
         JSONObject result = new JSONObject();
         try {
-            Log.d("--------", "counting for " + diningCourtJSON.getString("Location"));
+            //log.d("--------", "counting for " + diningCourtJSON.getString("Location"));
             result.put("Location", diningCourtJSON.getString("Location"));
             result.put("Date", diningCourtJSON.getString("Date"));
             JSONObject allMealDetails = new JSONObject();
@@ -159,11 +159,11 @@ public class DiningCourtParser {
                             detail.put("ID", allItems.getJSONObject(k).getString("ID"));
                             detail.put("allergens", menuAllergens);
                             allMenu.put(allItems.getJSONObject(k).getString("Name"), detail);
-                            //Log.d("....menuAllergen", ">" + allItems.getJSONObject(k).getString("Name") + " : " + menuAllergens.toString());
+                            ////log.d("....menuAllergen", ">" + allItems.getJSONObject(k).getString("Name") + " : " + menuAllergens.toString());
                         }
                     }
-                    Log.d("****" + meal.getString("Name") + " @ " + diningCourtJSON.getString("Location") + " VegieCount", "parseDiningCourtJSON: " + counter);
-                    Log.d("****" + meal.getString("Name") + " @ " + diningCourtJSON.getString("Location") + " AllergenMap", "parseDiningCourtJSON: " + countAllergens.toString());
+                    //log.d("****" + meal.getString("Name") + " @ " + diningCourtJSON.getString("Location") + " VegieCount", "parseDiningCourtJSON: " + counter);
+                    //log.d("****" + meal.getString("Name") + " @ " + diningCourtJSON.getString("Location") + " AllergenMap", "parseDiningCourtJSON: " + countAllergens.toString());
                     mealDetail.put("Location", diningCourtJSON.getString("Location"));
                     mealDetail.put("Status", meal.getString("Status"));
                     mealDetail.put("AllMeal", allMenu);
@@ -240,7 +240,7 @@ public class DiningCourtParser {
     }
 
     private boolean betweenTime(String current, String start, String end) {
-        Log.d("^^^^^^betweenTime", current + " from " + start + " to " + end);
+        //log.d("^^^^^^betweenTime", current + " from " + start + " to " + end);
         SimpleDateFormat parser = new SimpleDateFormat("HH:mm");
         try {
             Date userDate = parser.parse(current);

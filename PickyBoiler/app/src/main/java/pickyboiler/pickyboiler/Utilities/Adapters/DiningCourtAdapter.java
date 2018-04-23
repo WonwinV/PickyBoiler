@@ -85,7 +85,7 @@ public class DiningCourtAdapter extends RecyclerView.Adapter<DiningCourtAdapter.
 
 
                 diningCourtNames[i] = allCurrentMeal.get(i).getString("Location");
-                //Log.d("DUPLICAEBUGGGGGG", "addData: " + diningCourtNames[i]);
+                ////log.d("DUPLICAEBUGGGGGG", "addData: " + diningCourtNames[i]);
                 //TODO: change back to numVeggies after debugging
                 //numsVeggies[i] = allCurrentMeal.get(i).getString("computedRanking");
                 numsVeggies[i] = allCurrentMeal.get(i).getString("favoriteCounts");

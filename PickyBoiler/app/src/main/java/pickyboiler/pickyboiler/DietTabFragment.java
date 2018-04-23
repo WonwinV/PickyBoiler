@@ -112,7 +112,7 @@ public class DietTabFragment extends Fragment {
                 favList = getPrefFavListtFofy();
                 if(favList.contains(dietItems.toLowerCase().trim())) {
                     //remove from fav list then add
-                    Log.d("CONFLICT", "onClick: found conflict");
+                    //log.d("CONFLICT", "onClick: found conflict");
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());       // not sure about the correct context
                     builder.setCancelable(false);
@@ -127,7 +127,7 @@ public class DietTabFragment extends Fragment {
                     });
                     builder.show();
                 }
-                Log.d("CONFLICT", "onClick: no conflict");
+                //log.d("CONFLICT", "onClick: no conflict");
                 SharedPreferencesManager.addDislikeItem(dietItems.trim());
 
 

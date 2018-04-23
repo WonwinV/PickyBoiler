@@ -75,40 +75,40 @@ public class SharedPreferencesManager extends Application{
         value = value.trim();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String oldValue = sharedPreferences.getString("allDiningMenu", null);
-        //Log.d("OLDVALUE", ">>" + oldValue);
+        ////log.d("OLDVALUE", ">>" + oldValue);
 
         if(oldValue == null || oldValue.trim().length() == 0) {
             editor.putString("allDiningMenu", value).apply();
-            //Log.d("FIRSTIN", value);
+            ////log.d("FIRSTIN", value);
         }
         else {
             //will change to hashmap if time allows, or if too slow
             ArrayList<String> items = new ArrayList<>(Arrays.asList(oldValue.split(", ")));
             if(!items.contains(value)) {
                 items.add(value);
-                //Log.d("BEFORECUR", value + ">>" + items.size() + "?????");
+                ////log.d("BEFORECUR", value + ">>" + items.size() + "?????");
                 //for min API = 26: String.join(",", items)
                 String stringItems = items.toString();
                 editor.putString("allDiningMenu", stringItems.substring(1, stringItems.length()-1)).apply();
-                //Log.d("ACUTALARR", stringItems.substring(1, stringItems.length()-1));
+                ////log.d("ACUTALARR", stringItems.substring(1, stringItems.length()-1));
             }
-            //Log.d("ACUTALARR", "ALREADY EXISTED");
+            ////log.d("ACUTALARR", "ALREADY EXISTED");
         }
     }
 
     public static String[] getArrayOfDiningCourtMenu() {
-        //Log.d("SPLITSIZE", "GOT INNNN");
+        ////log.d("SPLITSIZE", "GOT INNNN");
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String oldValue = sharedPreferences.getString("allDiningMenu", null);
         oldValue = oldValue.toLowerCase();
 
         if(oldValue == null || oldValue.trim().length() == 0) {
-            //Log.d("SPLITSIZE", "!!! 0 !!!!");
+            ////log.d("SPLITSIZE", "!!! 0 !!!!");
             return new String[0];
         }
         else {
             //String[] d = oldValue.split("\\\\s*,\\\\s*");
-            //Log.d("SPLITSIZE", d.length + "<<");
+            ////log.d("SPLITSIZE", d.length + "<<");
             return oldValue.split(", ");
         }
     }
@@ -132,7 +132,7 @@ public class SharedPreferencesManager extends Application{
             //add normally
             addOrAppendStringToSharedPreferences(context, context.getResources().getString(R.string.favoriteFood), item);
         }
-        Log.d("ADDFAV", "new:>>"+sharedPreferences.getString(context.getResources().getString(R.string.favoriteFood), null) + "<<");
+        //log.d("ADDFAV", "new:>>"+sharedPreferences.getString(context.getResources().getString(R.string.favoriteFood), null) + "<<");
     }
 
     public static void forceAddFavoriteItem(Context context, String item) {
@@ -149,14 +149,14 @@ public class SharedPreferencesManager extends Application{
         }
         String newList = "";
         for (String iterator: favoriteList) {
-            Log.d("ITERAATORRRR", ">>" + iterator);
+            //log.d("ITERAATORRRR", ">>" + iterator);
             if(!iterator.equals(itemToRemoved))
                 newList += iterator + ',';
         }
         if(newList.length() > 0)
             newList = newList.substring(0, newList.length()-1);
 
-        Log.d("REMOVEFAV_fofygg", "old: " + sharedPreferences.getString(context.getResources().getString(R.string.favoriteFood), null) + " new:>>" + newList + "<<");
+        //log.d("REMOVEFAV_fofygg", "old: " + sharedPreferences.getString(context.getResources().getString(R.string.favoriteFood), null) + " new:>>" + newList + "<<");
         putStringSharedPreferences(context.getResources().getString(R.string.favoriteFood), newList);
     }
 
@@ -178,7 +178,7 @@ public class SharedPreferencesManager extends Application{
         if(favorite.length() >= 2) {
             // favorite = favorite.substring(1);
         }
-        Log.d("fromHIGH_fofygg", favorite);
+        //log.d("fromHIGH_fofygg", favorite);
         return new ArrayList<String>(Arrays.asList(favorite.trim().split(",")));
     }
     public static boolean isVeggie() {
@@ -233,7 +233,7 @@ public class SharedPreferencesManager extends Application{
         if(dislike.length() >= 2) {
             // favorite = favorite.substring(1);
         }
-        Log.d("getPrefDislikeList", dislike);
+        //log.d("getPrefDislikeList", dislike);
         return new ArrayList<String>(Arrays.asList(dislike.trim().split(",")));
     }
 
@@ -270,14 +270,14 @@ public class SharedPreferencesManager extends Application{
         }
         String newList = "";
         for (String iterator: dislikeList) {
-            //Log.d("ITERAATORRRR", ">>" + iterator);
+            ////log.d("ITERAATORRRR", ">>" + iterator);
             if(!iterator.equals(itemToRemoved))
                 newList += iterator + ',';
         }
         if(newList.length() > 0)
             newList = newList.substring(0, newList.length()-1);
 
-        Log.d("REMOVEFAV_fofygg", "old: " + sharedPreferences.getString(context.getResources().getString(R.string.dislikeFood), null) + " new: " + newList);
+        //log.d("REMOVEFAV_fofygg", "old: " + sharedPreferences.getString(context.getResources().getString(R.string.dislikeFood), null) + " new: " + newList);
         putStringSharedPreferences(context.getResources().getString(R.string.dislikeFood), newList);
     }
 }

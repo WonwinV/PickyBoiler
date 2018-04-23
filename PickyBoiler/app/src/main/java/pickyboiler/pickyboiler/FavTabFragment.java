@@ -48,11 +48,11 @@ public class FavTabFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d("header_fofygg", "TEST 1");
+        //log.d("header_fofygg", "TEST 1");
         final View view = inflater.inflate(R.layout.fav_tab_fragment,container,false);
-        Log.d("header_fofygg", "TEST 2");
+        //log.d("header_fofygg", "TEST 2");
         mListView = (SwipeMenuListView) view.findViewById(R.id.favfood_lv);
-        Log.d("header_fofygg", "TEST 3");
+        //log.d("header_fofygg", "TEST 3");
         listView = (ListView) view.findViewById(R.id.favfood_lv);
 
         favItemsList = SharedPreferencesManager.getPrefFavListtFofy();
@@ -61,14 +61,14 @@ public class FavTabFragment extends Fragment {
                 favItemsList.remove(i);
         }
 
-        Log.d("header_fofygg", "TEST 4");
+        //log.d("header_fofygg", "TEST 4");
         String forbg = "";
         for (String x:
              favItemsList) {
             forbg += x + ",";
         }
-        Log.d("header_fofygg", "TEST 5");
-        Log.d("favlist_fofygg", forbg);
+        //log.d("header_fofygg", "TEST 5");
+        //log.d("favlist_fofygg", forbg);
         adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,favItemsList);
 
         //Create instance to check autofill
@@ -101,7 +101,7 @@ public class FavTabFragment extends Fragment {
                 dislike = getAllDislikeItem();
                 if(dislike.contains(favItems.toLowerCase().trim())) {
                     //remove from fav list then add
-                    Log.d("CONFLICT", "onClick: found conflict");
+                    //log.d("CONFLICT", "onClick: found conflict");
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setCancelable(false);
@@ -116,10 +116,10 @@ public class FavTabFragment extends Fragment {
                     });
                     builder.show();
                 }
-                Log.d("CONFLICT", "onClick: no conflict");
+                //log.d("CONFLICT", "onClick: no conflict");
                 SharedPreferencesManager.addFavoriteItem(getActivity().getApplicationContext(), favItems.trim());
-                Log.d("what_added_fofygg", "||"+ favItems.trim());
-                Log.d("testSharedPref_fofygg", ">>>" + SharedPreferencesManager.getValueFromKey(getResources().getString(R.string.favoriteFood)));
+                //log.d("what_added_fofygg", "||"+ favItems.trim());
+                //log.d("testSharedPref_fofygg", ">>>" + SharedPreferencesManager.getValueFromKey(getResources().getString(R.string.favoriteFood)));
 
                 favItemsList.add(favItems.trim());
                 SharedPreferencesManager.showToast("Item added.");

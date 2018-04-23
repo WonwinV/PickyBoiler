@@ -42,14 +42,14 @@ public class Sorter {
                 item.put("computedRanking", computed.getString("computedRanking"));
                 String favCounts = "";
                 JSONArray list = computed.getJSONArray("favoriteCounts");
-                Log.d("SORTER", "sortDiningCourt: " + list.toString());
-                //Log.d("SORTER_SCORE", "sortDiningCourt: " + computed.getString("computedRanking"));
+                //log.d("SORTER", "sortDiningCourt: " + list.toString());
+                ////log.d("SORTER_SCORE", "sortDiningCourt: " + computed.getString("computedRanking"));
                 if(list != null && list.length() > 0) {
                     for (int j = 0; j < list.length(); j++) {
                         JSONObject entry = list.getJSONObject(j);
                         Iterator<String> keys = entry.keys();
                         String name = keys.next();
-                        //Log.d("FAVCOUNTS", "sortDiningCourt: " + name);
+                        ////log.d("FAVCOUNTS", "sortDiningCourt: " + name);
                         if (name.trim().length() > 0) {
                             favCounts += name + "(" + entry.getInt(name) + ")" + ", ";
                         }
@@ -81,7 +81,7 @@ public class Sorter {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("ALLCURRENTMENU", "XXXX" + SharedPreferencesManager.getValueFromKey("allDiningMenu"));
+        //log.d("ALLCURRENTMENU", "XXXX" + SharedPreferencesManager.getValueFromKey("allDiningMenu"));
         return diningCourtWithScore;
     }
 
@@ -135,7 +135,7 @@ public class Sorter {
 
                 //check if dislike
                 for (int j = 0; j < dislikeList.size(); j++) {
-                    //Log.d("DISSIZE", "dissize: "+dislikeList.size());
+                    ////log.d("DISSIZE", "dissize: "+dislikeList.size());
                     if(dislikeList.get(j).trim().length() == 0)
                         continue;
 
@@ -149,11 +149,11 @@ public class Sorter {
                         }
                         regex += ".*";
                     }
-                    //Log.d("computeSorter", "regex: >>" + regex + "<<" + "word: >>" + favoriteList.get(j));
+                    ////log.d("computeSorter", "regex: >>" + regex + "<<" + "word: >>" + favoriteList.get(j));
                     boolean matchAllKeyword = menuName.toLowerCase().matches(regex);
                     if (matchAllKeyword) {
                         //counts favorite
-                        Log.d("computeSorter", "found dislike!: " + dislikeList.get(j));
+                        //log.d("computeSorter", "found dislike!: " + dislikeList.get(j));
                         isDislike = true;
                         score -= dislikeMultiplier;
                         break;
@@ -164,7 +164,7 @@ public class Sorter {
                 //check if favorite
                 if(!isDislike) {
                     for (int j = 0; j < favoriteList.size(); j++) {
-                        Log.d("FAVSIZE", "favsize: "+favoriteList.size());
+                        //log.d("FAVSIZE", "favsize: "+favoriteList.size());
                         if(favoriteList.get(j).trim().length() == 0)
                             continue;
 
@@ -178,11 +178,11 @@ public class Sorter {
                             }
                             regex += ".*";
                         }
-                        //Log.d("computeSorter", "regex: >>" + regex + "<<" + "word: >>" + favoriteList.get(j));
+                        ////log.d("computeSorter", "regex: >>" + regex + "<<" + "word: >>" + favoriteList.get(j));
                         boolean matchAllKeyword = menuName.toLowerCase().matches(regex);
                         if (matchAllKeyword) {
                             //counts favorite
-                            Log.d("computeSorter", "found fav!: " + favoriteList.get(j));
+                            //log.d("computeSorter", "found fav!: " + favoriteList.get(j));
                             if (!favoriteCounts.containsKey(favoriteList.get(j))) {
                                 favoriteCounts.put(favoriteList.get(j), 1);
                             } else {
@@ -229,7 +229,7 @@ public class Sorter {
             result.put("computedRanking", score);
             result.put("favoriteCounts", sortedFav);
         } catch (JSONException e) {
-            Log.d("CRASH", "crash at computeScore: ");
+            //log.d("CRASH", "crash at computeScore: ");
             e.printStackTrace();
         }
 
