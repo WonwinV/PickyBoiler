@@ -73,9 +73,10 @@ public class OffCampusDining extends AppCompatActivity
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(vPager);
 
-        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#FFB52B"));
+        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#F2F2F2"));
         tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
-        tabLayout.setTabTextColors(Color.parseColor("#727272"), Color.parseColor("#FFB52B"));
+        //tabLayout.setTabTextColors(Color.parseColor("#727272"), Color.parseColor("#FFB52B"));
+        tabLayout.setTabTextColors(Color.parseColor("#727272"), Color.parseColor("#727272"));
         tabLayout.setBackgroundColor(Color.parseColor("#F2F2F2"));
 
 
@@ -85,7 +86,7 @@ public class OffCampusDining extends AppCompatActivity
 
     private void setupViewPager (ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new NearbyRestaurantsFragment(), "Nearby Restaurants");
+        //adapter.addFragment(new NearbyRestaurantsFragment(), "Nearby Restaurants");
         adapter.addFragment(new RestaurantMapFragment(), "Restaurants Map");
         viewPager.setAdapter(adapter);
     }
