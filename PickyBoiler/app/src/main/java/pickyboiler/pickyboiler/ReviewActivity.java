@@ -105,15 +105,13 @@ public class ReviewActivity extends AppCompatActivity {
                             return;
                         }
 
-                        int totPoints = wiley.pointsForQuality + wiley.pointsForSeating +
-                                wiley.pointsForService + wiley.pointsForQuantity;
-                        int avg = (int)totPoints / 4;
-
                         //assign to variables
                         quanibar.setRating(wiley.pointsForQuantity/totalVoters);
                         qualibar.setRating(wiley.pointsForQuality/totalVoters);
                         servibar.setRating(wiley.pointsForService/totalVoters);
                         seatibar.setRating(wiley.pointsForService/totalVoters);
+                        int avg = (int) (quanibar.getRating() + qualibar.getRating() + servibar.getRating()
+                                + seatibar.getRating())/4;
                         overbar.setRating(avg);
                     }
 
@@ -152,16 +150,16 @@ public class ReviewActivity extends AppCompatActivity {
                             return;
                         }
 
-                        int totPoints = ford.pointsForQuality + ford.pointsForSeating +
-                                ford.pointsForService + ford.pointsForQuantity;
-                        int avg = (int)totPoints / 4;
 
                         //assign to variables
                         quanibar.setRating(ford.pointsForQuantity/totalVoters);
                         qualibar.setRating(ford.pointsForQuality/totalVoters);
                         servibar.setRating(ford.pointsForService/totalVoters);
                         seatibar.setRating(ford.pointsForService/totalVoters);
+                        int avg = (int) (quanibar.getRating() + qualibar.getRating() + servibar.getRating()
+                                + seatibar.getRating())/4;
                         overbar.setRating(avg);
+                        
                     }
 
                     @Override
@@ -199,16 +197,15 @@ public class ReviewActivity extends AppCompatActivity {
                             return;
                         }
 
-                        int totPoints = hilli.pointsForQuality + hilli.pointsForSeating +
-                                hilli.pointsForService + hilli.pointsForQuantity;
-                        int avg = (int)totPoints / 4;
-
                         //assign to variables
                         quanibar.setRating(hilli.pointsForQuantity/totalVoters);
                         qualibar.setRating(hilli.pointsForQuality/totalVoters);
                         servibar.setRating(hilli.pointsForService/totalVoters);
                         seatibar.setRating(hilli.pointsForService/totalVoters);
+                        int avg = (int) (quanibar.getRating() + qualibar.getRating() + servibar.getRating()
+                                + seatibar.getRating())/4;
                         overbar.setRating(avg);
+                        
                     }
 
                     @Override
@@ -246,16 +243,15 @@ public class ReviewActivity extends AppCompatActivity {
                             return;
                         }
 
-                        int totPoints = earhart.pointsForQuality + earhart.pointsForSeating +
-                                earhart.pointsForService + earhart.pointsForQuantity;
-                        int avg = (int)totPoints / 4;
-
                         //assign to variables
                         quanibar.setRating(earhart.pointsForQuantity/totalVoters);
                         qualibar.setRating(earhart.pointsForQuality/totalVoters);
                         servibar.setRating(earhart.pointsForService/totalVoters);
                         seatibar.setRating(earhart.pointsForService/totalVoters);
+                        int avg = (int) (quanibar.getRating() + qualibar.getRating() + servibar.getRating()
+                                + seatibar.getRating())/4;
                         overbar.setRating(avg);
+                      
                     }
 
                     @Override
@@ -293,16 +289,15 @@ public class ReviewActivity extends AppCompatActivity {
                             return;
                         }
 
-                        int totPoints = windsor.pointsForQuality + windsor.pointsForSeating +
-                                windsor.pointsForService + windsor.pointsForQuantity;
-                        int avg = (int)totPoints / 4;
-
                         //assign to variables
                         quanibar.setRating(windsor.pointsForQuantity/totalVoters);
                         qualibar.setRating(windsor.pointsForQuality/totalVoters);
                         servibar.setRating(windsor.pointsForService/totalVoters);
                         seatibar.setRating(windsor.pointsForService/totalVoters);
+                        int avg = (int) (quanibar.getRating() + qualibar.getRating() + servibar.getRating()
+                                + seatibar.getRating())/4;
                         overbar.setRating(avg);
+                      
                     }
 
                     @Override
@@ -331,4 +326,3 @@ public class ReviewActivity extends AppCompatActivity {
 
     }
 }
-
