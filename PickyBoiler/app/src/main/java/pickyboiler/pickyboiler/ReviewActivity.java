@@ -333,7 +333,6 @@ public class ReviewActivity extends AppCompatActivity {
         Button reviewButton = findViewById(R.id.leaveReview);
         reviewButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //displayPopup(ReviewActivity.this);
                 buildpopup(ReviewActivity.this);
             }
         });
@@ -344,72 +343,5 @@ public class ReviewActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
-
-    private void displayPopup(final Activity context) {
-
-        //inflate popup_layout
-        RelativeLayout viewGroup= (RelativeLayout) context.findViewById(R.id.reviewPopup);
-        LayoutInflater layoutInflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layout = layoutInflater.inflate(R.layout.review_popup, viewGroup);
-
-        final PopupWindow popup = new PopupWindow(context);
-        popup.setContentView(layout);
-        popup.setFocusable(true);
-        setContentView(R.layout.review_popup);
-        //popup.setBackgroundDrawable(getResources().getDrawable(R.drawable.background));
-
-        //clear default background
-        popup.setBackgroundDrawable(new BitmapDrawable());
-
-        //popup appears at center screen
-        popup.showAtLocation(layout, Gravity.CENTER, 0,0);
-
-        setContentView(R.layout.review_popup);
-
-        final RatingBar quanbar = (RatingBar) findViewById(R.id.varibar);
-        final RatingBar qualbar = (RatingBar) findViewById(R.id.qualbar);
-        final RatingBar servbar = (RatingBar) findViewById(R.id.servbar);
-        final RatingBar seatbar = (RatingBar) findViewById(R.id.seatbar);
-
-        //Get a reference to close button, and close the popup when clicked
-
-        Button close = layout.findViewById(R.id.closebutton);
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //setContentView(R.layout.review_popup);
-                qualChange = (int) qualbar.getRating();
-                quanChange = (int) quanbar.getRating();
-                seatChange = (int) seatbar.getRating();
-                servChange = (int) servbar.getRating();
-                mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("diningCourts").child(diningCourtNam).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        diningCourts unknown = dataSnapshot.getValue(diningCourts.class);
-                        mDatabase.child("diningcourts").child(diningCourtNam).child
-                                ("pointsForQuality").setValue(qualChange + unknown.pointsForQuality);
-                        System.out.println(qualChange);
-                        System.out.println(unknown.pointsForQuality);
-                        mDatabase.child("diningcourts").child(diningCourtNam).child
-                                ("pointsForQuantity").setValue(quanChange + unknown.pointsForQuantity);
-                        mDatabase.child("diningcourts").child(diningCourtNam).child
-                                ("pointsForService").setValue(servChange + unknown.pointsForService);
-                        mDatabase.child("diningcourts").child(diningCourtNam).child
-                                ("pointsForSeating").setValue(seatChange + unknown.pointsForSeating);
-                        mDatabase.child("diningcourts").child(diningCourtNam).child
-                                ("totalVoters").setValue(unknown.totalVoters + 1);
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-                popup.dismiss();
-            }
-        });
-      }
 }
+
