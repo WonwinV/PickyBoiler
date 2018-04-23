@@ -61,14 +61,15 @@
             android:layout_width="wrap_content"
             android:layout_height="58dp"
             android:layout_below="@id/textView2"
-            android:layout_marginTop ="35dp"
+            android:layout_marginTop ="45dp"
             android:layout_marginBottom="200dp"
             android:layout_marginStart="55dp"
+            android:layout_alignParentStart="true"
             android:text="Yes" />
 
         <Button
             android:id="@+id/rbutton"
-            android:layout_width="149dp"
+            android:layout_width="140dp"
             android:layout_height="58dp"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/lbutton"
