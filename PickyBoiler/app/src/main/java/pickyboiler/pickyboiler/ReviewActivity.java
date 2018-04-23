@@ -2,20 +2,13 @@ package pickyboiler.pickyboiler;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,11 +48,7 @@ public class ReviewActivity extends AppCompatActivity {
             this.totalVoters = totalVoters;
         }
     }
-
-
-
-
-
+    
     //declaration to database
     public static DatabaseReference mDatabase;
     public String diningCourtNam;
@@ -83,14 +72,12 @@ public class ReviewActivity extends AppCompatActivity {
 
         //prepare database for communications
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        //diningCourtName = "Ford";
 
         int menuID = R.drawable.default_menu_logo;
 
 
         switch (diningCourtNam){
             case "Wiley":
-                //setContentView(R.layout.activity_review);
                 menuID = R.drawable.wiley_menu_logo;
                 mDatabase.child("diningCourts").child("Wiley").addValueEventListener(new ValueEventListener() {
                     @Override
