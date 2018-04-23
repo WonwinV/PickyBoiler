@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/menuimg"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="75dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Current ratings on..."
@@ -35,6 +36,7 @@
     <TextView
         android:id="@+id/reviewVariety"
         android:layout_alignStart="@id/textTop"
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -47,11 +49,13 @@
     <RatingBar
         android:id="@+id/varietybar"
         android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_height="wrap_content"
         android:isIndicator="true"
         android:layout_below="@id/reviewVariety"/>
 
     <TextView
+        android:layout_marginLeft="10dp"
         android:id="@+id/reviewQuality"
         android:layout_alignStart="@id/textTop"
         android:layout_width="wrap_content"
@@ -63,6 +67,7 @@
         android:text="Quality of Dishes"/>
 
     <RatingBar
+        android:layout_marginLeft="10dp"
         android:id="@+id/qualitybar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,6 +75,7 @@
         android:layout_below="@id/reviewQuality"/>
 
     <TextView
+        android:layout_marginLeft="10dp"
         android:id="@+id/reviewService"
         android:layout_alignStart="@id/textTop"
         android:layout_width="wrap_content"
@@ -81,6 +87,7 @@
         android:text="Service"/>
 
     <RatingBar
+        android:layout_marginLeft="10dp"
         android:id="@+id/servicebar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -88,6 +95,7 @@
         android:layout_below="@id/reviewService"/>
 
     <TextView
+        android:layout_marginLeft="10dp"
         android:id="@+id/reviewSeating"
         android:layout_alignStart="@id/textTop"
         android:layout_width="wrap_content"
@@ -99,6 +107,7 @@
         android:text="Seating Availability"/>
 
     <RatingBar
+        android:layout_marginLeft="10dp"
         android:id="@+id/seatingebar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,6 +115,7 @@
         android:layout_below="@id/reviewSeating"/>
 
     <TextView
+        android:layout_marginLeft="10dp"
         android:id="@+id/reviewOverall"
         android:layout_alignStart="@id/textTop"
         android:layout_width="wrap_content"
@@ -117,6 +127,7 @@
         android:text="Overall Score"/>
 
     <RatingBar
+        android:layout_marginLeft="10dp"
         android:id="@+id/overallbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -124,6 +135,8 @@
         android:layout_below="@id/reviewOverall"/>
 
     <Button
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/leaveReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
