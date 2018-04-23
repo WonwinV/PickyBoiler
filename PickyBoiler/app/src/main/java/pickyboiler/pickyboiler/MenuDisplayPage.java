@@ -94,7 +94,7 @@ public class MenuDisplayPage extends AppCompatActivity {
         int currPos;
         for(currPos = 0; currPos < menuFinal.length(); currPos++) {
             ini = currPos;
-            while(menuFinal.charAt(currPos + 1) !=  '\n') {
+            while(menuFinal.charAt(currPos) !=  '\n') {
                 if(currPos >= menuFinal.length()) {
                     break;
                 }
@@ -121,7 +121,7 @@ public class MenuDisplayPage extends AppCompatActivity {
             ss.setSpan(newclickableSpan, ini, fin, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             //to newline; increment puts us on new line past the newline char
-            currPos++;
+            //currPos++;
         }
         Button reviewButton = findViewById(R.id.reviewButton);
         reviewButton.setOnClickListener(new View.OnClickListener() {
