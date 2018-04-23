@@ -12,7 +12,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+
+
     private GoogleMap mMap;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,18 +29,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+
 
         // Add a marker in Sydney and move the camera
         LatLng tripleX = new LatLng(40.4227077, -86.90541109999998);
@@ -49,6 +46,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng riceCafe = new LatLng(40.423170, -86.908867);
         LatLng BrotherBG = new LatLng(40.424076, -86.908359);
         LatLng JJ   = new LatLng(40.423806, -86.908437);
+
+
 
         mMap.addMarker(new MarkerOptions().position(tripleX).title("Triple X"));
         mMap.addMarker(new MarkerOptions().position(puccinis).title("Puccini's"));

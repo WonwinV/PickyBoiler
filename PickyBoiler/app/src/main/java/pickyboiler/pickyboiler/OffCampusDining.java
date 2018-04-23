@@ -57,7 +57,6 @@ public class OffCampusDining extends AppCompatActivity
         });
 
 
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -80,11 +79,10 @@ public class OffCampusDining extends AppCompatActivity
         tabLayout.setBackgroundColor(Color.parseColor("#F2F2F2"));
 
 
-
     }
 
 
-    private void setupViewPager (ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new RestaurantMapFragment(), "Restaurants Map");
         viewPager.setAdapter(adapter);
@@ -92,6 +90,7 @@ public class OffCampusDining extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -142,7 +141,5 @@ public class OffCampusDining extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-        
-        /*Fixing bugs arising from merging work - CC*/
     }
 }
