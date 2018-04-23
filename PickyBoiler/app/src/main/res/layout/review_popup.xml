@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/bg"
         android:layout_width="600dp"
-        android:layout_height="550dp"
+        android:layout_height="600dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
@@ -66,8 +66,8 @@
     <RatingBar
         android:id="@+id/varibar"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_alignStart="@id/askUser"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:layout_below="@id/askVariety"
         android:backgroundTint="@color/white"
         android:stepSize="1"
@@ -88,9 +88,9 @@
 
     <RatingBar
         android:id="@+id/qualbar"
-        android:layout_alignStart="@id/askUser"
+        android:layout_alignStart="@id/varibar"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:isIndicator="false"
         android:backgroundTint="@color/white"
         android:stepSize="1"
@@ -111,9 +111,9 @@
 
     <RatingBar
         android:id="@+id/servbar"
-        android:layout_alignStart="@id/askUser"
+        android:layout_alignStart="@id/varibar"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:isIndicator="false"
         android:backgroundTint="@color/white"
         android:stepSize="1"
@@ -134,9 +134,9 @@
 
     <RatingBar
         android:id="@+id/seatbar"
-        android:layout_alignStart="@id/askUser"
+        android:layout_alignStart="@id/varibar"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:isIndicator="false"
         android:backgroundTint="@color/white"
         android:stepSize="1"
@@ -154,4 +154,3 @@
 
 
 </RelativeLayout>
-
