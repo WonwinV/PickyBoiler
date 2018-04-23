@@ -2,20 +2,10 @@ package pickyboiler.pickyboiler;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -26,11 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ValueEventListener;
-
-
-import java.util.ArrayList;
-
-import pickyboiler.pickyboiler.Utilities.Adapters.DiningCourtAdapter;
 
 import static pickyboiler.pickyboiler.ReviewActivity.mDatabase;
 
@@ -71,39 +56,33 @@ public class reviewSeparatePopup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_review_separate_popup);
+        //setContentView(R.layout.activity_review_separate_popup);
 
         //inflate popup_layout
         RelativeLayout viewGroup= (RelativeLayout) reviewSeparatePopup.this.findViewById(R.id.reviewPopup);
         LayoutInflater layoutInflater = (LayoutInflater) reviewSeparatePopup.this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layout = layoutInflater.inflate(R.layout.review_popup, viewGroup);
+        View layout = this.getLayoutInflater().inflate(R.layout.review_popup, viewGroup);
+        setContentView(layout);
 
         final RatingBar quanbar = (RatingBar) layout.findViewById(R.id.varibar);
         final RatingBar qualbar = (RatingBar) layout.findViewById(R.id.qualbar);
         final RatingBar servbar = (RatingBar) layout.findViewById(R.id.servbar);
         final RatingBar seatbar = (RatingBar) layout.findViewById(R.id.seatbar);
-
-        quanbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-
+        
+        //Get a reference to submit button, and close the popup when clicked
+        Button close = layout.findViewById(R.id.closebutton) ;
+        close.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                quanChange = quanbar.getRating();
+            public void onClick(View view) {
+                finish();
             }
         });
 
-
-
-        //qualChange = (int) qualbar.getRating();
-        //quanChange = (int) quanbar.getRating();
-        //seatChange = (int) seatbar.getRating();
-        //servChange = (int) servbar.getRating();
-
-
         //Get a reference to close button, and close the popup when clicked
 
-        Button close = layout.findViewById(R.id.closebutton);
-        close.setOnClickListener(new View.OnClickListener() {
+        Button submit = layout.findViewById(R.id.submitButton);
+        submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 qualChange = (int) qualbar.getRating();
@@ -115,7 +94,6 @@ public class reviewSeparatePopup extends AppCompatActivity {
                 nDatabase.child("diningCourts").child(diningCourtNam).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        System.out.println(quanChange);
                         ReviewActivity.diningCourts unknown = dataSnapshot.getValue(ReviewActivity.diningCourts.class);
                         nDatabase.child("diningCourts").child(diningCourtNam).child
                                 ("pointsForQuality").setValue(qualChange + unknown.pointsForQuality);
@@ -146,4 +124,3 @@ public class reviewSeparatePopup extends AppCompatActivity {
         super.finish();
     }
 }
-
