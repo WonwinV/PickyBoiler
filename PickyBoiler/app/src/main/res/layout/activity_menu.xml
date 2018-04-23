@@ -45,6 +45,7 @@
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
         android:textSize="18sp"
+        android:textColorHighlight="@color/white"
         android:verticalScrollbarPosition="right" />
 
 </RelativeLayout>
