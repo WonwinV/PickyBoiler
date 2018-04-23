@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/bg"
         android:layout_width="600dp"
-        android:layout_height="489dp"
+        android:layout_height="550dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
@@ -142,5 +142,16 @@
         android:stepSize="1"
         android:layout_below="@id/askSeating"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/submitButton"
+        android:layout_below="@+id/seatbar"
+        android:layout_marginTop="30dp"
+        android:text="Submit!"
+        android:layout_centerInParent="true"
+        />
+
 
 </RelativeLayout>
+
