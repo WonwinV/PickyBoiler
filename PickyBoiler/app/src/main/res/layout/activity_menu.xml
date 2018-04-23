@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,11 +20,20 @@
         android:paddingTop="4dp"
         app:srcCompat="@drawable/ford_menu_logo" />
 
+    <Button
+        android:id="@+id/reviewButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/menuimg"
+        android:text="Leave/View Reviews"
+        />
+
     <TextView
         android:id="@+id/MenuText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/menuimg"
+        android:layout_below="@+id/reviewButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp"
         android:width="375dp"
