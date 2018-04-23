@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -77,28 +79,25 @@ public class reviewSeparatePopup extends AppCompatActivity {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = layoutInflater.inflate(R.layout.review_popup, viewGroup);
 
-        final PopupWindow popup = new PopupWindow(reviewSeparatePopup.this);
-        popup.setContentView(layout);
-        popup.setFocusable(true);
-        //setContentView(R.layout.review_popup);
+        final RatingBar quanbar = (RatingBar) layout.findViewById(R.id.varibar);
+        final RatingBar qualbar = (RatingBar) layout.findViewById(R.id.qualbar);
+        final RatingBar servbar = (RatingBar) layout.findViewById(R.id.servbar);
+        final RatingBar seatbar = (RatingBar) layout.findViewById(R.id.seatbar);
 
-        //clear default background
-        popup.setBackgroundDrawable(new BitmapDrawable());
+        quanbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
 
-        //popup appears at center screen
-        //popup.showAtLocation(layout, Gravity.CENTER, 0,0);
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                quanChange = quanbar.getRating();
+            }
+        });
 
-        //setContentView(R.layout.review_popup);
 
-        final RatingBar quanbar = (RatingBar) findViewById(R.id.varibar);
-        final RatingBar qualbar = (RatingBar) findViewById(R.id.qualbar);
-        final RatingBar servbar = (RatingBar) findViewById(R.id.servbar);
-        final RatingBar seatbar = (RatingBar) findViewById(R.id.seatbar);
 
-        qualChange = (int) qualbar.getRating();
-        quanChange = (int) quanbar.getRating();
-        seatChange = (int) seatbar.getRating();
-        servChange = (int) servbar.getRating();
+        //qualChange = (int) qualbar.getRating();
+        //quanChange = (int) quanbar.getRating();
+        //seatChange = (int) seatbar.getRating();
+        //servChange = (int) servbar.getRating();
 
 
         //Get a reference to close button, and close the popup when clicked
@@ -107,29 +106,26 @@ public class reviewSeparatePopup extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popup.dismiss();
-                setContentView(R.layout.activity_review);
-
-                //setContentView(R.layout.review_popup);
                 qualChange = (int) qualbar.getRating();
                 quanChange = (int) quanbar.getRating();
                 seatChange = (int) seatbar.getRating();
                 servChange = (int) servbar.getRating();
-                mDatabase = FirebaseDatabase.getInstance().getReference();
+                nDatabase = FirebaseDatabase.getInstance().getReference();
 
-                mDatabase.child("diningCourts").child(diningCourtNam).addListenerForSingleValueEvent(new ValueEventListener() {
+                nDatabase.child("diningCourts").child(diningCourtNam).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        System.out.println(quanChange);
                         ReviewActivity.diningCourts unknown = dataSnapshot.getValue(ReviewActivity.diningCourts.class);
-                        mDatabase.child("diningcourts").child(diningCourtNam).child
+                        nDatabase.child("diningCourts").child(diningCourtNam).child
                                 ("pointsForQuality").setValue(qualChange + unknown.pointsForQuality);
-                        mDatabase.child("diningcourts").child(diningCourtNam).child
+                        nDatabase.child("diningCourts").child(diningCourtNam).child
                                 ("pointsForQuantity").setValue(quanChange + unknown.pointsForQuantity);
-                        mDatabase.child("diningcourts").child(diningCourtNam).child
+                        nDatabase.child("diningCourts").child(diningCourtNam).child
                                 ("pointsForService").setValue(servChange + unknown.pointsForService);
-                        mDatabase.child("diningcourts").child(diningCourtNam).child
+                        nDatabase.child("diningCourts").child(diningCourtNam).child
                                 ("pointsForSeating").setValue(seatChange + unknown.pointsForSeating);
-                        mDatabase.child("diningcourts").child(diningCourtNam).child
+                        nDatabase.child("diningCourts").child(diningCourtNam).child
                                 ("totalVoters").setValue(unknown.totalVoters + 1);
                     }
 
@@ -138,13 +134,16 @@ public class reviewSeparatePopup extends AppCompatActivity {
 
                     }
                 });
-                returnUser(reviewSeparatePopup.this);
+                Toast.makeText(getApplicationContext(),"Your review was saved!",
+                        Toast.LENGTH_LONG).show();
+                finish();
             }
         });
         }
 
-        private void returnUser(final Activity context) {
-            Intent intent = new Intent(this, ReviewActivity.class);
-            startActivity(intent);
-        }
+    @Override
+    public void finish() {
+        super.finish();
     }
+}
+
