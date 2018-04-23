@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:id="@+id/reviewLayout"
+    tools:context="pickyboiler.pickyboiler.ReviewActivity">
+
+    <ImageView
+        android:id="@+id/menuimg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        android:paddingTop="4dp"
+        app:srcCompat="@drawable/ford_menu_logo" />
+
+    <TextView
+        android:id="@+id/textTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/menuimg"
+        android:layout_marginTop="75dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Current ratings on..."
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/reviewVariety"
+        android:layout_alignStart="@id/textTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="14sp"
+        android:layout_below="@id/textTop"
+        android:text="Variety of Dishes"/>
+
+    <RatingBar
+        android:id="@+id/varietybar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:layout_below="@id/reviewVariety"/>
+
+    <TextView
+        android:id="@+id/reviewQuality"
+        android:layout_alignStart="@id/textTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="14sp"
+        android:layout_below="@id/varietybar"
+        android:text="Quality of Dishes"/>
+
+    <RatingBar
+        android:id="@+id/qualitybar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:layout_below="@id/reviewQuality"/>
+
+    <TextView
+        android:id="@+id/reviewService"
+        android:layout_alignStart="@id/textTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="14sp"
+        android:layout_below="@id/qualitybar"
+        android:text="Service"/>
+
+    <RatingBar
+        android:id="@+id/servicebar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:layout_below="@id/reviewService"/>
+
+    <TextView
+        android:id="@+id/reviewSeating"
+        android:layout_alignStart="@id/textTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="14sp"
+        android:layout_below="@id/servicebar"
+        android:text="Seating Availability"/>
+
+    <RatingBar
+        android:id="@+id/seatingebar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:layout_below="@id/reviewSeating"/>
+
+    <TextView
+        android:id="@+id/reviewOverall"
+        android:layout_alignStart="@id/textTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Subtitle"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="14sp"
+        android:layout_below="@id/seatingebar"
+        android:text="Overall Score"/>
+
+    <RatingBar
+        android:id="@+id/overallbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:layout_below="@id/reviewOverall"/>
+
+    <Button
+        android:id="@+id/leaveReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/overallbar"
+        android:text="Leave A Review"/>
+
+
