@@ -62,6 +62,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(JJ).title("Jimmy John's"));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tripleX));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(tripleX, 14.0f));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(tripleX, 15.0f));
     }
 }
