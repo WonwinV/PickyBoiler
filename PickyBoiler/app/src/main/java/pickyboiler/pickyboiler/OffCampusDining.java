@@ -85,6 +85,7 @@ public class OffCampusDining extends AppCompatActivity
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new RestaurantMapFragment(), "Restaurants Map");
+        //adapter.addFragment(new NearbyRestaurantsFragment(), "Nearby Restaurants");
         viewPager.setAdapter(adapter);
     }
 
